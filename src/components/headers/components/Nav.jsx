@@ -57,82 +57,13 @@ export default function Nav() {
     <>
       <li className="navigation__item">
         <a
-          href="#"
+          href="/"
           className={`navigation__link ${
             isActiveParentMenu(homePages) ? "menu-active" : ""
           }`}
         >
           Home
         </a>
-        <div className="box-menu" style={{ width: "800px" }}>
-          <div className="col pe-4">
-            <ul className="sub-menu__list list-unstyled">
-              {homePages.slice(0, 6).map((elm, i) => (
-                <li key={i} className="sub-menu__item">
-                  <Link
-                    href={elm.href}
-                    className={`menu-link menu-link_us-s ${
-                      isMenuActive(elm.href) ? "menu-active" : ""
-                    }`}
-                  >
-                    {elm.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="col pe-4">
-            <ul className="sub-menu__list list-unstyled">
-              {homePages.slice(6, 12).map((elm, i) => (
-                <li key={i} className="sub-menu__item">
-                  <Link
-                    href={elm.href}
-                    className={`menu-link menu-link_us-s ${
-                      isMenuActive(elm.href) ? "menu-active" : ""
-                    }`}
-                  >
-                    {elm.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="col pe-4">
-            <ul className="sub-menu__list list-unstyled">
-              {homePages.slice(12, 18).map((elm, i) => (
-                <li key={i} className="sub-menu__item">
-                  <Link
-                    href={elm.href}
-                    className={`menu-link menu-link_us-s ${
-                      isMenuActive(elm.href) ? "menu-active" : ""
-                    }`}
-                  >
-                    {elm.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="col">
-            <ul className="sub-menu__list list-unstyled">
-              {homePages.slice(18, 24).map((elm, i) => (
-                <li key={i} className="sub-menu__item">
-                  <Link
-                    href={elm.href}
-                    className={`menu-link menu-link_us-s ${
-                      isMenuActive(elm.href) ? "menu-active" : ""
-                    }`}
-                  >
-                    {elm.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
         {/* <!-- /.box-menu --> */}
       </li>
       <li className="navigation__item">

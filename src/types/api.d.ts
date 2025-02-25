@@ -12,10 +12,16 @@ export interface Product {
   ratings?: number | undefined;
   totalReviews?: string | undefined;
   price?: number | undefined;
-  categories?: Category[] | undefined;
+  category?: Category | undefined;
+  attributes?: Attribute[] | undefined;
 }
 
 export interface Category {
+  id?: number | undefined;
+  name?: string | undefined;
+}
+
+export interface Attribute {
   id?: number | undefined;
   name?: string | undefined;
 }
