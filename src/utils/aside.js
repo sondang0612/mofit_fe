@@ -13,8 +13,8 @@ export const closeModalShopFilter = () => {
 export const openModalUserlogin = () => {
   const pageOverlay = document.getElementById("pageOverlay");
   const shopFilter = document.getElementById("userAside");
-  pageOverlay.classList.add("page-overlay_visible");
-  shopFilter.classList.add("aside_visible");
+  pageOverlay?.classList.add("page-overlay_visible");
+  shopFilter?.classList.add("aside_visible");
 };
 export const closeModalUserlogin = () => {
   const pageOverlay = document.getElementById("pageOverlay");

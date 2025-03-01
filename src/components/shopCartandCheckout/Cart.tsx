@@ -4,33 +4,26 @@ import { useContextElement } from "@/context/Context";
 import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
+import { useCart } from "@/hooks/react-query/cart/useCart";
+import { EDefaultValue } from "@/utils/constants/default-value.enum";
+import { getTotalPrice } from "@/utils/getTotalPrice";
+import { useRemoveCartItems } from "@/hooks/react-query/cart/useRemoveCartItems";
 
 export default function Cart() {
   const { cartProducts, setCartProducts, totalPrice } = useContextElement();
-  const setQuantity = (id, quantity) => {
-    if (quantity >= 1) {
-      const item = cartProducts.filter((elm) => elm.id == id)[0];
-      const items = [...cartProducts];
-      const itemIndex = items.indexOf(item);
-      item.quantity = quantity;
-      items[itemIndex] = item;
-      setCartProducts(items);
-    }
-  };
-  const removeItem = (id) => {
-    setCartProducts((pre) => [...pre.filter((elm) => elm.id != id)]);
-  };
+  const { data: cart } = useCart();
+  const { mutate: removeCartItems } = useRemoveCartItems();
 
-  const [checkboxes, setCheckboxes] = useState({
+  const [checkboxes, setCheckboxes] = useState<any>({
     free_shipping: false,
     flat_rate: false,
     local_pickup: false,
   });
 
   // Step 2: Create a handler function
-  const handleCheckboxChange = (event) => {
+  const handleCheckboxChange = (event: any) => {
     const { id, checked } = event.target;
-    setCheckboxes((prevCheckboxes) => ({
+    setCheckboxes((prevCheckboxes: any) => ({
       ...prevCheckboxes,
       [id]: checked,
     }));
@@ -38,7 +31,7 @@ export default function Cart() {
   return (
     <div className="shopping-cart" style={{ minHeight: "calc(100vh - 300px)" }}>
       <div className="cart-table__wrapper">
-        {cartProducts.length ? (
+        {cart?.data?.items?.length ? (
           <>
             <table className="cart-table">
               <thead>
@@ -52,13 +45,13 @@ export default function Cart() {
                 </tr>
               </thead>
               <tbody>
-                {cartProducts.map((elm, i) => (
+                {cart?.data?.items?.map((elm, i) => (
                   <tr key={i}>
                     <td>
                       <div className="shopping-cart__product-item">
                         <Image
                           loading="lazy"
-                          src={elm.imgSrc}
+                          src={elm?.product?.imgSrc || EDefaultValue.IMAGE}
                           width="120"
                           height="120"
                           alt="image"
@@ -67,7 +60,7 @@ export default function Cart() {
                     </td>
                     <td>
                       <div className="shopping-cart__product-item__detail">
-                        <h4>{elm.title}</h4>
+                        <h4>{elm?.product?.title}</h4>
                         <ul className="shopping-cart__product-item__options">
                           <li>Color: Yellow</li>
                           <li>Size: L</li>
@@ -76,7 +69,7 @@ export default function Cart() {
                     </td>
                     <td>
                       <span className="shopping-cart__product-price">
-                        ${elm.price}
+                        ${elm?.product?.price}
                       </span>
                     </td>
                     <td>
@@ -86,34 +79,23 @@ export default function Cart() {
                           name="quantity"
                           value={elm.quantity}
                           min={1}
-                          onChange={(e) =>
-                            setQuantity(elm.id, e.target.value / 1)
-                          }
                           className="qty-control__number text-center"
                         />
-                        <div
-                          onClick={() => setQuantity(elm.id, elm.quantity - 1)}
-                          className="qty-control__reduce"
-                        >
-                          -
-                        </div>
-                        <div
-                          onClick={() => setQuantity(elm.id, elm.quantity + 1)}
-                          className="qty-control__increase"
-                        >
-                          +
-                        </div>
+                        <div className="qty-control__reduce">-</div>
+                        <div className="qty-control__increase">+</div>
                       </div>
                     </td>
                     <td>
                       <span className="shopping-cart__subtotal">
-                        ${elm.price * elm.quantity}
+                        ${getTotalPrice(elm?.product?.price, elm?.quantity)}
                       </span>
                     </td>
                     <td>
                       <a
-                        onClick={() => removeItem(elm.id)}
                         className="remove-cart"
+                        onClick={() =>
+                          removeCartItems({ cartItemIds: [elm?.id] })
+                        }
                       >
                         <svg
                           width="10"
@@ -233,8 +215,8 @@ export default function Cart() {
                     <th>Total</th>
                     <td>
                       $
-                      {49 * checkboxes.flat_rate +
-                        8 * checkboxes.local_pickup +
+                      {49 * checkboxes?.flat_rate +
+                        8 * checkboxes?.local_pickup +
                         totalPrice +
                         19}
                     </td>

@@ -36,11 +36,11 @@ export default function HomePage1() {
           <InstaGram />
           <div className="mb-4 pb-4 pb-xl-5 mb-xl-5"></div>
           <div className="bg-white">
-            <Features />{" "}
+            <Features />
           </div>
         </main>
         <Footer1 />
-        <LoginFormPopup />{" "}
+        <LoginFormPopup />
       </div>
     </>
   );

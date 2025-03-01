@@ -25,11 +25,11 @@ const fetchData = async <T>({
     attributeName,
   });
 
-  const response = await axiosInstance.get(endpoint, { params });
+  const res = await axiosInstance.get(endpoint, { params });
 
   return {
-    data: response.data.data.data,
-    total: response.data.data.total,
+    data: res.data.data.data,
+    total: res.data.data.total,
   };
 };
 
@@ -65,4 +65,4 @@ const useInfiniteFetch = <T>({
   };
 };
 
-export default useInfiniteFetch;
+export { useInfiniteFetch };

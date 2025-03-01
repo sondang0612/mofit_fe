@@ -62,7 +62,7 @@ export default function Nav() {
             isActiveParentMenu(homePages) ? "menu-active" : ""
           }`}
         >
-          Home
+          Trang chủ
         </a>
         {/* <!-- /.box-menu --> */}
       </li>
@@ -75,7 +75,7 @@ export default function Nav() {
            ${isActiveParentMenu(additionalShopPageitems) ? "menu-active" : ""}
           `}
         >
-          Shop
+          Cửa hàng
         </a>
         <div className="mega-menu">
           <div className="container d-flex">
@@ -173,7 +173,7 @@ export default function Nav() {
             isActiveParentMenu(blogmenuItems) ? "menu-active" : ""
           }`}
         >
-          Blog
+          Bài viết
         </a>
         <ul className="default-menu list-unstyled">
           {blogmenuItems.map((elm, i) => (

@@ -1,19 +1,44 @@
 "use client";
 
+import { useLogin } from "@/hooks/react-query/auth/useLogin";
 import { closeModalUserlogin } from "@/utils/aside";
 import Link from "next/link";
-import { useEffect } from "react";
+import React from "react";
+import { toast } from "react-toastify";
 
 export default function CustomerLogin() {
-  useEffect(() => {
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const { mutate: login, isSuccess } = useLogin();
+
+  const isValidForm = React.useMemo(() => {
+    return email.length !== 0 && password.length !== 0;
+  }, [email, password]);
+
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!isValidForm) {
+      toast.error("Vui lòng nhập đầy đủ thông tin");
+      return;
+    }
+    login({ email, password });
+  };
+
+  React.useEffect(() => {
     const pageOverlay = document.getElementById("pageOverlay");
 
-    pageOverlay.addEventListener("click", closeModalUserlogin);
+    pageOverlay?.addEventListener("click", closeModalUserlogin);
 
     return () => {
-      pageOverlay.removeEventListener("click", closeModalUserlogin);
+      pageOverlay?.removeEventListener("click", closeModalUserlogin);
     };
   }, []);
+
+  React.useEffect(() => {
+    if (isSuccess) {
+      closeModalUserlogin();
+    }
+  }, [isSuccess]);
 
   return (
     <div
@@ -29,13 +54,18 @@ export default function CustomerLogin() {
               className="btn-close-lg js-close-aside ms-auto"
             />
           </div>
-          <form onSubmit={(e) => e.preventDefault()} className="aside-content">
+          <form
+            onSubmit={handleLogin}
+            className="aside-content"
+            id="login-form"
+          >
             <div className="form-floating mb-3">
               <input
                 name="email"
                 type="email"
                 className="form-control form-control_gray"
                 placeholder="name@example.com"
+                onChange={(e) => setEmail(e.target.value)}
               />
               <label>Username or email address *</label>
             </div>
@@ -47,6 +77,7 @@ export default function CustomerLogin() {
                 className="form-control form-control_gray"
                 type="password"
                 placeholder="********"
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div className="d-flex align-items-center mb-3 pb-2">
@@ -55,7 +86,7 @@ export default function CustomerLogin() {
                   name="remember"
                   className="form-check-input form-check-input_fill"
                   type="checkbox"
-                  defaultValue
+                  defaultValue={0}
                 />
                 <label className="form-check-label text-secondary">
                   Remember me
@@ -68,6 +99,7 @@ export default function CustomerLogin() {
             <button
               className="btn btn-primary w-100 text-uppercase"
               type="submit"
+              form="login-form"
             >
               Log In
             </button>

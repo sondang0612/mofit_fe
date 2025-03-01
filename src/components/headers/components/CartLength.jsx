@@ -1,8 +1,8 @@
 "use client";
 
-import { useContextElement } from "@/context/Context";
+import { useCart } from "@/hooks/react-query/cart/useCart";
 
 export default function CartLength() {
-  const { cartProducts } = useContextElement();
-  return <>{cartProducts.length}</>;
+  const { data: cart } = useCart();
+  return <>{cart?.data?.items?.length || 0}</>;
 }

@@ -9,8 +9,11 @@ const countries = [
 import { useContextElement } from "@/context/Context";
 import { useState } from "react";
 import Link from "next/link";
+import { useCart } from "@/hooks/react-query/cart/useCart";
+import { getTotalPrice } from "@/utils/getTotalPrice";
 export default function Checkout() {
-  const { cartProducts, totalPrice } = useContextElement();
+  const { totalPrice } = useContextElement();
+  const { data: cart } = useCart();
   const [selectedRegion, setSelectedRegion] = useState("");
   const [idDDActive, setIdDDActive] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -216,8 +219,8 @@ export default function Checkout() {
               <textarea
                 className="form-control form-control_gray"
                 placeholder="Order Notes (optional)"
-                cols="30"
-                rows="8"
+                cols={30}
+                rows={8}
               ></textarea>
             </div>
           </div>
@@ -225,21 +228,23 @@ export default function Checkout() {
         <div className="checkout__totals-wrapper">
           <div className="sticky-content">
             <div className="checkout__totals">
-              <h3>Your Order</h3>
+              <h3>Đon hàng của bạn</h3>
               <table className="checkout-cart-items">
                 <thead>
                   <tr>
-                    <th>PRODUCT</th>
+                    <th>Sản phẩm</th>
                     <th>SUBTOTAL</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {cartProducts.map((elm, i) => (
+                  {cart?.data?.items?.map((elm, i) => (
                     <tr key={i}>
                       <td>
-                        {elm.title} x {elm.quantity}
+                        {elm.product?.title} x {elm.quantity}
                       </td>
-                      <td>${elm.price * elm.quantity}</td>
+                      <td>
+                        ${getTotalPrice(elm?.product?.price, elm?.quantity)}
+                      </td>
                     </tr>
                   ))}
                 </tbody>

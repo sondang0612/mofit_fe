@@ -2,32 +2,37 @@
 import Link from "next/link";
 
 import { useContextElement } from "@/context/Context";
-import React, { useEffect } from "react";
+import { useCart } from "@/hooks/react-query/cart/useCart";
+import { useRemoveCartItems } from "@/hooks/react-query/cart/useRemoveCartItems";
+import { EDefaultValue } from "@/utils/constants/default-value.enum";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import React, { useEffect } from "react";
+import { getTotalPrice } from "@/utils/getTotalPrice";
 
 export default function CartDrawer() {
   const { cartProducts, setCartProducts, totalPrice } = useContextElement();
+
+  const { data: cart } = useCart();
+  const { mutate: removeCartItems } = useRemoveCartItems();
+  const router = useRouter();
   const pathname = usePathname();
   const closeCart = () => {
     document
-      .getElementById("cartDrawerOverlay")
-      .classList.remove("page-overlay_visible");
-    document.getElementById("cartDrawer").classList.remove("aside_visible");
+      ?.getElementById("cartDrawerOverlay")
+      ?.classList.remove("page-overlay_visible");
+    document?.getElementById("cartDrawer")?.classList.remove("aside_visible");
   };
-  const setQuantity = (id, quantity) => {
-    if (quantity >= 1) {
-      const item = cartProducts.filter((elm) => elm.id == id)[0];
-      const items = [...cartProducts];
-      const itemIndex = items.indexOf(item);
-      item.quantity = quantity;
-      items[itemIndex] = item;
-      setCartProducts(items);
+
+  const handleShopNow = () => {
+    const href = "/shop-1";
+    if (pathname === href) {
+      closeCart();
+    } else {
+      router.push(href);
     }
   };
-  const removeItem = (id) => {
-    setCartProducts((pre) => [...pre.filter((elm) => elm.id != id)]);
-  };
+
   useEffect(() => {
     closeCart();
   }, [pathname]);
@@ -40,10 +45,10 @@ export default function CartDrawer() {
       >
         <div className="aside-header d-flex align-items-center">
           <h3 className="text-uppercase fs-6 mb-0">
-            SHOPPING BAG (
+            Giỏ hàng (
             <span className="cart-amount js-cart-items-count">
-              {cartProducts.length}
-            </span>{" "}
+              {cart?.data?.items?.length}
+            </span>
             )
           </h3>
           <button
@@ -51,9 +56,9 @@ export default function CartDrawer() {
             className="btn-close-lg js-close-aside btn-close-aside ms-auto"
           ></button>
         </div>
-        {cartProducts.length ? (
+        {cart?.data?.items?.length ? (
           <div className="aside-content cart-drawer-items-list">
-            {cartProducts.map((elm, i) => (
+            {cart?.data?.items?.map((elm, i) => (
               <React.Fragment key={i}>
                 <div className="cart-drawer-item d-flex position-relative">
                   <div className="position-relative">
@@ -63,13 +68,13 @@ export default function CartDrawer() {
                       width={330}
                       height={400}
                       style={{ height: "fit-content" }}
-                      src={elm.imgSrc}
+                      src={elm?.product?.imgSrc || EDefaultValue.IMAGE}
                       alt="image"
                     />
                   </div>
                   <div className="cart-drawer-item__info flex-grow-1">
                     <h6 className="cart-drawer-item__title fw-normal">
-                      {elm.title}
+                      {elm?.product?.title}
                     </h6>
                     <p className="cart-drawer-item__option text-secondary">
                       Color: Yellow
@@ -82,38 +87,23 @@ export default function CartDrawer() {
                         <input
                           type="number"
                           name="quantity"
-                          onChange={(e) =>
-                            setQuantity(elm.id, e.target.value / 1)
-                          }
                           value={elm.quantity}
                           min="1"
                           className="qty-control__number border-0 text-center"
                         />
-                        <div
-                          onClick={() => {
-                            setQuantity(elm.id, elm.quantity - 1);
-                          }}
-                          className="qty-control__reduce text-start"
-                        >
-                          -
-                        </div>
-                        <div
-                          onClick={() => setQuantity(elm.id, elm.quantity + 1)}
-                          className="qty-control__increase text-end"
-                        >
-                          +
-                        </div>
+                        <div className="qty-control__reduce text-start">-</div>
+                        <div className="qty-control__increase text-end">+</div>
                       </div>
 
                       <span className="cart-drawer-item__price money price">
-                        ${elm.price * elm.quantity}
+                        {getTotalPrice(elm?.product?.price, elm?.quantity)}
                       </span>
                     </div>
                   </div>
 
                   <button
-                    onClick={() => removeItem(elm.id)}
                     className="btn-close-xs position-absolute top-0 end-0 js-cart-item-remove"
+                    onClick={() => removeCartItems({ cartItemIds: [elm?.id] })}
                   ></button>
                 </div>
                 {/* <!-- /.cart-drawer-item d-flex --> */}
@@ -125,8 +115,14 @@ export default function CartDrawer() {
             {/* <!-- /.cart-drawer-item d-flex --> */}
           </div>
         ) : (
-          <div className="fs-18 mt-5 px-5">
-            Your cart is empty. Start shopping!
+          <div className="fs-18 mt-5 px-5 text-center">
+            Chưa có sản phẩm trong giỏ hàng.{" "}
+            <span
+              className="underline cursor-pointer text-blue-500"
+              onClick={handleShopNow}
+            >
+              Shopping now!
+            </span>
           </div>
         )}
         {/* <!-- /.aside-content --> */}
@@ -138,16 +134,16 @@ export default function CartDrawer() {
             <span className="cart-subtotal fw-medium">${totalPrice}</span>
           </div>
           {/* <!-- /.d-flex justify-content-between --> */}
-          {cartProducts.length ? (
+          {cart?.data?.items?.length ? (
             <>
               <Link href="/shop_cart" className="btn btn-light mt-3 d-block">
-                View Cart
+                Xem giỏ hàng
               </Link>
               <Link
                 href="/shop_checkout"
                 className="btn btn-primary mt-3 d-block"
               >
-                Checkout
+                Thanh toán
               </Link>
             </>
           ) : (

@@ -1,4 +1,6 @@
 import axios from "axios";
+import Cookies from "js-cookie";
+import { cookiesKey } from "./cookiesKey";
 
 const baseURL =
   process.env.NEXT_PUBLIC_API_URL || "https://api.your-domain.com";
@@ -13,9 +15,10 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
-    if (token && config.headers) {
-      config.headers.Authorization = `Bearer ${token}`;
+    const accessToken = Cookies.get(cookiesKey.ACCESS_TOKEN);
+
+    if (accessToken && config.headers) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
     return config;
   },
@@ -30,7 +33,7 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem("token");
+      Cookies.remove(cookiesKey.ACCESS_TOKEN);
     }
     return Promise.reject(error);
   }

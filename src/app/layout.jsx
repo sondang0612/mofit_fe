@@ -1,29 +1,31 @@
 "use client";
+import ProductAdditionalInformation from "@/components/asides/ProductAdditionalInformation";
+import ProductDescription from "@/components/asides/ProductDescription";
+import ProductReviews from "@/components/asides/ProductReviews";
+import ShopFilter from "@/components/asides/ShopFilter";
+import CookieContainer from "@/components/common/CookieContainer";
+import LoginFormPopup from "@/components/common/LoginFormPopup";
+import ScrollTop from "@/components/common/ScrollTop";
 import Svgs from "@/components/common/Svgs";
+import MobileFooter1 from "@/components/footers/MobileFooter1";
+import MobileHeader from "@/components/headers/MobileHeader";
+import Delivery from "@/components/modals/Delivery";
+import NewsLetter from "@/components/modals/NewsLetter";
+import QuickView from "@/components/modals/QuickView";
+import SiteMap from "@/components/modals/SiteMap";
+import SizeGuide from "@/components/modals/SizeGuide";
+import CartDrawer from "@/components/shopCartandCheckout/CartDrawer";
+import Context from "@/context/Context";
+import { AuthProvider } from "@/providers/AuthProvider";
+import QueryProvider from "@/providers/QueryProvider";
+import "rc-slider/assets/index.css";
+import { useEffect } from "react";
+import { ToastContainer } from "react-toastify";
 import "react-tooltip/dist/react-tooltip.css";
+import "tippy.js/dist/tippy.css";
 import "../../public/assets/css/plugins/swiper.min.css";
 import "../../public/assets/sass/style.scss";
-import "rc-slider/assets/index.css";
-import "tippy.js/dist/tippy.css";
-import LoginFormPopup from "@/components/common/LoginFormPopup";
-import { useEffect } from "react";
-import ScrollTop from "@/components/common/ScrollTop";
-import Context from "@/context/Context";
-import QuickView from "@/components/modals/QuickView";
-import CartDrawer from "@/components/shopCartandCheckout/CartDrawer";
-import SiteMap from "@/components/modals/SiteMap";
-import NewsLetter from "@/components/modals/NewsLetter";
-import CookieContainer from "@/components/common/CookieContainer";
-import MobileHeader from "@/components/headers/MobileHeader";
-import SizeGuide from "@/components/modals/SizeGuide";
-import Delivery from "@/components/modals/Delivery";
 import CustomerLogin from "@/components/asides/CustomerLogin";
-import ShopFilter from "@/components/asides/ShopFilter";
-import ProductDescription from "@/components/asides/ProductDescription";
-import ProductAdditionalInformation from "@/components/asides/ProductAdditionalInformation";
-import ProductReviews from "@/components/asides/ProductReviews";
-import MobileFooter1 from "@/components/footers/MobileFooter1";
-import QueryProvider from "@/providers/QueryProvider";
 
 export default function RootLayout({ children }) {
   useEffect(() => {
@@ -80,30 +82,43 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        <QueryProvider>
-          <Svgs />
-          <Context>
-            <MobileHeader />
-            {children}
-            <MobileFooter1 />
-            {/* //modals and asides */}
-            <LoginFormPopup />
-            <QuickView />
-            <NewsLetter />
-            <CookieContainer />
-            <SizeGuide />
-            <Delivery />
-            <CartDrawer />
-            <SiteMap />
-            <CustomerLogin />
-            <ShopFilter />
-            <ProductDescription />
-            <ProductAdditionalInformation />
-            <ProductReviews />
-          </Context>
-          <div className="page-overlay" id="pageOverlay"></div>
-          <ScrollTop />
-        </QueryProvider>
+        <AuthProvider>
+          <QueryProvider>
+            <Svgs />
+            <Context>
+              <MobileHeader />
+              {children}
+              <MobileFooter1 />
+              {/* //modals and asides */}
+              <LoginFormPopup />
+              <QuickView />
+              <NewsLetter />
+              <CookieContainer />
+              <SizeGuide />
+              <Delivery />
+              <CartDrawer />
+              <SiteMap />
+              <CustomerLogin />
+              <ShopFilter />
+              <ProductDescription />
+              <ProductAdditionalInformation />
+              <ProductReviews />
+              <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
+            </Context>
+            <div className="page-overlay" id="pageOverlay"></div>
+            <ScrollTop />
+          </QueryProvider>
+        </AuthProvider>
       </body>
     </html>
   );

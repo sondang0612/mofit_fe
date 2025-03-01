@@ -158,3 +158,31 @@ body {
 .product-single__thumbnail .swiper-slide {
   height: fit-content !important;
 }
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.right-0 {
+  right: 0px;
+}
+
+.top-2 {
+  margin-top: 0.5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.text-blue-500 {
+  color: #2196f3;
+}

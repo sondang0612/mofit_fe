@@ -4,23 +4,33 @@ import { useContextElement } from "@/context/Context";
 import Link from "next/link";
 const filterCategories = ["All", "New Arrivals", "Best Seller", "Top Rated"];
 
-import useInfiniteFetch from "@/hooks/react-query/useInfiniteFetch";
+import { useInfiniteFetch } from "@/hooks/react-query/useInfiniteFetch";
 import { Product } from "@/types/api";
 import { apiEndpoints } from "@/utils/constants/apiEndpoints";
 import { EDefaultValue } from "@/utils/constants/default-value.enum";
 import Image from "next/image";
 import { useState } from "react";
 import SkeletonProduct1 from "./SkeletonProduct1";
+import { useAddToCart } from "@/hooks/react-query/cart/useAddToCart";
 
 export default function Products2() {
   const { toggleWishlist, isAddedtoWishlist } = useContextElement();
   const { addProductToCart, isAddedToCartProducts } = useContextElement();
   const [currentCategory, setCurrentCategory] = useState(filterCategories[0]);
+  const { mutate: addToCart } = useAddToCart();
   const { data: products } = useInfiniteFetch<Product>({
     endpoint: apiEndpoints.PRODUCTS,
     limit: 8,
     attributeName: currentCategory === "All" ? undefined : currentCategory,
   });
+
+  const handleAddToCart = (productId?: number, quantity?: number) => {
+    if (!productId || !quantity) {
+      return undefined;
+    }
+
+    addToCart({ productId, quantity });
+  };
 
   return (
     <section className="products-grid container">
@@ -80,16 +90,10 @@ export default function Products2() {
                         </Link>
                         <button
                           className="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium js-add-cart js-open-aside"
-                          onClick={() => addProductToCart(elm.id)}
-                          title={
-                            isAddedToCartProducts(elm.id)
-                              ? "Already Added"
-                              : "Add to Cart"
-                          }
+                          onClick={() => handleAddToCart(elm?.id, 1)}
+                          title={"Thêm vào giỏ hàng"}
                         >
-                          {isAddedToCartProducts(elm.id)
-                            ? "Already Added"
-                            : "Add To Cart"}
+                          Thêm vào giỏ hàng
                         </button>
                       </div>
 

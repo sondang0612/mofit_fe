@@ -1,17 +1,22 @@
 "use client";
+import { useProfile } from "@/hooks/react-query/auth/useProfile";
 import { openCart } from "@/utils/openCart";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import React from "react";
 import CartLength from "./components/CartLength";
 import Nav from "./components/Nav";
 import SearchPopup from "./components/SearchPopup";
 import User from "./components/User";
+import Avatar from "./components/Avatar";
+import { useLogout } from "@/hooks/useLogout";
 
 export default function Header1() {
-  const [scrollDirection, setScrollDirection] = useState("down");
+  const [scrollDirection, setScrollDirection] = React.useState("down");
+  const { data: profile } = useProfile();
+  const { mutate: logout } = useLogout();
 
-  useEffect(() => {
+  React.useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
@@ -76,42 +81,43 @@ export default function Header1() {
 
             {/* <!-- /.header-tools__item hover-container --> */}
 
-            <div className="header-tools__item hover-container">
-              <a className="header-tools__item js-open-aside" href="#">
-                <User />
-              </a>
-            </div>
+            {profile ? (
+              <>
+                <div className="user-menu-dropdown_wrapper">
+                  <Avatar data={profile.data} />
+                  <div className="user-menu-dropdown">
+                    <Link href="/account_edit">Tài khoản của tôi</Link>
+                    <Link href="/account_wishlist">Sản phẩm yêu thích</Link>
+                    <span onClick={logout}>Thoát</span>
+                  </div>
+                </div>
 
-            <Link className="header-tools__item" href="/account_wishlist">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <use href="#icon_heart" />
-              </svg>
-            </Link>
-
-            <a
-              onClick={() => openCart()}
-              className="header-tools__item header-tools__cart js-open-aside"
-            >
-              <svg
-                className="d-block"
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <use href="#icon_cart" />
-              </svg>
-              <span className="cart-amount d-block position-absolute js-cart-items-count">
-                <CartLength />
-              </span>
-            </a>
+                <a
+                  onClick={() => openCart()}
+                  className="header-tools__item header-tools__cart js-open-aside"
+                >
+                  <svg
+                    className="d-block"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <use href="#icon_cart" />
+                  </svg>
+                  <span className="cart-amount d-block position-absolute js-cart-items-count">
+                    <CartLength />
+                  </span>
+                </a>
+              </>
+            ) : (
+              <div className="header-tools__item hover-container">
+                <a className="header-tools__item js-open-aside" href="#">
+                  <User />
+                </a>
+              </div>
+            )}
 
             <a
               className="header-tools__item"

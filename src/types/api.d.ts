@@ -25,3 +25,23 @@ export interface Attribute {
   id?: number | undefined;
   name?: string | undefined;
 }
+
+export interface User {
+  id?: number | undefined;
+  email?: string | undefined;
+  firstName?: string | undefined;
+  lastName?: string | undefined;
+  phoneNumber?: string | undefined;
+  username?: string | undefined;
+}
+
+export interface Cart {
+  id?: number | undefined;
+  items?: CartItem[] | undefined;
+}
+
+export interface CartItem {
+  id: number | undefined;
+  quantity?: number | undefined;
+  product?: Product | undefined;
+}
