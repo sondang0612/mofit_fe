@@ -9,22 +9,22 @@ const steps = [
     id: 1,
     href: "/shop_cart",
     number: "01",
-    title: "Shopping Bag",
-    description: "Manage Your Items List",
+    title: "Dánh sách sản phẩm",
+    description: "Quản lí sản phẩm của bạn",
   },
   {
     id: 2,
     href: "/shop_checkout",
     number: "02",
-    title: "Shipping and Checkout",
-    description: "Checkout Your Items List",
+    title: "Vận chuyển và thanh toán",
+    description: "Thanh toán danh sách sản phẩm của bạn",
   },
   {
     id: 3,
     href: "/shop_order_complete",
     number: "03",
-    title: "Confirmation",
-    description: "Review And Submit Your Order",
+    title: "Xác nhận thanh toán",
+    description: "Kiểm tra và gửi đơn hàng của bạn",
   },
 ];
 export default function ChectoutSteps() {

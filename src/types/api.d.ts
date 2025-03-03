@@ -35,11 +35,6 @@ export interface User {
   username?: string | undefined;
 }
 
-export interface Cart {
-  id?: number | undefined;
-  items?: CartItem[] | undefined;
-}
-
 export interface CartItem {
   id: number | undefined;
   quantity?: number | undefined;

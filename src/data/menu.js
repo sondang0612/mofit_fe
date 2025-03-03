@@ -139,12 +139,12 @@ export const othersMenuItems = [
   {
     id: 1,
     href: "/account_dashboard",
-    title: "My Account",
+    title: "Tài khoản của tôi",
   },
   {
     id: 2,
     href: "/login_register",
-    title: "Login / Register",
+    title: "Đăng nhập / Đăng ký",
   },
   {
     id: 3,
@@ -182,31 +182,37 @@ export const dashboardMenuItems = [
   {
     id: 1,
     href: "/account_dashboard",
-    title: "Dashboard",
+    title: "Trang quản lí",
+    value: "dashboard",
   },
   {
     id: 2,
     href: "/account_orders",
-    title: "Orders",
+    title: "Đơn hàng",
+    value: "account_orders",
   },
   {
     id: 3,
     href: "/account_edit_address",
-    title: "Addresses",
+    title: "Địa chỉ",
+    value: "account_edit_address",
   },
   {
     id: 4,
     href: "/account_edit",
-    title: "Account Details",
+    title: "Thông tin tài khoản",
+    value: "account_edit",
   },
   {
     id: 5,
     href: "/account_wishlist",
-    title: "Wishlist",
+    title: "Sản phẩm yêu thích",
+    value: "account_wishlist",
   },
   {
     id: 6,
     href: "/login_register",
-    title: "Logout",
+    title: "Thoát",
+    value: "logout",
   },
 ];

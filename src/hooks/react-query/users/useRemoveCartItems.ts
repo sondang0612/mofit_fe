@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { queryKey } from "../queryKey";
 
 type Form = {
-  cartItemIds: [];
+  cartItemIds: any[];
 };
 
 const fetchData = asyncAuth(async (form: Form) => {

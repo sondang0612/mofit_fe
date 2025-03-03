@@ -4,5 +4,5 @@ import { useCart } from "@/hooks/react-query/cart/useCart";
 
 export default function CartLength() {
   const { data: cart } = useCart();
-  return <>{cart?.data?.items?.length || 0}</>;
+  return <>{cart?.data?.length || 0}</>;
 }

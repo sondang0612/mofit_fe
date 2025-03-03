@@ -10,11 +10,9 @@ export const useLogout = () => {
   const mutate = useCallback(async () => {
     Cookies.remove("access_token");
 
-    await queryClient.resetQueries({ refetchActive: true } as any);
+    queryClient.resetQueries({ exact: true });
 
     queryClient.clear();
-
-    queryClient.invalidateQueries();
 
     await new Promise((resolve) => setTimeout(resolve, 100));
 

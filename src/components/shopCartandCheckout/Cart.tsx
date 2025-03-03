@@ -1,16 +1,14 @@
 "use client";
 
-import { useContextElement } from "@/context/Context";
-import Link from "next/link";
-import { useState } from "react";
-import Image from "next/image";
 import { useCart } from "@/hooks/react-query/cart/useCart";
+import { useRemoveCartItems } from "@/hooks/react-query/users/useRemoveCartItems";
 import { EDefaultValue } from "@/utils/constants/default-value.enum";
 import { getTotalPrice } from "@/utils/getTotalPrice";
-import { useRemoveCartItems } from "@/hooks/react-query/cart/useRemoveCartItems";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 
 export default function Cart() {
-  const { cartProducts, setCartProducts, totalPrice } = useContextElement();
   const { data: cart } = useCart();
   const { mutate: removeCartItems } = useRemoveCartItems();
 
@@ -31,21 +29,21 @@ export default function Cart() {
   return (
     <div className="shopping-cart" style={{ minHeight: "calc(100vh - 300px)" }}>
       <div className="cart-table__wrapper">
-        {cart?.data?.items?.length ? (
+        {cart?.data?.length ? (
           <>
             <table className="cart-table">
               <thead>
                 <tr>
-                  <th>Product</th>
+                  <th>Sản phẩm</th>
                   <th></th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Subtotal</th>
+                  <th>Giá</th>
+                  <th>Số lượng</th>
+                  <th>Tổng phụ</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
-                {cart?.data?.items?.map((elm, i) => (
+                {cart?.data?.map((elm, i) => (
                   <tr key={i}>
                     <td>
                       <div className="shopping-cart__product-item">
@@ -122,120 +120,29 @@ export default function Cart() {
                   className="form-control"
                   type="text"
                   name="coupon_code"
-                  placeholder="Coupon Code"
+                  placeholder="Mã thánh toán"
                 />
                 <input
                   className="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4"
                   type="submit"
-                  defaultValue="APPLY COUPON"
+                  defaultValue="Áp dụng"
                 />
               </form>
-              <button className="btn btn-light">UPDATE CART</button>
+              <button className="btn btn-light">
+                <Link href={"/shop_checkout"}>Tiếp theo</Link>
+              </button>
             </div>
           </>
         ) : (
           <>
-            <div className="fs-20">Shop cart is empty</div>
+            <div className="fs-20">Giò hàng đang trống</div>
 
             <button className="btn mt-3 btn-light">
-              <Link href={"/shop-1"}>Explore Products</Link>
+              <Link href={"/shop-1"}>Shopping now!</Link>
             </button>
           </>
         )}
       </div>
-      {cartProducts.length ? (
-        <div className="shopping-cart__totals-wrapper">
-          <div className="sticky-content">
-            <div className="shopping-cart__totals">
-              <h3>Cart Totals</h3>
-              <table className="cart-totals">
-                <tbody>
-                  <tr>
-                    <th>Subtotal</th>
-                    <td>${totalPrice}</td>
-                  </tr>
-                  <tr>
-                    <th>Shipping</th>
-                    <td>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input form-check-input_fill"
-                          type="checkbox"
-                          id="free_shipping"
-                          checked={checkboxes.free_shipping}
-                          onChange={handleCheckboxChange}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="free_shipping"
-                        >
-                          Free shipping
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input form-check-input_fill"
-                          type="checkbox"
-                          id="flat_rate"
-                          checked={checkboxes.flat_rate}
-                          onChange={handleCheckboxChange}
-                        />
-                        <label className="form-check-label" htmlFor="flat_rate">
-                          Flat rate: $49
-                        </label>
-                      </div>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input form-check-input_fill"
-                          type="checkbox"
-                          id="local_pickup"
-                          checked={checkboxes.local_pickup}
-                          onChange={handleCheckboxChange}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="local_pickup"
-                        >
-                          Local pickup: $8
-                        </label>
-                      </div>
-                      <div>Shipping to AL.</div>
-                      <div>
-                        <a href="#" className="menu-link menu-link_us-s">
-                          CHANGE ADDRESS
-                        </a>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>VAT</th>
-                    <td>$19</td>
-                  </tr>
-                  <tr>
-                    <th>Total</th>
-                    <td>
-                      $
-                      {49 * checkboxes?.flat_rate +
-                        8 * checkboxes?.local_pickup +
-                        totalPrice +
-                        19}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div className="mobile_fixed-btn_wrapper">
-              <div className="button-wrapper container">
-                <button className="btn btn-primary btn-checkout">
-                  PROCEED TO CHECKOUT
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      ) : (
-        ""
-      )}
     </div>
   );
 }

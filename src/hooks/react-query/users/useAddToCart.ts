@@ -10,7 +10,7 @@ type Form = {
 };
 
 const fetchData = asyncAuth(async (form: Form) => {
-  const response = await axiosInstance.post("cart/add", form);
+  const response = await axiosInstance.post("users/add-to-cart", form);
   return response?.data;
 });
 

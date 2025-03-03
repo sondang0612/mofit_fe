@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { useContextElement } from "@/context/Context";
 import { useCart } from "@/hooks/react-query/cart/useCart";
-import { useRemoveCartItems } from "@/hooks/react-query/cart/useRemoveCartItems";
+import { useRemoveCartItems } from "@/hooks/react-query/users/useRemoveCartItems";
 import { EDefaultValue } from "@/utils/constants/default-value.enum";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
@@ -11,8 +11,6 @@ import React, { useEffect } from "react";
 import { getTotalPrice } from "@/utils/getTotalPrice";
 
 export default function CartDrawer() {
-  const { cartProducts, setCartProducts, totalPrice } = useContextElement();
-
   const { data: cart } = useCart();
   const { mutate: removeCartItems } = useRemoveCartItems();
   const router = useRouter();
@@ -47,7 +45,7 @@ export default function CartDrawer() {
           <h3 className="text-uppercase fs-6 mb-0">
             Giỏ hàng (
             <span className="cart-amount js-cart-items-count">
-              {cart?.data?.items?.length}
+              {cart?.data?.length}
             </span>
             )
           </h3>
@@ -56,9 +54,9 @@ export default function CartDrawer() {
             className="btn-close-lg js-close-aside btn-close-aside ms-auto"
           ></button>
         </div>
-        {cart?.data?.items?.length ? (
+        {cart?.data?.length ? (
           <div className="aside-content cart-drawer-items-list">
-            {cart?.data?.items?.map((elm, i) => (
+            {cart?.data?.map((elm, i) => (
               <React.Fragment key={i}>
                 <div className="cart-drawer-item d-flex position-relative">
                   <div className="position-relative">
@@ -131,10 +129,10 @@ export default function CartDrawer() {
           <hr className="cart-drawer-divider" />
           <div className="d-flex justify-content-between">
             <h6 className="fs-base fw-medium">SUBTOTAL:</h6>
-            <span className="cart-subtotal fw-medium">${totalPrice}</span>
+            <span className="cart-subtotal fw-medium">${0}</span>
           </div>
           {/* <!-- /.d-flex justify-content-between --> */}
-          {cart?.data?.items?.length ? (
+          {cart?.data?.length ? (
             <>
               <Link href="/shop_cart" className="btn btn-light mt-3 d-block">
                 Xem giỏ hàng

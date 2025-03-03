@@ -11,7 +11,7 @@ import { EDefaultValue } from "@/utils/constants/default-value.enum";
 import Image from "next/image";
 import { useState } from "react";
 import SkeletonProduct1 from "./SkeletonProduct1";
-import { useAddToCart } from "@/hooks/react-query/cart/useAddToCart";
+import { useAddToCart } from "@/hooks/react-query/users/useAddToCart";
 
 export default function Products2() {
   const { toggleWishlist, isAddedtoWishlist } = useContextElement();
