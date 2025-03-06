@@ -53,3 +53,21 @@ export interface Address {
   phoneNumber?: string | undefined;
   user?: User | undefined;
 }
+
+export interface OrderItem {
+  id?: number | undefined;
+  product?: Product | undefined;
+  quantity?: number | undefined;
+}
+
+export interface Order {
+  id?: number | undefined;
+  orderItems?: OrderItem[] | undefined;
+  shippingMethod?: string | undefined;
+  shippingPrice?: number | undefined;
+  paymentMethod?: string | undefined;
+  discount?: number | undefined;
+  vat?: number | undefined;
+  subTotal?: number | undefined;
+  totalPrice?: number | undefined;
+}

@@ -29,12 +29,8 @@ const useLogin = () => {
     onSuccess: async (data: LoginData) => {
       toast.success(`Chào mừng ${data.fullName} đã trở lại`);
       Cookies.set(cookiesKey.ACCESS_TOKEN, data?.access_token);
-      await queryClient.invalidateQueries({
-        queryKey: [queryKey.PROFILE],
-      });
-      await queryClient.invalidateQueries({
-        queryKey: [queryKey.CART_INFO],
-      });
+      queryClient.invalidateQueries({ queryKey: [queryKey.PROFILE] });
+      queryClient.invalidateQueries({ queryKey: [queryKey.CART_INFO] });
     },
     onError: (_) => {
       toast.error(`Tài khoản hoặc mật khẩu không đúng`);

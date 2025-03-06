@@ -2,6 +2,7 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactNode, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function QueryProvider({ children }: { children: ReactNode }) {
   const [queryClient] = useState(
@@ -11,6 +12,19 @@ export default function QueryProvider({ children }: { children: ReactNode }) {
           queries: {
             refetchOnWindowFocus: false,
             staleTime: 60 * 1000,
+          },
+          mutations: {
+            onError: (error, _, context: any) => {
+              if (error?.message && error?.message.includes("401")) {
+                toast.error(`Vui lòng đăng nhập`);
+              } else {
+                console.log(context);
+
+                const errorMessage =
+                  context?.meta?.errorMessage || "Có lỗi xảy ra!";
+                toast.error(errorMessage);
+              }
+            },
           },
         },
       })

@@ -17,7 +17,7 @@ interface Params {
 }
 
 const fetchData = asyncAuth(async () => {
-  const response = await axiosInstance.get("addresses/me");
+  const response = await axiosInstance.get("addresses");
   return response?.data?.data;
 });
 

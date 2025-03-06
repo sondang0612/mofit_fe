@@ -11,12 +11,12 @@ import { EDefaultValue } from "@/utils/constants/default-value.enum";
 import Image from "next/image";
 import { useState } from "react";
 import SkeletonProduct1 from "./SkeletonProduct1";
-import { useAddToCart } from "@/hooks/react-query/users/useAddToCart";
+import { useCreateCartItem } from "@/hooks/react-query/cart-items/useCreateCartItem";
 
 export default function Products2() {
   const { toggleWishlist, isAddedtoWishlist } = useContextElement();
   const [currentCategory, setCurrentCategory] = useState(filterCategories[0]);
-  const { mutate: addToCart } = useAddToCart();
+  const { mutate: createCartItem } = useCreateCartItem();
   const { data: products } = useInfiniteFetch<Product>({
     endpoint: apiEndpoints.PRODUCTS,
     limit: 8,
@@ -28,7 +28,7 @@ export default function Products2() {
       return undefined;
     }
 
-    addToCart({ productId, quantity });
+    createCartItem({ productId, quantity });
   };
 
   return (

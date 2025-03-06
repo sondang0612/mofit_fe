@@ -9,9 +9,7 @@ type Form = {
 };
 
 const fetchData = asyncAuth(async (form: Form) => {
-  const response = await axiosInstance.patch(
-    `addresses/${form?.id}/me/default`
-  );
+  const response = await axiosInstance.patch(`addresses/${form?.id}/default`);
   return response?.data;
 });
 

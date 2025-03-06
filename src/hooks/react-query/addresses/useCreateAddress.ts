@@ -16,7 +16,7 @@ type Form = {
 };
 
 const fetchData = asyncAuth(async (form: Form) => {
-  const response = await axiosInstance.post("addresses/me", form);
+  const response = await axiosInstance.post("addresses", form);
   return response?.data;
 });
 

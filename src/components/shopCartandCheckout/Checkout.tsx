@@ -1,11 +1,5 @@
 "use client";
-const countries = [
-  "Australia",
-  "Canada",
-  "United Kingdom",
-  "United States",
-  "Turkey",
-];
+
 import { useCart } from "@/hooks/react-query/cart/useCart";
 import { getSubTotal } from "@/utils/getSubTotal";
 import { getTotal } from "@/utils/getTotal";
@@ -15,15 +9,60 @@ import ListCartItems from "./ListCartItems";
 import React from "react";
 import { useAddresses } from "@/hooks/react-query/addresses/useAddresses";
 import Address from "../otherPages/address/Address";
+import { useCreateOrder } from "@/hooks/react-query/orders/useCreateOrder";
+import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+
 export default function Checkout() {
   const { data: cart } = useCart();
   const { data: addresses } = useAddresses();
+  const { mutate: createOrder, isSuccess, data: order } = useCreateOrder();
   const router = useRouter();
 
   const subTotal = React.useMemo(() => {
     return getSubTotal(cart?.data);
   }, [cart?.data]);
+
+  const checkValid = () => {
+    if (addresses?.data?.length === 0 || !addresses?.data) {
+      toast.error("Vui lòng chọn địa chỉ nhận hàng");
+      return false;
+    }
+
+    if (cart?.data?.length === 0 || !cart?.data) {
+      toast.error("Vui lòng thêm sản phẩm vào giỏ hàng");
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleCreateOrder = () => {
+    const isValid = checkValid();
+
+    if (!isValid) return;
+
+    createOrder({
+      addressId: addresses?.data[0].id,
+      cartItemIds: cart?.data?.map((item) => item.id),
+      discount: 0,
+      vat: 0,
+      paymentMethod: "COD",
+      shippingMethod: "OWN_DELIVERY",
+      shippingPrice: 0,
+      subTotal,
+      totalPrice: getTotal(subTotal, 0, 0),
+    });
+  };
+
+  React.useEffect(() => {
+    if (isSuccess && order) {
+      sessionStorage.setItem("order", JSON.stringify(order?.data));
+      console.log(order?.data);
+
+      router.push("/shop_order_complete");
+    }
+  }, [isSuccess, router, order]);
 
   return (
     <form onSubmit={(e) => e.preventDefault()}>
@@ -78,12 +117,16 @@ export default function Checkout() {
               </table>
             </div>
             <div className="checkout__totals">
-              <Address data={addresses?.data[0]} />
+              {addresses && addresses?.data?.length > 0 && (
+                <Address data={addresses?.data[0]} />
+              )}
               <span
                 className="underline cursor-pointer text-blue-500"
                 onClick={() => router.push("/account_edit_address")}
               >
-                Đặt lại địa chỉ mặc định
+                {addresses && addresses?.data?.length > 0
+                  ? "Đặt lại địa chỉ mặc định"
+                  : "Thêm địa chỉ giao hàng"}
               </span>
             </div>
             <div className="checkout__payment-methods">
@@ -177,7 +220,10 @@ export default function Checkout() {
                 .
               </div>
             </div>
-            <button className="btn btn-primary btn-checkout">
+            <button
+              className="btn btn-primary btn-checkout"
+              onClick={handleCreateOrder}
+            >
               PLACE ORDER
             </button>
           </div>

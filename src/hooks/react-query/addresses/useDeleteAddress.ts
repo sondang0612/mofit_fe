@@ -9,7 +9,7 @@ type Params = {
 };
 
 const fetchData = asyncAuth(async (params: Params) => {
-  const response = await axiosInstance.delete(`addresses/${params?.id}/me`);
+  const response = await axiosInstance.delete(`addresses/${params?.id}`);
   return response?.data;
 });
 

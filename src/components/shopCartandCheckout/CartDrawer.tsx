@@ -7,7 +7,7 @@ import { getTotalPrice } from "@/utils/getTotalPrice";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect } from "react";
-import { useRemoveCartItem } from "@/hooks/react-query/users/useRemoveCartItem";
+import { useRemoveCartItem } from "@/hooks/react-query/cart-items/useRemoveCartItem";
 
 export default function CartDrawer() {
   const { data: cart } = useCart();

@@ -1,14 +1,34 @@
 "use client";
 
-import { useContextElement } from "@/context/Context";
+import { Order } from "@/types/api";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function OrderCompleted() {
-  const { cartProducts, totalPrice } = useContextElement();
-  const [showDate, setShowDate] = useState(false);
+  const [order, setOrder] = useState<Order | null>(null);
+  const router = useRouter();
+
   useEffect(() => {
-    setShowDate(true);
+    const data = sessionStorage.getItem("order");
+    if (data) {
+      setOrder(JSON.parse(data));
+    }
+
+    return () => {
+      sessionStorage.removeItem("order");
+    };
   }, []);
+
+  if (!order) {
+    return (
+      <p
+        className="underline text-blue-500 cursor-pointer"
+        onClick={() => router.push("/")}
+      >
+        Shopping now!
+      </p>
+    );
+  }
 
   return (
     <div className="order-complete">
@@ -32,20 +52,20 @@ export default function OrderCompleted() {
       <div className="order-info">
         <div className="order-info__item">
           <label>Order Number</label>
-          <span>13119</span>
+          <span>{order?.id}</span>
         </div>
         <div className="order-info__item">
           <label>Date</label>
-          {showDate && <span>{new Date().toLocaleDateString()}</span>}
+          <span>{new Date().toLocaleDateString()}</span>
         </div>
         <div className="order-info__item">
           <label>Total</label>
 
-          <span>${totalPrice && totalPrice + 19}</span>
+          <span>${order?.totalPrice}</span>
         </div>
         <div className="order-info__item">
           <label>Paymetn Method</label>
-          <span>Direct Bank Transfer</span>
+          <span>{order?.paymentMethod}</span>
         </div>
       </div>
       <div className="checkout__totals-wrapper">
@@ -59,12 +79,12 @@ export default function OrderCompleted() {
               </tr>
             </thead>
             <tbody>
-              {cartProducts.map((elm, i) => (
+              {order?.orderItems?.map((elm, i) => (
                 <tr key={i}>
                   <td>
-                    {elm.title} x {elm.quantity}
+                    {elm?.product?.title} x {elm?.quantity}
                   </td>
-                  <td>${elm.price}</td>
+                  <td>${elm?.product?.price}</td>
                 </tr>
               ))}
             </tbody>
@@ -73,7 +93,7 @@ export default function OrderCompleted() {
             <tbody>
               <tr>
                 <th>SUBTOTAL</th>
-                <td>${totalPrice}</td>
+                <td>${order?.subTotal}</td>
               </tr>
               <tr>
                 <th>SHIPPING</th>
@@ -81,11 +101,11 @@ export default function OrderCompleted() {
               </tr>
               <tr>
                 <th>VAT</th>
-                <td>${totalPrice && 19}</td>
+                <td>${order?.vat}</td>
               </tr>
               <tr>
                 <th>TOTAL</th>
-                <td>${totalPrice && totalPrice + 19}</td>
+                <td>${order?.totalPrice}</td>
               </tr>
             </tbody>
           </table>

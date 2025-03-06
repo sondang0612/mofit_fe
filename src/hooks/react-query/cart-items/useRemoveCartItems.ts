@@ -1,19 +1,18 @@
 import axiosInstance from "@/libs/axiosInstance";
-import { asyncAuth } from "@/utils/asyncAuth";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { queryKey } from "../queryKey";
 
 type Form = {
-  cartItemId?: number | undefined;
+  cartItemIds: any[];
 };
 
-const fetchData = asyncAuth(async (form: Form) => {
-  const response = await axiosInstance.delete(`cart/${form.cartItemId}/me`);
+const fetchData = async (form: Form) => {
+  const response = await axiosInstance.post("cart-items/remove", form);
   return response?.data;
-});
+};
 
-const useRemoveCartItem = () => {
+const useRemoveCartItems = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: fetchData,
@@ -21,10 +20,7 @@ const useRemoveCartItem = () => {
       toast.success(`Xoá khỏi giỏ hàng thành công`);
       queryClient.invalidateQueries({ queryKey: [queryKey.CART_INFO] });
     },
-    onError: (_) => {
-      toast.error(`Xoá khỏi giỏ hàng thất bại`);
-    },
   });
 };
 
-export { useRemoveCartItem };
+export { useRemoveCartItems };

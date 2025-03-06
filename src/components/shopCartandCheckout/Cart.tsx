@@ -1,7 +1,7 @@
 "use client";
 
 import { useCart } from "@/hooks/react-query/cart/useCart";
-import { useRemoveCartItem } from "@/hooks/react-query/users/useRemoveCartItem";
+import { useRemoveCartItem } from "@/hooks/react-query/cart-items/useRemoveCartItem";
 import Link from "next/link";
 import ListCartItems from "./ListCartItems";
 

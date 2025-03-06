@@ -9,7 +9,7 @@ interface Params {
 }
 
 const fetchData = asyncAuth(async () => {
-  const response = await axiosInstance.get("cart/me");
+  const response = await axiosInstance.get("cart");
   return response?.data;
 });
 

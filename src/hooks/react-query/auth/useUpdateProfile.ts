@@ -24,13 +24,6 @@ const useUpdateProfile = () => {
         queryKey: [queryKey.PROFILE],
       });
     },
-    onError: (error) => {
-      if (error?.message && error?.message.includes("401")) {
-        toast.error(`Mật khẩu không chính xác`);
-      } else {
-        toast.error("Cập nhật thông tin cá nhân thất bại");
-      }
-    },
   });
 };
 

@@ -36,6 +36,8 @@ export default function CustomerLogin() {
 
   React.useEffect(() => {
     if (isSuccess) {
+      console.log("zo");
+
       closeModalUserlogin();
     }
   }, [isSuccess]);
