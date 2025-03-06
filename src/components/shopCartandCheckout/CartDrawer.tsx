@@ -1,18 +1,17 @@
 "use client";
 import Link from "next/link";
 
-import { useContextElement } from "@/context/Context";
 import { useCart } from "@/hooks/react-query/cart/useCart";
-import { useRemoveCartItems } from "@/hooks/react-query/users/useRemoveCartItems";
 import { EDefaultValue } from "@/utils/constants/default-value.enum";
+import { getTotalPrice } from "@/utils/getTotalPrice";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect } from "react";
-import { getTotalPrice } from "@/utils/getTotalPrice";
+import { useRemoveCartItem } from "@/hooks/react-query/users/useRemoveCartItem";
 
 export default function CartDrawer() {
   const { data: cart } = useCart();
-  const { mutate: removeCartItems } = useRemoveCartItems();
+  const { mutate: removeCartItem } = useRemoveCartItem();
   const router = useRouter();
   const pathname = usePathname();
   const closeCart = () => {
@@ -101,7 +100,7 @@ export default function CartDrawer() {
 
                   <button
                     className="btn-close-xs position-absolute top-0 end-0 js-cart-item-remove"
-                    onClick={() => removeCartItems({ cartItemIds: [elm?.id] })}
+                    onClick={() => removeCartItem({ cartItemId: elm?.id })}
                   ></button>
                 </div>
                 {/* <!-- /.cart-drawer-item d-flex --> */}

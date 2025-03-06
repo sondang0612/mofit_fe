@@ -40,3 +40,16 @@ export interface CartItem {
   quantity?: number | undefined;
   product?: Product | undefined;
 }
+
+export interface Address {
+  id?: number | undefined;
+  firstName?: string | undefined;
+  lastName?: string | undefined;
+  city?: string | undefined;
+  district?: string | undefined;
+  streetAddress?: string | undefined;
+  note?: string | undefined;
+  isDefault?: string | undefined;
+  phoneNumber?: string | undefined;
+  user?: User | undefined;
+}

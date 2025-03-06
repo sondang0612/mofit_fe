@@ -1,0 +1,235 @@
+.address-modal-component {
+  // Address Manager Container
+
+  // Button Styles
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    border-radius: 0.375rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    &--primary {
+      background-color: #3b82f6; // blue-500
+      color: #ffffff;
+      border: none;
+
+      &:hover {
+        background-color: #2563eb; // blue-600
+      }
+    }
+
+    &--secondary {
+      background-color: #ffffff;
+      color: #4b5563; // gray-600
+      border: 1px solid #e5e7eb; // gray-200
+
+      &:hover {
+        background-color: #f9fafb; // gray-50
+      }
+    }
+
+    &--text {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 0.875rem;
+
+      &.primary {
+        color: #3b82f6; // blue-500
+
+        &:hover {
+          color: #2563eb; // blue-600
+        }
+      }
+
+      &.danger {
+        color: #ef4444; // red-500
+
+        &:hover {
+          color: #dc2626; // red-600
+        }
+      }
+    }
+
+    &--md {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+    }
+
+    &--lg {
+      padding: 0.5rem 1.5rem;
+      font-size: 1rem;
+    }
+  }
+
+  // Modal Styles
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+
+    &.is-active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    &__container {
+      background-color: #ffffff;
+      border-radius: 0.375rem;
+      width: 100%;
+      max-width: 42rem;
+      margin: 0 1rem;
+      padding: 1.5rem;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      transform: translateY(-20px);
+      transition: transform 0.3s ease;
+
+      .is-active & {
+        transform: translateY(0);
+      }
+    }
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      h3 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #111827; // gray-900
+      }
+    }
+
+    &__close {
+      background: none;
+      border: none;
+      color: #9ca3af; // gray-400
+      cursor: pointer;
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: #4b5563; // gray-600
+        background-color: #f9fafb; // gray-50
+      }
+    }
+
+    &__body {
+      margin-bottom: 1.5rem;
+    }
+
+    &__footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+    }
+  }
+
+  // Form Styles
+  .form {
+    &__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+
+      @media (min-width: 768px) {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    &__group {
+      margin-bottom: 1rem;
+    }
+
+    &__label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #111827; // gray-900
+      margin-bottom: 0.25rem;
+    }
+
+    &__input {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #e5e7eb; // gray-200
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      transition: all 0.3s ease;
+
+      &:focus {
+        outline: none;
+        border-color: #3b82f6; // blue-500
+        box-shadow: 0 0 0 1px #3b82f6; // blue-500
+      }
+    }
+
+    &__checkbox {
+      display: flex;
+      align-items: center;
+
+      input[type="checkbox"] {
+        margin-right: 0.5rem;
+        cursor: pointer;
+      }
+
+      span {
+        font-size: 0.875rem;
+        color: #4b5563; // gray-600
+      }
+    }
+  }
+
+  // Animation
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.3s ease;
+  }
+
+  .slide-up {
+    animation: slideUp 0.3s ease;
+  }
+}

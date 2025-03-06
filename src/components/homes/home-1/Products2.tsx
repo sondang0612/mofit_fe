@@ -15,7 +15,6 @@ import { useAddToCart } from "@/hooks/react-query/users/useAddToCart";
 
 export default function Products2() {
   const { toggleWishlist, isAddedtoWishlist } = useContextElement();
-  const { addProductToCart, isAddedToCartProducts } = useContextElement();
   const [currentCategory, setCurrentCategory] = useState(filterCategories[0]);
   const { mutate: addToCart } = useAddToCart();
   const { data: products } = useInfiniteFetch<Product>({

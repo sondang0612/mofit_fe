@@ -6,107 +6,36 @@ const countries = [
   "United States",
   "Turkey",
 ];
-import { useContextElement } from "@/context/Context";
-import { useState } from "react";
-import Link from "next/link";
 import { useCart } from "@/hooks/react-query/cart/useCart";
+import { getSubTotal } from "@/utils/getSubTotal";
+import { getTotal } from "@/utils/getTotal";
 import { getTotalPrice } from "@/utils/getTotalPrice";
+import Link from "next/link";
+import ListCartItems from "./ListCartItems";
+import React from "react";
+import { useAddresses } from "@/hooks/react-query/addresses/useAddresses";
+import Address from "../otherPages/address/Address";
+import { useRouter } from "next/navigation";
 export default function Checkout() {
-  const { totalPrice } = useContextElement();
   const { data: cart } = useCart();
-  const [selectedRegion, setSelectedRegion] = useState("");
-  const [idDDActive, setIdDDActive] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const { data: addresses } = useAddresses();
+  const router = useRouter();
+
+  const subTotal = React.useMemo(() => {
+    return getSubTotal(cart?.data);
+  }, [cart?.data]);
+
   return (
     <form onSubmit={(e) => e.preventDefault()}>
       <div className="checkout-form">
         <div className="billing-info__wrapper">
           <h4>Chi tiết đơn hàng</h4>
-          <div className="row">
-            <div className="col-md-6">
-              <div className="form-floating my-3">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="checkout_first_name"
-                  placeholder="First Name"
-                />
-                <label htmlFor="checkout_first_name">Họ</label>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="form-floating my-3">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="checkout_last_name"
-                  placeholder="Last Name"
-                />
-                <label htmlFor="checkout_last_name">Tên</label>
-              </div>
-            </div>
-            <div className="col-md-12">
-              <div className="form-floating my-3">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="checkout_city"
-                  placeholder="Town / City *"
-                  required
-                />
-                <label htmlFor="checkout_city">Thành phố *</label>
-              </div>
-            </div>
-            <div className="col-md-12">
-              <div className="form-floating my-3">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="checkout_district"
-                  placeholder="District *"
-                />
-                <label htmlFor="checkout_district">Quận *</label>
-              </div>
-            </div>
-            <div className="col-md-12">
-              <div className="form-floating mt-3 mb-3">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="checkout_street_address"
-                  placeholder="Street Address *"
-                  required
-                />
-                <label htmlFor="checkout_company_name">Địa chỉ *</label>
-              </div>
-            </div>
-            <div className="col-md-12">
-              <div className="form-floating my-3">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="checkout_phone"
-                  placeholder="Phone *"
-                />
-                <label htmlFor="checkout_phone">Số điện thoại *</label>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-12">
-            <div className="mt-3">
-              <textarea
-                className="form-control form-control_gray"
-                placeholder="Ghi chú"
-                cols={30}
-                rows={8}
-              ></textarea>
-            </div>
-          </div>
+          <ListCartItems data={cart?.data} canEdit={false} />
         </div>
         <div className="checkout__totals-wrapper">
           <div className="sticky-content">
             <div className="checkout__totals">
-              <h3>Đon hàng của bạn</h3>
+              <h3>Đơn hàng của bạn</h3>
               <table className="checkout-cart-items">
                 <thead>
                   <tr>
@@ -130,23 +59,32 @@ export default function Checkout() {
               <table className="checkout-totals">
                 <tbody>
                   <tr>
-                    <th>SUBTOTAL</th>
-                    <td>${totalPrice}</td>
+                    <th>Tổng phụ</th>
+                    <td>${subTotal}</td>
                   </tr>
                   <tr>
-                    <th>SHIPPING</th>
+                    <th>Vận chuyển</th>
                     <td>Free shipping</td>
                   </tr>
                   <tr>
                     <th>VAT</th>
-                    <td>${totalPrice && 19}</td>
+                    <td>${0}</td>
                   </tr>
                   <tr>
-                    <th>TOTAL</th>
-                    <td>${totalPrice && totalPrice + 19}</td>
+                    <th>Tổng tiền</th>
+                    <td>${getTotal(subTotal, 0, 0)}</td>
                   </tr>
                 </tbody>
               </table>
+            </div>
+            <div className="checkout__totals">
+              <Address data={addresses?.data[0]} />
+              <span
+                className="underline cursor-pointer text-blue-500"
+                onClick={() => router.push("/account_edit_address")}
+              >
+                Đặt lại địa chỉ mặc định
+              </span>
             </div>
             <div className="checkout__payment-methods">
               <div className="form-check">
@@ -232,7 +170,7 @@ export default function Checkout() {
               <div className="policy-text">
                 Your personal data will be used to process your order, support
                 your experience throughout this website, and for other purposes
-                described in our
+                described in our{" "}
                 <Link href="/terms" target="_blank">
                   privacy policy
                 </Link>

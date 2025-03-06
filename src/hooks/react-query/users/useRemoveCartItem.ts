@@ -5,27 +5,26 @@ import { toast } from "react-toastify";
 import { queryKey } from "../queryKey";
 
 type Form = {
-  productId: number;
-  quantity: number;
+  cartItemId?: number | undefined;
 };
 
 const fetchData = asyncAuth(async (form: Form) => {
-  const response = await axiosInstance.post("cart/me", form);
+  const response = await axiosInstance.delete(`cart/${form.cartItemId}/me`);
   return response?.data;
 });
 
-const useAddToCart = () => {
+const useRemoveCartItem = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: fetchData,
     onSuccess: () => {
-      toast.success(`Thêm vào giỏ hàng thành công`);
+      toast.success(`Xoá khỏi giỏ hàng thành công`);
       queryClient.invalidateQueries({ queryKey: [queryKey.CART_INFO] });
     },
     onError: (_) => {
-      toast.error(`Thêm vào giỏ hàng thất bại`);
+      toast.error(`Xoá khỏi giỏ hàng thất bại`);
     },
   });
 };
 
-export { useAddToCart };
+export { useRemoveCartItem };

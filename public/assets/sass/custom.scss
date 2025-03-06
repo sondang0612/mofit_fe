@@ -187,10 +187,22 @@ body {
   color: #2196f3;
 }
 
+.text-red-500 {
+  color: #f32121;
+}
+
 .bg-white {
   background-color: transparent !important;
 }
 
 .opacity-50 {
   opacity: 0.5;
+}
+
+.resize-none {
+  resize: none;
+}
+
+.w-full {
+  width: 100%;
 }
