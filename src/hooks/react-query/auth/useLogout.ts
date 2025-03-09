@@ -10,13 +10,7 @@ export const useLogout = () => {
   const mutate = useCallback(async () => {
     Cookies.remove("access_token");
 
-    queryClient.resetQueries({ exact: true });
-
-    queryClient.clear();
-
-    await new Promise((resolve) => setTimeout(resolve, 100));
-
-    router.push("/");
+    window.location.reload();
   }, [queryClient, router]);
 
   return { mutate };

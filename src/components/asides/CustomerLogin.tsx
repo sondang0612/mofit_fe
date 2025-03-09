@@ -36,8 +36,6 @@ export default function CustomerLogin() {
 
   React.useEffect(() => {
     if (isSuccess) {
-      console.log("zo");
-
       closeModalUserlogin();
     }
   }, [isSuccess]);
@@ -164,9 +162,7 @@ export default function CustomerLogin() {
             </button>
             <div className="customer-option mt-4 text-center">
               <span className="text-secondary">Already have account?</span>
-              <a href="#" className="btn-text js-show-login">
-                Login
-              </a>
+              <button className="btn-text js-show-login">Login</button>
             </div>
           </form>
         </div>

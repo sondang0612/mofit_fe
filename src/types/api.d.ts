@@ -1,6 +1,13 @@
+import {
+  EOrderStatus,
+  EPaymentMethod,
+  EShippingMethod,
+} from "@/utils/constants/order.enum";
+
 export interface ApiResponse<T> {
   data: T;
   message?: string;
+  total?: number;
 }
 
 export interface Product {
@@ -63,9 +70,10 @@ export interface OrderItem {
 export interface Order {
   id?: number | undefined;
   orderItems?: OrderItem[] | undefined;
-  shippingMethod?: string | undefined;
+  shippingMethod?: EShippingMethod | undefined;
   shippingPrice?: number | undefined;
-  paymentMethod?: string | undefined;
+  paymentMethod?: EPaymentMethod | undefined;
+  orderStatus?: EOrderStatus | undefined;
   discount?: number | undefined;
   vat?: number | undefined;
   subTotal?: number | undefined;

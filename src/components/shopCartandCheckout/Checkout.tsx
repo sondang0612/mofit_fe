@@ -11,13 +11,46 @@ import { useAddresses } from "@/hooks/react-query/addresses/useAddresses";
 import Address from "../otherPages/address/Address";
 import { useCreateOrder } from "@/hooks/react-query/orders/useCreateOrder";
 import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { EPaymentMethod, EShippingMethod } from "@/utils/constants/order.enum";
+import { useCreatePaymentTransaction } from "@/hooks/react-query/payment-gateway/useCreatePaymentTransaction";
+import { useCreatePaymentTransactionOrder } from "@/hooks/react-query/payment-gateway/useCreatePaymentTransactionOrder";
+
+const paymentMethods = [
+  {
+    id: "checkout_payment_method_1",
+    value: EPaymentMethod.COD,
+    label: "Thanh toán khi nhận hàng",
+  },
+  {
+    id: "checkout_payment_method_2",
+    value: EPaymentMethod.PAYMENT_GATEWAY,
+    label: "Thanh toán bằng thẻ",
+  },
+];
 
 export default function Checkout() {
   const { data: cart } = useCart();
   const { data: addresses } = useAddresses();
-  const { mutate: createOrder, isSuccess, data: order } = useCreateOrder();
+  const {
+    mutate: createOrder,
+    isSuccess: isCreateOrderSuccess,
+    data: order,
+  } = useCreateOrder();
+  const { mutate: createPaymentTransaction } = useCreatePaymentTransaction();
+
+  const [paymentMethod, setPaymentMethod] = React.useState<EPaymentMethod>(
+    EPaymentMethod.PAYMENT_GATEWAY
+  );
+
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const {
+    mutate: createPaymentTransactionOrder,
+    isSuccess: isCreatePaymentTransactionOrderSuccess,
+    data: paymentTransactionOrder,
+  } = useCreatePaymentTransactionOrder();
 
   const subTotal = React.useMemo(() => {
     return getSubTotal(cart?.data);
@@ -42,27 +75,78 @@ export default function Checkout() {
 
     if (!isValid) return;
 
-    createOrder({
+    if (paymentMethod === EPaymentMethod.COD) {
+      createOrder({
+        addressId: addresses?.data[0].id,
+        cartItemIds: cart?.data?.map((item) => item.id),
+        discount: 0,
+        vat: 0,
+        paymentMethod: EPaymentMethod.COD,
+        shippingMethod: EShippingMethod.OWN_DELIVERY,
+        shippingPrice: 0,
+        subTotal,
+        totalPrice: getTotal(subTotal, 0, 0),
+      });
+      return;
+    }
+
+    if (paymentMethod === EPaymentMethod.PAYMENT_GATEWAY) {
+      createPaymentTransaction({
+        orderInfo: "Hello World",
+        totalPrice: getTotal(subTotal, 0, 0) * 24000,
+      });
+      return;
+    }
+  };
+
+  const handleCreateOrderTransaction = () => {
+    createPaymentTransactionOrder({
+      query: Object.fromEntries(searchParams.entries()),
       addressId: addresses?.data[0].id,
       cartItemIds: cart?.data?.map((item) => item.id),
       discount: 0,
       vat: 0,
-      paymentMethod: "COD",
-      shippingMethod: "OWN_DELIVERY",
+      paymentMethod: EPaymentMethod.PAYMENT_GATEWAY,
+      shippingMethod: EShippingMethod.OWN_DELIVERY,
       shippingPrice: 0,
       subTotal,
-      totalPrice: getTotal(subTotal, 0, 0),
+      totalPrice: getTotal(subTotal, 0, 0) * 23000,
     });
   };
 
   React.useEffect(() => {
-    if (isSuccess && order) {
+    if (isCreateOrderSuccess && order) {
       sessionStorage.setItem("order", JSON.stringify(order?.data));
-      console.log(order?.data);
-
       router.push("/shop_order_complete");
     }
-  }, [isSuccess, router, order]);
+  }, [isCreateOrderSuccess, order]);
+
+  React.useEffect(() => {
+    if (isCreatePaymentTransactionOrderSuccess && paymentTransactionOrder) {
+      sessionStorage.setItem(
+        "order",
+        JSON.stringify(paymentTransactionOrder?.data)
+      );
+      router.push("/shop_order_complete");
+    }
+  }, [isCreatePaymentTransactionOrderSuccess, paymentTransactionOrder]);
+
+  React.useEffect(() => {
+    const queryString = new URLSearchParams(
+      Object.fromEntries(searchParams.entries())
+    ).toString();
+
+    if (
+      queryString &&
+      queryString?.length > 0 &&
+      cart &&
+      cart?.data?.length > 0 &&
+      addresses &&
+      addresses?.data?.length > 0
+    ) {
+      handleCreateOrderTransaction();
+    }
+  }, [addresses, cart]);
 
   return (
     <form onSubmit={(e) => e.preventDefault()}>
@@ -130,86 +214,22 @@ export default function Checkout() {
               </span>
             </div>
             <div className="checkout__payment-methods">
-              <div className="form-check">
-                <input
-                  className="form-check-input form-check-input_fill"
-                  type="radio"
-                  name="checkout_payment_method"
-                  id="checkout_payment_method_1"
-                  defaultChecked
-                />
-                <label
-                  className="form-check-label"
-                  htmlFor="checkout_payment_method_1"
-                >
-                  Direct bank transfer
-                  <span className="option-detail d-block">
-                    Make your payment directly into our bank account. Please use
-                    your Order ID as the payment reference.Your order will not
-                    be shipped until the funds have cleared in our account.
-                  </span>
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input form-check-input_fill"
-                  type="radio"
-                  name="checkout_payment_method"
-                  id="checkout_payment_method_2"
-                />
-                <label
-                  className="form-check-label"
-                  htmlFor="checkout_payment_method_2"
-                >
-                  Check payments
-                  <span className="option-detail d-block">
-                    Phasellus sed volutpat orci. Fusce eget lore mauris vehicula
-                    elementum gravida nec dui. Aenean aliquam varius ipsum, non
-                    ultricies tellus sodales eu. Donec dignissim viverra nunc,
-                    ut aliquet magna posuere eget.
-                  </span>
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input form-check-input_fill"
-                  type="radio"
-                  name="checkout_payment_method"
-                  id="checkout_payment_method_3"
-                />
-                <label
-                  className="form-check-label"
-                  htmlFor="checkout_payment_method_3"
-                >
-                  Cash on delivery
-                  <span className="option-detail d-block">
-                    Phasellus sed volutpat orci. Fusce eget lore mauris vehicula
-                    elementum gravida nec dui. Aenean aliquam varius ipsum, non
-                    ultricies tellus sodales eu. Donec dignissim viverra nunc,
-                    ut aliquet magna posuere eget.
-                  </span>
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input form-check-input_fill"
-                  type="radio"
-                  name="checkout_payment_method"
-                  id="checkout_payment_method_4"
-                />
-                <label
-                  className="form-check-label"
-                  htmlFor="checkout_payment_method_4"
-                >
-                  Paypal
-                  <span className="option-detail d-block">
-                    Phasellus sed volutpat orci. Fusce eget lore mauris vehicula
-                    elementum gravida nec dui. Aenean aliquam varius ipsum, non
-                    ultricies tellus sodales eu. Donec dignissim viverra nunc,
-                    ut aliquet magna posuere eget.
-                  </span>
-                </label>
-              </div>
+              {paymentMethods.map((method) => (
+                <div className="form-check" key={method.id}>
+                  <input
+                    className="form-check-input form-check-input_fill"
+                    type="radio"
+                    name="checkout_payment_method"
+                    id={method.id}
+                    checked={paymentMethod === method.value}
+                    onChange={() => setPaymentMethod(method.value)}
+                    aria-label={method.label}
+                  />
+                  <label className="form-check-label" htmlFor={method.id}>
+                    {method.label}
+                  </label>
+                </div>
+              ))}
               <div className="policy-text">
                 Your personal data will be used to process your order, support
                 your experience throughout this website, and for other purposes
@@ -224,7 +244,7 @@ export default function Checkout() {
               className="btn btn-primary btn-checkout"
               onClick={handleCreateOrder}
             >
-              PLACE ORDER
+              {paymentMethod === EPaymentMethod.COD ? "Đặt hàng" : "Thanh toán"}
             </button>
           </div>
         </div>

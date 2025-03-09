@@ -9,7 +9,7 @@ import Nav from "./components/Nav";
 import SearchPopup from "./components/SearchPopup";
 import User from "./components/User";
 import Avatar from "./components/Avatar";
-import { useLogout } from "@/hooks/useLogout";
+import { useLogout } from "@/hooks/react-query/auth/useLogout";
 
 export default function Header1() {
   const [scrollDirection, setScrollDirection] = React.useState("down");

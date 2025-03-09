@@ -6,7 +6,7 @@ const asyncAuth = <T extends (...args: any[]) => Promise<any>>(fn: T) => {
     try {
       const accessToken = Cookies.get(cookiesKey.ACCESS_TOKEN);
       if (!accessToken) {
-        return;
+        return null;
       }
       return await fn(...args);
     } catch (err) {

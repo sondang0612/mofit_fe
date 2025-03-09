@@ -1,6 +1,6 @@
 "use client";
 import { dashboardMenuItems } from "@/data/menu";
-import { useLogout } from "@/hooks/useLogout";
+import { useLogout } from "@/hooks/react-query/auth/useLogout";
 import { usePathname, useRouter } from "next/navigation";
 export default function DashboardSidebar() {
   const pathname = usePathname();

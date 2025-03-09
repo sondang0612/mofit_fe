@@ -8,7 +8,6 @@ export default function LocationMap() {
   const [getLocation, setLocation] = useState(null);
   return (
     <>
-      {" "}
       <StoreMap
         getLocation={getLocation}
         setLocation={setLocation}
