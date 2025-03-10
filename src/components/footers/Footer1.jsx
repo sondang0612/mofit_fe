@@ -21,9 +21,9 @@ export default function Footer1() {
               <Link href="/">
                 <Image
                   src="/assets/images/logo.png"
-                  width={112}
-                  height={28}
-                  alt="Uomo"
+                  width={0}
+                  height={0}
+                  alt="DoubleFish logo"
                   className="logo__image d-block"
                 />
               </Link>

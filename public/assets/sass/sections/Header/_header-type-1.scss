@@ -1,5 +1,7 @@
 .header-desk_type_1 {
-  padding: $header-type-1-padding;
+  //padding: $header-type-1-padding;
+
+  height: 100%;
 
   .logo {
     margin-right: $header-type-1-logo-space;
@@ -30,7 +32,8 @@
       border-color: transparent;
       width: 15rem;
 
-      &__btn, &__input {
+      &__btn,
+      &__input {
         background-color: transparent;
         color: $color-white;
         margin: 0;

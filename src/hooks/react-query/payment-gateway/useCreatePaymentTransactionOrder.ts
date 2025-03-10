@@ -33,6 +33,9 @@ const useCreatePaymentTransactionOrder = () => {
       toast.success(`Đặt hàng thành công`);
       queryClient.invalidateQueries({ queryKey: [queryKey.CART_INFO] });
     },
+    onError: () => {
+      toast.error("Thanh toán không hợp lệ");
+    },
   });
 };
 

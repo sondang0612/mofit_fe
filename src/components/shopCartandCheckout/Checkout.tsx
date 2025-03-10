@@ -30,6 +30,9 @@ const paymentMethods = [
 ];
 
 export default function Checkout() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const { data: cart } = useCart();
   const { data: addresses } = useAddresses();
   const {
@@ -42,9 +45,6 @@ export default function Checkout() {
   const [paymentMethod, setPaymentMethod] = React.useState<EPaymentMethod>(
     EPaymentMethod.PAYMENT_GATEWAY
   );
-
-  const router = useRouter();
-  const searchParams = useSearchParams();
 
   const {
     mutate: createPaymentTransactionOrder,
