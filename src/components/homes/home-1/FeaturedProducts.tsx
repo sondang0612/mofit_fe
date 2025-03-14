@@ -43,19 +43,17 @@ const swiperOptions = {
 };
 import Image from "next/image";
 
-export default function Products5() {
+export default function FeaturedProducts() {
   const { toggleWishlist, isAddedtoWishlist } = useContextElement();
   const { addProductToCart, isAddedToCartProducts } = useContextElement();
   return (
     <section className="products-carousel container">
-      <h2 className="section-title text-uppercase text-center mb-4 pb-xl-2 mb-xl-4">
-        Limited <strong>Edition</strong>
-      </h2>
+      <h2 className="section-title mb-4 pb-xl-2 mb-xl-4">Sản phẩm nổi bậc</h2>
 
       <div id="product_carousel" className="position-relative">
         <Swiper
           style={{ maxWidth: "100vw", overflow: "hidden" }}
-          {...swiperOptions}
+          {...(swiperOptions as any)}
           className="swiper-container js-swiper-slider"
         >
           {products1.map((elm, i) => (

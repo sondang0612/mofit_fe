@@ -14,7 +14,7 @@
         width: 7.5rem;
         height: 100%;
         background-color: transparent;
-        content: '';
+        content: "";
       }
     }
   }
@@ -29,10 +29,10 @@
   font-weight: $nav-link-font-weight;
   line-height: $navigation-item-line-height;
   text-decoration: none;
-  text-transform: uppercase;
+  //  text-transform: uppercase;
 
   &:after {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
     top: 100%;
@@ -66,7 +66,7 @@
 
 .sub-menu__title {
   display: block;
-  margin-bottom: .75rem;
+  margin-bottom: 0.75rem;
   color: $sub-menu-title-color;
   font-weight: $font-weight-heading;
   text-transform: uppercase;
@@ -83,7 +83,7 @@
 // Menu link underlined small
 .menu-link_us-s {
   &:after {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
     top: $menu-link-line-height + $menu-link-padding-y;

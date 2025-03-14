@@ -21,6 +21,8 @@ export interface Product {
   price?: number | undefined;
   category?: Category | undefined;
   attributes?: Attribute[] | undefined;
+  discount?: Discount | undefined;
+  finalPrice?: number | undefined;
 }
 
 export interface Category {
@@ -30,7 +32,8 @@ export interface Category {
 
 export interface Attribute {
   id?: number | undefined;
-  name?: string | undefined;
+  label?: string | undefined;
+  value: string | undefined;
 }
 
 export interface User {
@@ -78,4 +81,9 @@ export interface Order {
   vat?: number | undefined;
   subTotal?: number | undefined;
   totalPrice?: number | undefined;
+}
+
+export interface Discount {
+  id?: number | undefined;
+  percentage?: number | undefined;
 }

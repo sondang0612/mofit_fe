@@ -1,20 +1,21 @@
-import { useAuthStore } from "@/hooks/store/useAuthStore";
 import axiosInstance from "@/libs/axiosInstance";
+import { cookiesKey } from "@/libs/cookiesKey";
+import { ERole } from "@/utils/constants/role.enum";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
-import { queryKey } from "../queryKey";
-import { cookiesKey } from "@/libs/cookiesKey";
 
 type Form = {
-  email: string;
+  username: string;
   password: string;
+  role?: ERole;
 };
 
 export type LoginData = {
   access_token: string;
   fullName: string;
   message: string;
+  role: ERole;
 };
 
 const fetchData = async (form: Form) => {
@@ -23,11 +24,11 @@ const fetchData = async (form: Form) => {
 };
 
 const useLogin = () => {
-  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: fetchData,
     onSuccess: async (data: LoginData) => {
       Cookies.set(cookiesKey.ACCESS_TOKEN, data?.access_token);
+      Cookies.set(cookiesKey.ROLE, data?.role);
       window.location.reload();
     },
     onError: (_) => {

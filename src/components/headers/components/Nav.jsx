@@ -8,9 +8,8 @@ import {
   shopList,
 } from "@/data/menu";
 import Link from "next/link";
-import React, { useEffect } from "react";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Nav() {
   const pathname = usePathname();
@@ -56,14 +55,14 @@ export default function Nav() {
   return (
     <>
       <li className="navigation__item">
-        <a
+        <Link
           href="/"
           className={`navigation__link ${
             isActiveParentMenu(homePages) ? "menu-active" : ""
           }`}
         >
           Trang chủ
-        </a>
+        </Link>
         {/* <!-- /.box-menu --> */}
       </li>
       <li className="navigation__item">
@@ -80,48 +79,22 @@ export default function Nav() {
       </li>
       <li className="navigation__item">
         <Link
-          href="/blog_list2"
-          className={`navigation__link ${
-            isActiveParentMenu(blogmenuItems) ? "menu-active" : ""
-          }`}
-        >
-          Bài viết
-        </Link>
-        {/* <!-- /.box-menu --> */}
-      </li>
-      <li className="navigation__item">
-        <a
-          href="#"
-          className={`navigation__link ${
-            isActiveParentMenu(othersMenuItems) ? "menu-active" : ""
-          }`}
-        >
-          Pages
-        </a>
-        <ul className="default-menu list-unstyled">
-          {othersMenuItems.map((elm, i) => (
-            <li key={i} className="sub-menu__item">
-              <Link
-                href={elm.href}
-                className={`menu-link menu-link_us-s ${
-                  isMenuActive(elm.href) ? "menu-active" : ""
-                }`}
-              >
-                {elm.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        {/* <!-- /.box-menu --> */}
-      </li>
-      <li className="navigation__item">
-        <Link
           href="/about"
           className={`navigation__link ${
             pathname == "/about" ? "menu-active" : ""
           }`}
         >
-          Về chúng tôi
+          Về Double Fish
+        </Link>
+      </li>
+      <li className="navigation__item">
+        <Link
+          href="/blog_list2"
+          className={`navigation__link ${
+            isActiveParentMenu(blogmenuItems) ? "menu-active" : ""
+          }`}
+        >
+          Tin tức
         </Link>
       </li>
       <li className="navigation__item">

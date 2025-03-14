@@ -7,13 +7,13 @@ import React from "react";
 import { toast } from "react-toastify";
 
 export default function CustomerLogin() {
-  const [email, setEmail] = React.useState("");
+  const [username, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const { mutate: login, isSuccess } = useLogin();
 
   const isValidForm = React.useMemo(() => {
-    return email.length !== 0 && password.length !== 0;
-  }, [email, password]);
+    return username.length !== 0 && password.length !== 0;
+  }, [username, password]);
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ export default function CustomerLogin() {
       toast.error("Vui lòng nhập đầy đủ thông tin");
       return;
     }
-    login({ email, password });
+    login({ username, password });
   };
 
   React.useEffect(() => {
@@ -61,10 +61,10 @@ export default function CustomerLogin() {
           >
             <div className="form-floating mb-3">
               <input
-                name="email"
-                type="email"
+                name="username"
+                type="username"
                 className="form-control form-control_gray"
-                placeholder="name@example.com"
+                placeholder="Tên đăng nhập"
                 onChange={(e) => setEmail(e.target.value)}
               />
               <label>Username or email address *</label>

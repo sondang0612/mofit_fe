@@ -2,27 +2,40 @@ import axiosInstance from "@/libs/axiosInstance";
 import { removeUndefinedParams } from "@/utils/removeUndefinedParams";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
+export enum QueryParam {
+  SORT_BY = "sortBy",
+  SORT = "sort",
+  ATTRIBUTE_VALUE = "attributeValue",
+}
+
+export enum QueryValue {
+  CREATED_AT = "createdAt",
+  DESC = "DESC",
+  ASC = "ASC",
+}
+
 const fetchData = async <T>({
   pageParam = 1,
   endpoint,
   limit,
-  sort,
-  sortBy,
-  attributeName,
+  queryParams,
+  queryValues,
 }: {
   pageParam: any;
   endpoint: string;
   limit?: number;
-  sortBy?: string;
-  sort?: "ASC" | "DESC";
-  attributeName?: string;
+  queryParams?: string[];
+  queryValues?: any[];
 }): Promise<{ data: T[]; total: number }> => {
+  const queryObject = queryParams?.reduce((acc, key, index) => {
+    acc[key] = queryValues?.[index];
+    return acc;
+  }, {} as Record<string, any>);
+
   const params = removeUndefinedParams({
     page: pageParam,
     limit,
-    sort,
-    sortBy,
-    attributeName,
+    ...queryObject,
   });
 
   const res = await axiosInstance.get(endpoint, { params });
@@ -36,20 +49,28 @@ const fetchData = async <T>({
 const useInfiniteFetch = <T>({
   endpoint,
   limit = 10,
-  sortBy = "createdAt",
-  sort = "DESC",
-  attributeName,
+  queryParams = [],
+  queryValues = [],
 }: {
   endpoint: string;
   limit?: number;
-  sortBy?: string;
-  sort?: "ASC" | "DESC";
-  attributeName?: string;
+  queryParams?: string[];
+  queryValues?: any[];
 }) => {
+  const queryKey = [endpoint, { limit, queryParams, queryValues }];
+
+  const queryFn = ({ pageParam }: { pageParam: any }) =>
+    fetchData<T>({
+      pageParam,
+      endpoint,
+      limit,
+      queryParams,
+      queryValues,
+    });
+
   const query = useInfiniteQuery<{ data: T[]; total: number }>({
-    queryKey: [endpoint, { limit, attributeName, sort, sortBy }],
-    queryFn: ({ pageParam }) =>
-      fetchData<T>({ pageParam, endpoint, limit, attributeName, sort, sortBy }),
+    queryKey,
+    queryFn,
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       if (allPages.flatMap((page) => page.data).length < lastPage.total) {
@@ -62,6 +83,7 @@ const useInfiniteFetch = <T>({
   return {
     ...query,
     data: query.data?.pages.flatMap((page) => page.data) || undefined,
+    totalElements: query?.data?.pages ? query?.data?.pages[0]?.total : 0,
   };
 };
 

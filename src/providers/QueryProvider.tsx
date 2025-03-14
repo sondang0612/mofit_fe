@@ -17,9 +17,9 @@ export default function QueryProvider({ children }: { children: ReactNode }) {
             onError: (error, _, context: any) => {
               if (error?.message && error?.message.includes("401")) {
                 toast.error(`Vui lòng đăng nhập`);
+              } else if (error?.message && error?.message.includes("403")) {
+                toast.error(`Không có quyền truy cập`);
               } else {
-                console.log(context);
-
                 const errorMessage =
                   context?.meta?.errorMessage || "Có lỗi xảy ra!";
                 toast.error(errorMessage);

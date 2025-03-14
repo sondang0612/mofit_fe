@@ -100,19 +100,22 @@ a {
   margin-bottom: 1.25rem;
 }
 .menu-active {
-  color: #c32929 !important;
+  color: #131313 !important;
+  font-weight: 700 !important;
 }
 body {
   .nav-20.theme-color .navigation__item {
     .menu-active {
-      color: #c32929 !important;
+      color: #000 !important;
+      font-weight: 700 !important;
     }
   }
 }
 body {
   .theme-22 .color-body .navigation__item {
     .menu-active {
-      color: #c32929 !important;
+      color: #000 !important;
+      font-weight: 700 !important;
     }
   }
 }
@@ -195,4 +198,14 @@ body {
 
 .h-full {
   height: 100%;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.flex-center-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
