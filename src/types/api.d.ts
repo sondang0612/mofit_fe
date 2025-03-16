@@ -28,7 +28,7 @@ export interface Category {
   id?: number | undefined;
   name?: string | undefined;
   parentCategory?: Category | undefined;
-  subCategories?: Category | undefined;
+  subCategories?: Category[] | undefined;
 }
 
 export interface Brand {

@@ -6,27 +6,48 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Slider from "rc-slider";
 import React, { useState } from "react";
 import { debounce } from "lodash";
+import { useUrlParams } from "@/hooks/useUrlParams";
+import FilterCategoryItem from "./FilterCategoryItem";
 
 export default function FilterAll() {
   const searchParams = useSearchParams();
   const activeCategory =
     Number(searchParams.get("activeCategory")) || undefined;
+  const minPrice = Number(searchParams.get("minPrice")) || 0;
+  const maxPrice = Number(searchParams.get("maxPrice")) || 0;
   const activeBrands = searchParams.getAll("brands");
-  const router = useRouter();
   const { data: categories } = useCategories();
   const { data: brands } = useBrands();
-  const [price, setPrice] = useState([20, 70987]);
+  const [price, setPrice] = useState([minPrice, maxPrice]);
   const [searchQuery, setSearchQuery] = React.useState("");
+  const { setParams, removeParams, toggleArrayParam } = useUrlParams();
 
   const filterFacts = React.useMemo(() => {
     const result = [];
-    if (activeCategory) {
-      const temp = categories?.data?.find((item) => item.id === activeCategory);
-      result?.push({
-        id: temp?.id,
-        label: temp?.name,
-        key: "activeCategory",
-      });
+    if (activeCategory && categories?.data) {
+      for (let i = 0; i < categories?.data?.length; i++) {
+        const item = categories.data[i];
+        if (item.id === activeCategory) {
+          result?.push({
+            id: item?.id,
+            label: item?.name,
+            key: "activeCategory",
+          });
+          break;
+        } else {
+          const temp = item?.subCategories?.find(
+            (subItem) => subItem?.id === activeCategory
+          );
+          if (temp) {
+            result?.push({
+              id: temp?.id,
+              label: temp?.name,
+              key: "activeCategory",
+            });
+            break;
+          }
+        }
+      }
     }
 
     if (Array.isArray(activeBrands)) {
@@ -39,47 +60,14 @@ export default function FilterAll() {
     return result;
   }, [activeCategory, activeBrands, brands, categories]);
 
-  // price range handler
   const handleOnChange = (value: any) => {
     setPrice(value);
     debouncedHandleOnChange(value);
   };
 
-  const handleSetParams = (data: { key: string; value: string }[]) => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    data.forEach((item) => params.set(item.key, item.value));
-
-    router.push(`?${params?.toString()}`, { scroll: false });
-  };
-
-  const handleSetArrayToParams = (key: string, value: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    let values = params.getAll(key);
-
-    if (values.includes(value)) {
-      values = values.filter((v) => v !== value);
-    } else {
-      values.push(value);
-    }
-
-    params.delete(key);
-    values.forEach((v) => params.append(key, v));
-
-    router.push(`?${params.toString()}`, { scroll: false });
-  };
-
-  const handleDeleteParams = (key: string, value: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.delete(key, value);
-
-    router.push(`?${params?.toString()}`, { scroll: false });
-  };
-
   const debouncedHandleOnChange = React.useCallback(
     debounce((value) => {
-      handleSetParams([
+      setParams([
         { key: "minPrice", value: value[0] },
         { key: "maxPrice", value: value[1] },
       ]);
@@ -124,19 +112,11 @@ export default function FilterAll() {
             <div className="accordion-body px-0 pb-0">
               <ul className="list list-inline row row-cols-2 mb-0">
                 {categories?.data.map((category, index) => (
-                  <li
+                  <FilterCategoryItem
+                    isActive={category?.id === activeCategory}
+                    category={category}
                     key={index}
-                    className={`list-item py-1 cursor-pointer ${
-                      activeCategory === category?.id && "text-blue-500"
-                    }`}
-                    onClick={() =>
-                      handleSetParams([
-                        { key: "activeCategory", value: `${category.id}` },
-                      ])
-                    }
-                  >
-                    {category?.name}
-                  </li>
+                  />
                 ))}
               </ul>
             </div>
@@ -198,9 +178,7 @@ export default function FilterAll() {
                   .map((elm, i) => (
                     <li
                       key={i}
-                      onClick={() =>
-                        handleSetArrayToParams("brands", `${elm?.id}`)
-                      }
+                      onClick={() => toggleArrayParam("brands", `${elm?.id}`)}
                       className={`search-suggestion__item multi-select__item text-primary js-search-select js-multi-select ${
                         activeBrands?.includes(`${elm?.id}`)
                           ? "mult-select__item_selected"
@@ -208,9 +186,6 @@ export default function FilterAll() {
                       }`}
                     >
                       <span className="me-auto">{elm.name}</span>
-                      <span className="text-secondary">
-                        {elm?.totalProducts}
-                      </span>
                     </li>
                   ))}
               </ul>
@@ -278,7 +253,9 @@ export default function FilterAll() {
         {filterFacts.map((filter, index) => (
           <button
             key={index}
-            onClick={() => handleDeleteParams(filter?.key, `${filter?.id}`)}
+            onClick={() =>
+              removeParams([{ key: filter?.key, value: `${filter?.id}` }])
+            }
             className="filter-tag d-inline-flex align-items-center mb-3 me-3 text-uppercase js-filter"
           >
             <i className="btn-close-xs d-inline-block" />
