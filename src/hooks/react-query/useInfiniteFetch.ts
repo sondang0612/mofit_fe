@@ -6,6 +6,10 @@ export enum QueryParam {
   SORT_BY = "sortBy",
   SORT = "sort",
   ATTRIBUTE_VALUE = "attributeValue",
+  CATEGORY = "category",
+  BRANDS = "brands",
+  MIN_PRICE = "minPrice",
+  MAX_PRICE = "maxPrice",
 }
 
 export enum QueryValue {

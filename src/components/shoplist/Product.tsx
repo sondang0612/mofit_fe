@@ -2,6 +2,7 @@
 
 import { Product as IProduct } from "@/types/api";
 import { EDefaultValue } from "@/utils/constants/default-value.enum";
+import { getFinalPrice } from "@/utils/getFinalPrice";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";
@@ -72,7 +73,7 @@ const Product = (props: Props) => {
         </div>
 
         <div className="pc__info position-relative">
-          <p className="pc__category">{data?.category?.name}</p>
+          {/* <p className="pc__category">{data?.category?.name}</p> */}
           <h6 className="pc__title">
             <Link href={`/product1_simple/${data?.id}`}>{data?.title}</Link>
           </h6>
@@ -81,7 +82,7 @@ const Product = (props: Props) => {
               <Fragment>
                 <span className="money price price-old">${data?.price}</span>
                 <span className="money price price-sale">
-                  ${data?.finalPrice}
+                  ${getFinalPrice(data?.price, data?.discount)}
                 </span>
               </Fragment>
             ) : (

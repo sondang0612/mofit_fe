@@ -1,7 +1,8 @@
 "use client";
 
+import { queryKey } from "@/hooks/react-query/queryKey";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactNode, useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { toast } from "react-toastify";
 
 export default function QueryProvider({ children }: { children: ReactNode }) {

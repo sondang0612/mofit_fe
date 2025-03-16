@@ -24,6 +24,11 @@ export default function Shop1() {
   const [currentCategory, setCurrentCategory] = useState(menuCategories[0]);
   const searchParams = useSearchParams();
   const sortingValue = searchParams.get("sortingValue");
+  const activeCategory = searchParams.get("activeCategory");
+  const brands = searchParams.getAll("brands");
+  const minPrice = searchParams.get("minPrice");
+  const maxPrice = searchParams.get("maxPrice");
+
   const router = useRouter();
   const {
     data: products,
@@ -37,11 +42,19 @@ export default function Shop1() {
       QueryParam.SORT_BY,
       QueryParam.SORT,
       QueryParam.ATTRIBUTE_VALUE,
+      QueryParam.CATEGORY,
+      QueryParam.BRANDS,
+      QueryParam.MIN_PRICE,
+      QueryParam.MAX_PRICE,
     ],
     queryValues: [
       QueryValue.CREATED_AT,
       QueryValue.DESC,
       sortingValue === "all" ? undefined : sortingValue,
+      activeCategory,
+      brands,
+      minPrice,
+      maxPrice,
     ],
   });
 
@@ -51,8 +64,12 @@ export default function Shop1() {
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
+
     if (selectedValue) {
-      router.push(`/shop-1?sortingValue=${selectedValue}`);
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("sortingValue", selectedValue);
+
+      router.push(`?${params?.toString()}`, { scroll: false });
     }
   };
 
@@ -101,7 +118,7 @@ export default function Shop1() {
                   <use href="#icon_filter" />
                 </svg>
                 <span className="text-uppercase fw-medium d-inline-block align-middle">
-                  Filter
+                  Bộ lọc
                 </span>
               </button>
             </div>

@@ -22,12 +22,19 @@ export interface Product {
   category?: Category | undefined;
   attributes?: Attribute[] | undefined;
   discount?: Discount | undefined;
-  finalPrice?: number | undefined;
 }
 
 export interface Category {
   id?: number | undefined;
   name?: string | undefined;
+  parentCategory?: Category | undefined;
+  subCategories?: Category | undefined;
+}
+
+export interface Brand {
+  id?: number | undefined;
+  name?: string | undefined;
+  totalProducts?: number | undefined;
 }
 
 export interface Attribute {
@@ -81,6 +88,11 @@ export interface Order {
   vat?: number | undefined;
   subTotal?: number | undefined;
   totalPrice?: number | undefined;
+}
+
+export interface Category {
+  id?: number | undefined;
+  name?: string | undefined;
 }
 
 export interface Discount {

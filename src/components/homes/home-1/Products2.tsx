@@ -16,6 +16,7 @@ import { EDefaultValue } from "@/utils/constants/default-value.enum";
 import Image from "next/image";
 import React, { Fragment, useState } from "react";
 import ListProducts from "./ListProducts";
+import { getFinalPrice } from "@/utils/getFinalPrice";
 
 export default function Products2() {
   const { toggleWishlist, isAddedtoWishlist } = useContextElement();
@@ -88,7 +89,7 @@ export default function Products2() {
           </div>
 
           <div className="pc__info position-relative">
-            <p className="pc__category">{data?.category?.name}</p>
+            {/* <p className="pc__category">{data?.category?.name}</p> */}
             <h6 className="pc__title">
               <Link href={`/product1_simple/${data.id}`}>{data.title}</Link>
             </h6>
@@ -97,19 +98,13 @@ export default function Products2() {
                 <Fragment>
                   <span className="money price price-old">${data?.price}</span>
                   <span className="money price price-sale">
-                    ${data?.finalPrice}
+                    ${getFinalPrice(data?.price, data?.discount)}
                   </span>
                 </Fragment>
               ) : (
                 <span className="money price">${data?.price}</span>
               )}
             </div>
-            <div className="product-card__review d-flex align-items-center">
-              <div className="reviews-group d-flex">
-                <Star stars={data?.ratings} />
-              </div>
-            </div>
-
             <button
               className={`pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist ${
                 isAddedtoWishlist(data.id) ? "active" : ""

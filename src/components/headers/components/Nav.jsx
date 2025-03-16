@@ -3,18 +3,22 @@ import {
   additionalShopPageitems,
   blogmenuItems,
   homePages,
-  othersMenuItems,
   shopDetails,
   shopList,
 } from "@/data/menu";
+import { useBrands } from "@/hooks/react-query/brands/useBrands";
+import { useCategories } from "@/hooks/react-query/categories/useCategories";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 export default function Nav() {
   const pathname = usePathname();
+  const { data: categories } = useCategories();
+  const { data: brands } = useBrands();
+
   const isMenuActive = (menu) => {
-    return menu.split("/")[1] == pathname.split("/")[1];
+    return menu?.split("/")[1] == pathname.split("/")[1];
   };
   const isActiveParentMenu = (menus) => {
     return menus.some(
@@ -76,6 +80,50 @@ export default function Nav() {
         >
           Cửa hàng
         </Link>
+        <div className="mega-menu">
+          <div className="container d-flex">
+            <div className="col pe-4">
+              <a href="#" className="sub-menu__title">
+                Loại sản phẩm
+              </a>
+              <ul className="sub-menu__list list-unstyled">
+                {categories?.data?.map((elm, i) => (
+                  <li key={i} className="sub-menu__item">
+                    <Link
+                      href={`/shop-1?activeCategory=${elm?.id}`}
+                      className={`menu-link menu-link_us-s ${
+                        isMenuActive(elm.href) ? "menu-active" : ""
+                      }`}
+                    >
+                      {elm.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="col pe-4">
+              <a href="#" className="sub-menu__title">
+                Thương hiệu
+              </a>
+              <ul className="sub-menu__list list-unstyled">
+                {brands?.data?.map((elm, i) => (
+                  <li key={i} className="sub-menu__item">
+                    <Link
+                      href={`/shop-1?brands=${elm?.id}`}
+                      className={`menu-link menu-link_us-s ${
+                        isMenuActive(elm.href) ? "menu-active" : ""
+                      }`}
+                    >
+                      {elm?.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          {/* <!-- /.container d-flex --> */}
+        </div>
       </li>
       <li className="navigation__item">
         <Link

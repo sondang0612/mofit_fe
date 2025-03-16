@@ -85,57 +85,13 @@ export default function FeaturedProducts() {
               </div>
 
               <div className="pc__info position-relative">
-                <p className="pc__category">{elm.category}</p>
+                {/* <p className="pc__category">{elm.category}</p> */}
                 <h6 className="pc__title">
                   <Link href={`/product1_simple/${elm.id}`}>{elm.title}</Link>
                 </h6>
                 <div className="product-card__price d-flex">
                   <span className="money price">${elm.price}</span>
                 </div>
-                {elm.reviews && (
-                  <div className="product-card__review d-flex align-items-center">
-                    <div className="reviews-group d-flex">
-                      <svg
-                        className="review-star"
-                        viewBox="0 0 9 9"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <use href="#icon_star" />
-                      </svg>
-                      <svg
-                        className="review-star"
-                        viewBox="0 0 9 9"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <use href="#icon_star" />
-                      </svg>
-                      <svg
-                        className="review-star"
-                        viewBox="0 0 9 9"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <use href="#icon_star" />
-                      </svg>
-                      <svg
-                        className="review-star"
-                        viewBox="0 0 9 9"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <use href="#icon_star" />
-                      </svg>
-                      <svg
-                        className="review-star"
-                        viewBox="0 0 9 9"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <use href="#icon_star" />
-                      </svg>
-                    </div>
-                    <span className="reviews-note text-lowercase text-secondary ms-1">
-                      {elm.reviews}
-                    </span>
-                  </div>
-                )}
 
                 <button
                   className={`pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist ${
