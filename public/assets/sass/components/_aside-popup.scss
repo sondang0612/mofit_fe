@@ -7,11 +7,11 @@
   height: -webkit-fill-available;
   transition: all 0.32s cubic-bezier(0.39, 0.575, 0.565, 1);
   background-color: $body-bg;
-  opacity: .7;
+  opacity: 0.7;
   z-index: $zindex-modal;
 
   @include media-breakpoint-up(sm) {
-    padding: 0 $aside-padding-x / 2;
+    //padding: 0 $aside-padding-x / 2;
   }
 }
 

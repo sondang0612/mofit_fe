@@ -84,7 +84,7 @@ export default function Nav() {
           <div className="container d-flex">
             <div className="col pe-4">
               <a href="#" className="sub-menu__title">
-                Loại sản phẩm
+                Dòng sản phẩm chính
               </a>
               <ul className="sub-menu__list list-unstyled">
                 {categories?.data?.map((elm, i) => (

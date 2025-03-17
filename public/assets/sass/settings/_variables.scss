@@ -63,7 +63,7 @@ $theme-colors: (
 /*------------------ Typography -----------------*/
 /*-----------------------------------------------*/
 
-$font-size-base: 0.875rem;
+//$font-size-base: 0.875rem;
 $h1-font-size: $font-size-base * 5;
 $h2-font-size: $font-size-base * 2;
 $h3-font-size: 1.625rem;
@@ -82,7 +82,7 @@ $page-title-size: 3.125rem;
 $page-title-weight: 700;
 
 /*---------------- Section Title ----------------*/
-$section-title-size: $font-size-base * 2.5;
+$section-title-size: $font-size-base * 1.5;
 $section-title-mobile-size: $h3-font-size;
 
 /*----------------- Block Title -----------------*/

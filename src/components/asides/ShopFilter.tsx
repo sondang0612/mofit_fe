@@ -9,10 +9,10 @@ export default function ShopFilter() {
   useEffect(() => {
     const pageOverlay = document.getElementById("pageOverlay");
 
-    pageOverlay.addEventListener("click", closeModalShopFilter);
+    pageOverlay?.addEventListener("click", closeModalShopFilter);
 
     return () => {
-      pageOverlay.removeEventListener("click", closeModalShopFilter);
+      pageOverlay?.removeEventListener("click", closeModalShopFilter);
     };
   }, []);
 

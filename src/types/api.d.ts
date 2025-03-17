@@ -27,6 +27,7 @@ export interface Product {
 export interface Category {
   id?: number | undefined;
   name?: string | undefined;
+  imgSrc?: string | undefined;
   parentCategory?: Category | undefined;
   subCategories?: Category[] | undefined;
 }

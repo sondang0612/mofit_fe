@@ -4,6 +4,7 @@ import { products1 } from "@/data/products/fashion";
 import Link from "next/link";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Image from "next/image";
 
 const swiperOptions = {
   modules: [Pagination, Navigation, Autoplay],
@@ -41,7 +42,6 @@ const swiperOptions = {
     },
   },
 };
-import Image from "next/image";
 
 export default function FeaturedProducts() {
   const { toggleWishlist, isAddedtoWishlist } = useContextElement();

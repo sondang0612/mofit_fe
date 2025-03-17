@@ -196,6 +196,10 @@ body {
   width: 100%;
 }
 
+.w-screen {
+  width: 100vw;
+}
+
 .h-full {
   height: 100%;
 }
@@ -208,4 +212,41 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.px-24 {
+  padding-left: 64px !important;
+  padding-right: 64px !important;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.rounded-full {
+  border-radius: 100%;
+}
+
+.rounded-10 {
+  border-radius: 2.5rem;
+}
+
+.grid {
+  display: grid;
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.gap-sm {
+  gap: 1px;
 }

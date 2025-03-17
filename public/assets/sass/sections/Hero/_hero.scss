@@ -1,0 +1,18 @@
+.moving-text {
+  position: absolute;
+  bottom: 10px;
+  left: 100%;
+  white-space: nowrap;
+  font-size: 120px;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+
+  @media (max-width: 768px) {
+    font-size: 60px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 30px;
+  }
+}

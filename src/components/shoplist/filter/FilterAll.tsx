@@ -88,7 +88,7 @@ export default function FilterAll() {
               aria-expanded="true"
               aria-controls="accordion-filter-1"
             >
-              Loại sản phẩm
+              Dòng sản phẩm chính
               <svg className="accordion-button__icon" viewBox="0 0 14 14">
                 <g aria-hidden="true" stroke="none" fillRule="evenodd">
                   <path

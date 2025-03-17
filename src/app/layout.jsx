@@ -1,16 +1,14 @@
 "use client";
+import CustomerLogin from "@/components/asides/CustomerLogin";
 import ProductAdditionalInformation from "@/components/asides/ProductAdditionalInformation";
 import ProductDescription from "@/components/asides/ProductDescription";
 import ProductReviews from "@/components/asides/ProductReviews";
-import ShopFilter from "@/components/asides/ShopFilter";
-import CookieContainer from "@/components/common/CookieContainer";
 import LoginFormPopup from "@/components/common/LoginFormPopup";
 import ScrollTop from "@/components/common/ScrollTop";
 import Svgs from "@/components/common/Svgs";
 import MobileFooter1 from "@/components/footers/MobileFooter1";
 import MobileHeader from "@/components/headers/MobileHeader";
 import Delivery from "@/components/modals/Delivery";
-import NewsLetter from "@/components/modals/NewsLetter";
 import QuickView from "@/components/modals/QuickView";
 import SiteMap from "@/components/modals/SiteMap";
 import SizeGuide from "@/components/modals/SizeGuide";
@@ -25,7 +23,6 @@ import "react-tooltip/dist/react-tooltip.css";
 import "tippy.js/dist/tippy.css";
 import "../../public/assets/css/plugins/swiper.min.css";
 import "../../public/assets/sass/style.scss";
-import CustomerLogin from "@/components/asides/CustomerLogin";
 
 export default function RootLayout({ children }) {
   useEffect(() => {
@@ -68,7 +65,6 @@ export default function RootLayout({ children }) {
               <CartDrawer />
               <SiteMap />
               <CustomerLogin />
-              <ShopFilter />
               <ProductDescription />
               <ProductAdditionalInformation />
               <ProductReviews />

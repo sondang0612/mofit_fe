@@ -1,3 +1,4 @@
+import ShopFilter from "@/components/asides/ShopFilter";
 import Footer1 from "@/components/footers/Footer1";
 
 import Header1 from "@/components/headers/Header1";
@@ -16,6 +17,8 @@ export default function ShopPage1() {
         <Shop1 />
       </main>
       <div className="mb-5 pb-xl-5"></div>
+      <ShopFilter />
+
       <Footer1 />
     </>
   );

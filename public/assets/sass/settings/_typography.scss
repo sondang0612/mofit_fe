@@ -64,6 +64,7 @@ h6 {
 
 .section-title {
   font-size: $section-title-mobile-size;
+  font-weight: 700;
 
   @include media-breakpoint-up(lg) {
     font-size: $section-title-size;
