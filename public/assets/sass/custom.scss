@@ -250,3 +250,57 @@ body {
 .gap-sm {
   gap: 1px;
 }
+
+.w-fit {
+  width: fit-content !important;
+}
+
+.w-inherit {
+  width: inherit !important;
+}
+
+.top-4 {
+  top: 1rem;
+}
+
+.right-4 {
+  right: 1rem;
+}
+
+.text-8 {
+  font-size: 2rem;
+
+  @media (max-width: 1024px) {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
+.text-right {
+  text-align: right;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.block {
+  display: block;
+}
+.insets-0 {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+
+.z-100 {
+  z-index: 100;
+}
+
+.bg-overlay-20 {
+  background: rgba(0, 0, 0, 0.2);
+}

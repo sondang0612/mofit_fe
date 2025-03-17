@@ -14,11 +14,12 @@ import { openModalShopFilter } from "@/utils/aside";
 import { apiEndpoints } from "@/utils/constants/apiEndpoints";
 import React, { useState } from "react";
 import Pagination1 from "../common/Pagination1";
-import ListProducts from "../homes/home-1/ListProducts";
 import BreadCumb from "./BreadCumb";
 import Product from "./Product";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import List from "../homes/home-1/List";
+import SkeletonProduct1 from "../homes/home-1/SkeletonProduct1";
 
 export default function Shop1() {
   const [currentCategory, setCurrentCategory] = useState(menuCategories[0]);
@@ -37,7 +38,7 @@ export default function Shop1() {
     fetchNextPage,
   } = useInfiniteFetch<IProduct>({
     endpoint: apiEndpoints.PRODUCTS,
-    limit: 8,
+    limit: 12,
     queryParams: [
       QueryParam.SORT_BY,
       QueryParam.SORT,
@@ -129,14 +130,15 @@ export default function Shop1() {
         {/* <!-- /.d-flex justify-content-between --> */}
 
         <div
-          className={`products-grid row row-cols-2 row-cols-md-3 row-cols-lg-4`}
+          className={`products-grid row row-cols-2 row-cols-md-3 row-cols-lg-6`}
           id="products-grid"
         >
-          <ListProducts
+          <List
             data={products}
             isFetching={isFetching}
             renderItem={renderItem}
-            n={8}
+            n={12}
+            skeleton={SkeletonProduct1}
           />
         </div>
         {/* <!-- /.products-grid row --> */}

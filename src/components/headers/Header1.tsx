@@ -72,6 +72,7 @@ export default function Header1() {
             <ul className="navigation__list list-unstyled d-flex">
               <Nav />
             </ul>
+
             {/* <!-- /.navigation__list --> */}
           </nav>
           {/* <!-- /.navigation --> */}

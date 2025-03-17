@@ -15,8 +15,9 @@ import { apiEndpoints } from "@/utils/constants/apiEndpoints";
 import { EDefaultValue } from "@/utils/constants/default-value.enum";
 import Image from "next/image";
 import React, { Fragment, useState } from "react";
-import ListProducts from "./ListProducts";
 import { getFinalPrice } from "@/utils/getFinalPrice";
+import List from "./List";
+import SkeletonProduct1 from "./SkeletonProduct1";
 
 export default function Products2() {
   const { toggleWishlist, isAddedtoWishlist } = useContextElement();
@@ -160,11 +161,12 @@ export default function Products2() {
           aria-labelledby="collections-tab-1-trigger"
         >
           <div className="row">
-            <ListProducts
+            <List
               data={products}
               isFetching={isFetching}
               renderItem={renderItem}
               n={4}
+              skeleton={SkeletonProduct1}
             />
           </div>
           {/* <!-- /.row --> */}

@@ -36,7 +36,7 @@ const HeroV1 = () => {
           x: [0, translateX],
         }}
         transition={{
-          duration: 5,
+          duration: 10,
           ease: "linear",
           repeat: Infinity,
         }}

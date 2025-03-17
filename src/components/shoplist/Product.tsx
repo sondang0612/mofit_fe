@@ -1,5 +1,6 @@
 "use client";
 
+import { useCreateCartItem } from "@/hooks/react-query/cart-items/useCreateCartItem";
 import { Product as IProduct } from "@/types/api";
 import { EDefaultValue } from "@/utils/constants/default-value.enum";
 import { getFinalPrice } from "@/utils/getFinalPrice";
@@ -14,6 +15,16 @@ interface Props {
 
 const Product = (props: Props) => {
   const { data } = props;
+  const { mutate: createCartItem } = useCreateCartItem();
+
+  const handleAddToCart = (productId?: number, quantity?: number) => {
+    if (!productId || !quantity) {
+      return undefined;
+    }
+
+    createCartItem({ productId, quantity });
+  };
+
   return (
     <div className="product-card-wrapper">
       <div className="product-card mb-3 mb-md-4 mb-xxl-5">
@@ -28,7 +39,7 @@ const Product = (props: Props) => {
             }}
           >
             {[data?.imgSrc, data?.imgSrc2].map((elm2, i) => (
-              <SwiperSlide key={i} className="swiper-slide">
+              <SwiperSlide key={i} className="swiper-slide w-inherit">
                 <Link href={`/product1_simple/${data?.id}`}>
                   <Image
                     loading="lazy"
@@ -67,7 +78,10 @@ const Product = (props: Props) => {
               </svg>
             </span>
           </Swiper>
-          <button className="pc__atc btn anim_appear-bottom btn position-absolute border-0 fw-medium js-add-cart js-open-aside">
+          <button
+            className="pc__atc btn anim_appear-bottom btn position-absolute border-0 fw-medium js-add-cart js-open-aside"
+            onClick={() => handleAddToCart(data?.id, 1)}
+          >
             Thêm vào giỏ hàng
           </button>
         </div>

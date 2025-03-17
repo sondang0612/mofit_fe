@@ -38,8 +38,8 @@ const swiperOptions = {
     },
     992: {
       slidesPerView: 4,
-      slidesPerGroup: 1,
-      spaceBetween: 30,
+      slidesPerGroup: 4,
+      spaceBetween: 24,
     },
   },
 };
@@ -75,7 +75,6 @@ const MainCategories = () => {
               </div>
 
               <div className="pc__info position-relative">
-                {/* <p className="pc__category">{elm.category}</p> */}
                 <h6 className="pc__title font-medium">
                   <Link href={`/shop-1?activeCategory=${elm.id}`}>
                     {elm?.name}
@@ -84,8 +83,6 @@ const MainCategories = () => {
               </div>
             </SwiperSlide>
           ))}
-
-          {/* <!-- /.swiper-wrapper --> */}
         </Swiper>
 
         <div className="products-pagination mt-4 mb-4 d-flex align-items-center justify-content-center"></div>
