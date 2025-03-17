@@ -1,9 +1,5 @@
 "use client";
-import { products51 } from "@/data/products/fashion";
-import {
-  menuCategories,
-  sortingOptions,
-} from "@/data/products/productCategories";
+import { sortingOptions } from "@/data/products/productCategories";
 import {
   QueryParam,
   QueryValue,
@@ -12,17 +8,15 @@ import {
 import { Product as IProduct } from "@/types/api";
 import { openModalShopFilter } from "@/utils/aside";
 import { apiEndpoints } from "@/utils/constants/apiEndpoints";
-import React, { useState } from "react";
-import Pagination1 from "../common/Pagination1";
-import BreadCumb from "./BreadCumb";
-import Product from "./Product";
 import { useRouter, useSearchParams } from "next/navigation";
-import Link from "next/link";
+import React from "react";
+import Pagination1 from "../common/Pagination1";
 import List from "../homes/home-1/List";
 import SkeletonProduct1 from "../homes/home-1/SkeletonProduct1";
+import BreadCumb from "./BreadCumb";
+import Product from "./Product";
 
-export default function Shop1() {
-  const [currentCategory, setCurrentCategory] = useState(menuCategories[0]);
+const Shop1 = () => {
   const searchParams = useSearchParams();
   const sortingValue = searchParams.get("sortingValue");
   const activeCategory = searchParams.get("activeCategory");
@@ -162,4 +156,6 @@ export default function Shop1() {
       </section>
     </>
   );
-}
+};
+
+export default Shop1;

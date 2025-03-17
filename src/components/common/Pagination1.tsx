@@ -18,7 +18,7 @@ export default function Pagination1(props: Props) {
         className="progress-bar"
         role="progressbar"
         style={{ width: `${progress}%` }}
-        aria-valuenow={`${progress.toFixed(0)}%`}
+        aria-valuenow={`${Math.round(progress)}%` as any}
         aria-valuemin={0}
         aria-valuemax={100}
       ></div>

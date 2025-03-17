@@ -2,7 +2,7 @@ import Footer1 from "@/components/footers/Footer1";
 import Header1 from "@/components/headers/Header1";
 import Checkout from "@/components/shopCartandCheckout/Checkout";
 import ChectoutSteps from "@/components/shopCartandCheckout/ChectoutSteps";
-import React from "react";
+import React, { Suspense } from "react";
 
 export default function () {
   return (
@@ -13,7 +13,9 @@ export default function () {
         <section className="shop-checkout container">
           <h2 className="page-title">Vận chuyển và thanh toán</h2>
           <ChectoutSteps />
-          <Checkout />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Checkout />
+          </Suspense>
         </section>
       </main>
       <div className="mb-5 pb-xl-5"></div>
