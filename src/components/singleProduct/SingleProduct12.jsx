@@ -1,16 +1,15 @@
 "use client";
-import React, { useState } from "react";
-import ProductSlider1 from "./sliders/ProductSlider1";
-import BreadCumb from "./BreadCumb";
-import Star from "../common/Star";
-import Colors from "./Colors";
-import Size from "./Size";
-import Description from "./Description";
-import AdditionalInfo from "./AdditionalInfo";
-import Reviews from "./Reviews";
-import Link from "next/link";
-import ShareComponent from "../common/ShareComponent";
 import { useContextElement } from "@/context/Context";
+import { useState } from "react";
+import ShareComponent from "../common/ShareComponent";
+import Star from "../common/Star";
+import AdditionalInfo from "./AdditionalInfo";
+import BreadCumb from "./BreadCumb";
+import Colors from "./Colors";
+import Description from "./Description";
+import Reviews from "./Reviews";
+import Size from "./Size";
+import ProductSlider1 from "./sliders/ProductSlider1";
 export default function SingleProduct12({ product }) {
   const { cartProducts, setCartProducts } = useContextElement();
   const [quantity, setQuantity] = useState(1);
@@ -51,35 +50,6 @@ export default function SingleProduct12({ product }) {
             <div className="breadcrumb mb-0 d-none d-md-block flex-grow-1">
               <BreadCumb />
             </div>
-            {/* <!-- /.breadcrumb --> */}
-
-            <div className="product-single__prev-next d-flex align-items-center justify-content-between justify-content-md-end flex-grow-1">
-              <a className="text-uppercase fw-medium">
-                <svg
-                  className="mb-1px"
-                  width="10"
-                  height="10"
-                  viewBox="0 0 25 25"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <use href="#icon_prev_md" />
-                </svg>
-                <span className="menu-link menu-link_us-s">Prev</span>
-              </a>
-              <a className="text-uppercase fw-medium">
-                <span className="menu-link menu-link_us-s">Next</span>
-                <svg
-                  className="mb-1px"
-                  width="10"
-                  height="10"
-                  viewBox="0 0 25 25"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <use href="#icon_next_md" />
-                </svg>
-              </a>
-            </div>
-            {/* <!-- /.shop-acs --> */}
           </div>
           <h1 className="product-single__name">{product.title}</h1>
           <div className="product-single__rating">
@@ -212,7 +182,7 @@ export default function SingleProduct12({ product }) {
               aria-controls="tab-description"
               aria-selected="true"
             >
-              Description
+              Mô tả
             </a>
           </li>
           <li className="nav-item" role="presentation">
@@ -225,20 +195,7 @@ export default function SingleProduct12({ product }) {
               aria-controls="tab-additional-info"
               aria-selected="false"
             >
-              Additional Information
-            </a>
-          </li>
-          <li className="nav-item" role="presentation">
-            <a
-              className="nav-link nav-link_underscore"
-              id="tab-reviews-tab"
-              data-bs-toggle="tab"
-              href="#tab-reviews"
-              role="tab"
-              aria-controls="tab-reviews"
-              aria-selected="false"
-            >
-              Reviews (2)
+              Thông tin thêm
             </a>
           </li>
         </ul>
@@ -258,14 +215,6 @@ export default function SingleProduct12({ product }) {
             aria-labelledby="tab-additional-info-tab"
           >
             <AdditionalInfo />
-          </div>
-          <div
-            className="tab-pane fade"
-            id="tab-reviews"
-            role="tabpanel"
-            aria-labelledby="tab-reviews-tab"
-          >
-            <Reviews />
           </div>
         </div>
       </div>

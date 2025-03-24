@@ -30,7 +30,7 @@ export default function Blog2() {
           />
         </div>
         <div className="container">
-          <h2 className="page-title">The Blog</h2>
+          <h2 className="page-title">Bài viết</h2>
           <div className="blog__filter">
             {categories.map((elm, i) => (
               <a
