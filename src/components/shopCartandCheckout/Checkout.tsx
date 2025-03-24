@@ -15,6 +15,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { EPaymentMethod, EShippingMethod } from "@/utils/constants/order.enum";
 import { useCreatePaymentTransaction } from "@/hooks/react-query/payment-gateway/useCreatePaymentTransaction";
 import { useCreatePaymentTransactionOrder } from "@/hooks/react-query/payment-gateway/useCreatePaymentTransactionOrder";
+import { formatPrice } from "@/utils/formatPrice";
 
 const paymentMethods = [
   {
@@ -93,7 +94,7 @@ export default function Checkout() {
     if (paymentMethod === EPaymentMethod.PAYMENT_GATEWAY) {
       createPaymentTransaction({
         orderInfo: "Hello World",
-        totalPrice: getTotal(subTotal, 0, 0) * 24000,
+        totalPrice: getTotal(subTotal, 0, 0),
       });
       return;
     }
@@ -110,7 +111,7 @@ export default function Checkout() {
       shippingMethod: EShippingMethod.OWN_DELIVERY,
       shippingPrice: 0,
       subTotal,
-      totalPrice: getTotal(subTotal, 0, 0) * 23000,
+      totalPrice: getTotal(subTotal, 0, 0),
     });
   };
 
@@ -163,17 +164,19 @@ export default function Checkout() {
                 <thead>
                   <tr>
                     <th>Sản phẩm</th>
-                    <th>SUBTOTAL</th>
+                    <th>Tạm tính</th>
                   </tr>
                 </thead>
                 <tbody>
                   {cart?.data?.map((elm, i) => (
                     <tr key={i}>
-                      <td>
+                      <td style={{ width: "65%" }}>
                         {elm.product?.title} x {elm.quantity}
                       </td>
                       <td>
-                        ${getTotalPrice(elm?.product?.price, elm?.quantity)}
+                        {formatPrice(
+                          getTotalPrice(elm?.product?.price, elm?.quantity)
+                        )}
                       </td>
                     </tr>
                   ))}
@@ -183,7 +186,7 @@ export default function Checkout() {
                 <tbody>
                   <tr>
                     <th>Tổng phụ</th>
-                    <td>${subTotal}</td>
+                    <td>{formatPrice(subTotal)}</td>
                   </tr>
                   <tr>
                     <th>Vận chuyển</th>
@@ -195,7 +198,7 @@ export default function Checkout() {
                   </tr>
                   <tr>
                     <th>Tổng tiền</th>
-                    <td>${getTotal(subTotal, 0, 0)}</td>
+                    <td>{formatPrice(getTotal(subTotal, 0, 0))}</td>
                   </tr>
                 </tbody>
               </table>

@@ -36,7 +36,7 @@
 }
 
 .footer__social-link {
-  padding: .5rem $footer-social-link-padding-x;
+  padding: 0.5rem $footer-social-link-padding-x;
   color: $footer-social-link-color;
 
   .svg-icon {
@@ -61,11 +61,12 @@
   color: $footer-type-1-color;
 
   .sub-menu__title {
-    margin-bottom: 0.875rem;
+    margin-bottom: 0.5rem;
     color: $footer-menu-title-color;
-
+    font-size: 14px;
+    font-weight: 600;
     @include media-breakpoint-up(lg) {
-      margin-bottom: 1.875rem;
+      margin-bottom: 1rem;
     }
   }
 
@@ -115,7 +116,9 @@
     }
 
     .menu-link {
-      color: $footer-type-2-dark-menu-link-color
+      color: $footer-type-2-dark-menu-link-color;
+      font-size: 12px;
+      font-weight: 500;
     }
 
     .form-select {
@@ -171,7 +174,7 @@
     }
 
     .menu-link {
-      color: $footer-type-2-dark-menu-link-color
+      color: $footer-type-2-dark-menu-link-color;
     }
 
     .form-select {
@@ -218,7 +221,7 @@
   padding: 0.875rem;
   line-height: 1.4;
   gap: 1.5rem;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 
   .app-download-text {
     display: flex;

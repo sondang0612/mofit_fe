@@ -12,7 +12,7 @@ export default function () {
       <main className="page-wrapper">
         <div className="mb-4 pb-4"></div>
         <section className="shop-checkout container">
-          <h2 className="page-title">ORDER RECEIVED</h2>
+          <h2 className="page-title">Đã nhận đơn hàng</h2>
           <ChectoutSteps />
           <OrderCompleted />
         </section>

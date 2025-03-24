@@ -1,6 +1,7 @@
 import { Product } from "@/types/api";
 import React, { Fragment } from "react";
 import SkeletonProduct1 from "./SkeletonProduct1";
+import { ITEMS_PER_PAGE } from "@/utils/constants";
 
 interface Props {
   data?: any[];
@@ -11,19 +12,25 @@ interface Props {
 }
 
 const List: React.FC<Props> = (props: Props) => {
-  const { n = 4, data, skeleton: Skeleton, isFetching, renderItem } = props;
+  const {
+    n = ITEMS_PER_PAGE,
+    data,
+    skeleton: Skeleton,
+    isFetching,
+    renderItem,
+  } = props;
   return (
     <>
-      {data?.map((item, index) => (
-        <Fragment key={item?.id || index}>
-          {renderItem({ data: item })}
-        </Fragment>
-      ))}
-      {isFetching &&
-        Skeleton &&
-        Array.from({ length: n }).map((_, index) => (
-          <Skeleton key={`skeleton-${index}`} />
-        ))}
+      {isFetching
+        ? Skeleton &&
+          Array.from({ length: n }).map((_, index) => (
+            <Skeleton key={`skeleton-${index}`} />
+          ))
+        : data?.map((item, index) => (
+            <Fragment key={item?.id || index}>
+              {renderItem({ data: item })}
+            </Fragment>
+          ))}
     </>
   );
 };

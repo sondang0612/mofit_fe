@@ -8,14 +8,14 @@ import React, { useState } from "react";
 import { debounce } from "lodash";
 import { useUrlParams } from "@/hooks/useUrlParams";
 import FilterCategoryItem from "./FilterCategoryItem";
+import { formatPrice } from "@/utils/formatPrice";
 
 export default function FilterAll() {
-  const searchParams = useSearchParams();
-  const activeCategory =
-    Number(searchParams.get("activeCategory")) || undefined;
-  const minPrice = Number(searchParams.get("minPrice")) || 0;
-  const maxPrice = Number(searchParams.get("maxPrice")) || 0;
-  const activeBrands = searchParams.getAll("brands");
+  const { getAllParams, getParam } = useUrlParams();
+  const activeCategory = Number(getParam("activeCategory")) || undefined;
+  const minPrice = Number(getParam("minPrice")) || 0;
+  const maxPrice = Number(getParam("maxPrice")) || 0;
+  const activeBrands = getAllParams("brands");
   const { data: categories } = useCategories();
   const { data: brands } = useBrands();
   const [price, setPrice] = useState([minPrice, maxPrice]);
@@ -110,8 +110,8 @@ export default function FilterAll() {
             data-bs-parent="#categories-list"
           >
             <div className="accordion-body px-0 pb-0">
-              <ul className="list list-inline row row-cols-2 mb-0">
-                {categories?.data.map((category, index) => (
+              <ul className="list list-inline mb-0">
+                {categories?.data?.map((category, index) => (
                   <FilterCategoryItem
                     isActive={category?.id === activeCategory}
                     category={category}
@@ -178,7 +178,11 @@ export default function FilterAll() {
                   .map((elm, i) => (
                     <li
                       key={i}
-                      onClick={() => toggleArrayParam("brands", `${elm?.id}`)}
+                      onClick={() => {
+                        toggleArrayParam("brands", `${elm?.id}`, {
+                          shouldReset: true,
+                        });
+                      }}
                       className={`search-suggestion__item multi-select__item text-primary js-search-select js-multi-select ${
                         activeBrands?.includes(`${elm?.id}`)
                           ? "mult-select__item_selected"
@@ -229,19 +233,23 @@ export default function FilterAll() {
           >
             <Slider
               range
-              max={100000}
+              max={100000000}
               min={0}
               defaultValue={price}
               onChange={(value) => handleOnChange(value)}
             />
             <div className="price-range__info d-flex align-items-center mt-2">
               <div className="me-auto">
-                <span className="text-secondary">Min Price: </span>
-                <span className="price-range__min">${price[0]}</span>
+                <span className="text-secondary">Từ: </span>
+                <span className="price-range__min">
+                  {formatPrice(price[0])}
+                </span>
               </div>
               <div>
-                <span className="text-secondary">Max Price: </span>
-                <span className="price-range__max">${price[1]}</span>
+                <span className="text-secondary">Đến: </span>
+                <span className="price-range__max">
+                  {formatPrice(price[1])}
+                </span>
               </div>
             </div>
           </div>

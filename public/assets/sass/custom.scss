@@ -304,3 +304,23 @@ body {
 .bg-overlay-20 {
   background: rgba(0, 0, 0, 0.2);
 }
+
+.object-fit-none {
+  object-fit: none !important;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hidden {
+  display: none;
+}
+
+.visibility-hidden {
+  visibility: hidden;
+}

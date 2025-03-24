@@ -10,12 +10,12 @@ const NewArrivals = () => {
   const router = useRouter();
 
   return (
-    <div className="products-carousel container">
+    <div className="products-carousel mx-4">
       <h2 className="section-title mb-4 pb-xl-2 mb-xl-2">Mới ra mắt</h2>
 
       <div className="position-relative grid grid-cols-3 gap-sm">
         {category?.data?.subCategories?.map?.((elm, i) => (
-          <div className="pc__img-wrapper block position-relative" key={i}>
+          <div className="pc__img-wrapper position-relative" key={i}>
             <div className="absolute insets-0 z-100 bg-overlay-20">
               <p className="absolute top-4 right-4 text-8 text-white text-right uppercase font-bold">
                 {elm?.name}
@@ -29,7 +29,7 @@ const NewArrivals = () => {
                 width="348"
                 height="348"
                 alt="Cropped Faux leather Jacket"
-                className="pc__img"
+                className="pc__img object-fit-none"
               />
             </Link>
           </div>

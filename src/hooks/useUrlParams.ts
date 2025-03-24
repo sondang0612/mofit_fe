@@ -120,6 +120,18 @@ export const useUrlParams = () => {
   );
 
   /**
+   * Get the current value of a parameter
+   * @param key Parameter key
+   * @returns The parameter value or null if not present
+   */
+  const getAllParams = useCallback(
+    (key: string) => {
+      return searchParams.getAll(key);
+    },
+    [searchParams]
+  );
+
+  /**
    * Check if a parameter exists
    * @param key Parameter key
    * @returns Boolean indicating if the parameter exists
@@ -138,7 +150,11 @@ export const useUrlParams = () => {
    * @param options Configuration options
    */
   const toggleArrayParam = useCallback(
-    (key: string, value: string, options: { scroll?: boolean } = {}) => {
+    (
+      key: string,
+      value: string,
+      options: { scroll?: boolean; shouldReset?: boolean } = {}
+    ) => {
       const { scroll = false } = options;
       const params = new URLSearchParams(searchParams.toString());
 
@@ -159,6 +175,9 @@ export const useUrlParams = () => {
       values.forEach((v) => params.append(key, v));
 
       // Update the URL
+      if (options.shouldReset) {
+        params.set("page", "1");
+      }
       router.push(`?${params.toString()}`, { scroll });
     },
     [searchParams, router]
@@ -172,5 +191,6 @@ export const useUrlParams = () => {
     hasParam,
     toggleArrayParam,
     params: searchParams,
+    getAllParams,
   };
 };

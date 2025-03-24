@@ -30,7 +30,7 @@
   top: 100%;
   left: 0;
   padding-top: $search-popup-padding-top * 0.7;
-  padding-bottom: $search-popup-padding-bottom * 0.7;;
+  padding-bottom: $search-popup-padding-bottom * 0.7;
   border-top: $mega-menu-border;
   background-color: $header-background;
   box-shadow: $box-shadow;
@@ -105,7 +105,7 @@
 
   .search-suggestion {
     position: absolute;
-    margin-top: -.5rem;
+    margin-top: -0.5rem;
     opacity: 0;
     visibility: hidden;
   }
@@ -121,7 +121,7 @@
   left: 0;
   width: 100%;
   min-height: $search-result-min-height * 0.6;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   padding-bottom: $search-result-bottom-space * 0.6;
   opacity: 0;
   visibility: hidden;

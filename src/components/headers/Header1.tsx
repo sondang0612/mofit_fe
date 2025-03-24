@@ -53,7 +53,7 @@ export default function Header1() {
         scrollDirection == "up" ? "header_sticky-active" : "position-absolute"
       } `}
     >
-      <div className="container h-full px-24">
+      <div className="h-full px-24">
         <div className="header-desk header-desk_type_1">
           <div className="logo">
             <Link href="/">

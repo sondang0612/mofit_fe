@@ -28,7 +28,10 @@ const FilterCategoryItem = (props: Props) => {
 
   const handleItemClick = () => {
     if (!hasSubCategories) {
-      setParams([{ key: "activeCategory", value: `${category?.id}` }]);
+      setParams([
+        { key: "activeCategory", value: `${category?.id}` },
+        { key: "page", value: 1 },
+      ]);
       return undefined;
     } else {
       setToggleSubCategories((prev) => !prev);
@@ -51,7 +54,10 @@ const FilterCategoryItem = (props: Props) => {
               key={item?.id}
               className={`${item?.id === activeCategory && "text-blue-500"}`}
               onClick={() =>
-                setParams([{ key: "activeCategory", value: `${item?.id}` }])
+                setParams([
+                  { key: "activeCategory", value: `${item?.id}` },
+                  { key: "page", value: 1 },
+                ])
               }
             >
               {item?.name}

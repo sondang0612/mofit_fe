@@ -1,5 +1,6 @@
 import { CartItem } from "@/types/api";
 import { EDefaultValue } from "@/utils/constants/default-value.enum";
+import { formatPrice } from "@/utils/formatPrice";
 import { getTotalPrice } from "@/utils/getTotalPrice";
 import Image from "next/image";
 import React from "react";
@@ -20,7 +21,7 @@ const ListCartItems = (props: Props) => {
           <th></th>
           <th>Giá</th>
           <th>Số lượng</th>
-          <th>Tổng phụ</th>
+          <th>Tạm tính</th>
           <th></th>
         </tr>
       </thead>
@@ -42,14 +43,14 @@ const ListCartItems = (props: Props) => {
               <div className="shopping-cart__product-item__detail">
                 <h4>{elm?.product?.title}</h4>
                 <ul className="shopping-cart__product-item__options">
-                  <li>Color: Yellow</li>
-                  <li>Size: L</li>
+                  <li>Loại: {elm?.product?.category?.name}</li>
+                  <li>Mã: {elm?.product?.id}</li>
                 </ul>
               </div>
             </td>
             <td>
               <span className="shopping-cart__product-price">
-                ${elm?.product?.price}
+                {formatPrice(elm?.product?.price)}
               </span>
             </td>
             <td>
@@ -73,7 +74,7 @@ const ListCartItems = (props: Props) => {
             </td>
             <td>
               <span className="shopping-cart__subtotal">
-                ${getTotalPrice(elm?.product?.price, elm?.quantity)}
+                {formatPrice(getTotalPrice(elm?.product?.price, elm?.quantity))}
               </span>
             </td>
             {onRemove && canEdit && (

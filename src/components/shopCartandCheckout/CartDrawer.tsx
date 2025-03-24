@@ -8,6 +8,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useRemoveCartItem } from "@/hooks/react-query/cart-items/useRemoveCartItem";
+import { formatPrice } from "@/utils/formatPrice";
 
 export default function CartDrawer() {
   const { data: cart } = useCart();
@@ -29,6 +30,14 @@ export default function CartDrawer() {
       router.push(href);
     }
   };
+
+  const subTotal = React.useMemo(() => {
+    return cart?.data?.reduce((prev, cur) => {
+      const curQuantity = cur?.quantity || 0;
+      const curPrice = cur?.product?.price || 0;
+      return prev + curQuantity * curPrice;
+    }, 0);
+  }, [cart?.data]);
 
   useEffect(() => {
     closeCart();
@@ -74,10 +83,10 @@ export default function CartDrawer() {
                       {elm?.product?.title}
                     </h6>
                     <p className="cart-drawer-item__option text-secondary">
-                      Color: Yellow
+                      Loại: {elm?.product?.category?.name}
                     </p>
                     <p className="cart-drawer-item__option text-secondary">
-                      Size: L
+                      Mã: {elm?.product?.id}
                     </p>
                     <div className="d-flex align-items-center justify-content-between mt-1">
                       <div className="qty-control position-relative">
@@ -85,6 +94,7 @@ export default function CartDrawer() {
                           type="number"
                           name="quantity"
                           value={elm.quantity}
+                          onChange={(e) => console.log(e.target.value)}
                           min="1"
                           className="qty-control__number border-0 text-center"
                         />
@@ -93,7 +103,9 @@ export default function CartDrawer() {
                       </div>
 
                       <span className="cart-drawer-item__price money price">
-                        {getTotalPrice(elm?.product?.price, elm?.quantity)}
+                        {formatPrice(
+                          getTotalPrice(elm?.product?.price, elm?.quantity)
+                        )}
                       </span>
                     </div>
                   </div>
@@ -127,8 +139,10 @@ export default function CartDrawer() {
         <div className="cart-drawer-actions position-absolute start-0 bottom-0 w-100">
           <hr className="cart-drawer-divider" />
           <div className="d-flex justify-content-between">
-            <h6 className="fs-base fw-medium">SUBTOTAL:</h6>
-            <span className="cart-subtotal fw-medium">${0}</span>
+            <h6 className="fs-base fw-medium">Tạm tính:</h6>
+            <span className="cart-subtotal fw-medium">
+              ${formatPrice(subTotal)}
+            </span>
           </div>
           {/* <!-- /.d-flex justify-content-between --> */}
           {cart?.data?.length ? (

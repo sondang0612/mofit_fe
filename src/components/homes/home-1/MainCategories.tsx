@@ -48,7 +48,7 @@ const MainCategories = () => {
   const router = useRouter();
 
   return (
-    <div className="products-carousel container">
+    <div className="products-carousel mx-4">
       <h2 className="section-title mb-4 pb-xl-2 mb-xl-2">
         Dòng sản phẩm chính
       </h2>

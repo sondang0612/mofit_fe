@@ -10,7 +10,8 @@
     padding-top: 3.125rem;
     flex-grow: 1;
 
-    .form-floating > label, .form-label-fixed > .form-label {
+    .form-floating > label,
+    .form-label-fixed > .form-label {
       color: $secondary;
     }
   }
@@ -32,7 +33,7 @@
     margin-bottom: 1.25rem;
     padding: 2.5rem 2.5rem 1.5rem;
     width: 26.25rem;
-    
+
     @include media-breakpoint-down(xl) {
       width: 100%;
     }
@@ -66,9 +67,10 @@
 .checkout__totals {
   border: 1px solid #222;
   margin-bottom: 1.25rem;
-  padding: 2.5rem 2.5rem 0.5rem;
+  //padding: 2.5rem 2.5rem 0.5rem;
+  padding: 1rem 1rem 0.5rem;
   width: 26.25rem;
-  
+
   @include media-breakpoint-down(xl) {
     width: 100%;
   }
@@ -115,7 +117,8 @@
   }
 
   .checkout-totals {
-    th, td {
+    th,
+    td {
       border-bottom: 1px solid $border-color;
       padding: 0.875rem 0;
       font-size: 0.875rem;
@@ -123,7 +126,8 @@
     }
 
     tr:last-child {
-      th, td {
+      th,
+      td {
         border-bottom: 0;
       }
     }

@@ -1,38 +1,44 @@
 "use client";
 import { sortingOptions } from "@/data/products/productCategories";
-import {
-  QueryParam,
-  QueryValue,
-  useInfiniteFetch,
-} from "@/hooks/react-query/useInfiniteFetch";
+import { useFetch } from "@/hooks/react-query/useFetch";
+import { QueryParam, QueryValue } from "@/hooks/react-query/useInfiniteFetch";
 import { Product as IProduct } from "@/types/api";
 import { openModalShopFilter } from "@/utils/aside";
+import { ITEMS_PER_PAGE } from "@/utils/constants";
 import { apiEndpoints } from "@/utils/constants/apiEndpoints";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
-import Pagination1 from "../common/Pagination1";
 import List from "../homes/home-1/List";
 import SkeletonProduct1 from "../homes/home-1/SkeletonProduct1";
 import BreadCumb from "./BreadCumb";
+import FilterAll from "./filter/FilterAll";
+import Pagination from "./Pagination";
 import Product from "./Product";
+import { useUrlParams } from "@/hooks/useUrlParams";
 
 const Shop1 = () => {
-  const searchParams = useSearchParams();
-  const sortingValue = searchParams.get("sortingValue");
-  const activeCategory = searchParams.get("activeCategory");
-  const brands = searchParams.getAll("brands");
-  const minPrice = searchParams.get("minPrice");
-  const maxPrice = searchParams.get("maxPrice");
+  const {
+    getParam,
+    getAllParams,
+    setParams,
+    params: searchParams,
+  } = useUrlParams();
+  const sortingValue = getParam("sortingValue");
+  const activeCategory = getParam("activeCategory");
+  const brands = getAllParams("brands");
+  const minPrice = getParam("minPrice");
+  const maxPrice = getParam("maxPrice");
+  const currentPage = Number(getParam("page") || 1);
 
   const router = useRouter();
   const {
     data: products,
     isFetching,
     totalElements,
-    fetchNextPage,
-  } = useInfiniteFetch<IProduct>({
+  } = useFetch<IProduct>({
+    page: currentPage,
     endpoint: apiEndpoints.PRODUCTS,
-    limit: 12,
+    limit: ITEMS_PER_PAGE,
     queryParams: [
       QueryParam.SORT_BY,
       QueryParam.SORT,
@@ -68,90 +74,90 @@ const Shop1 = () => {
     }
   };
 
+  const onPageChange = (page: number) => {
+    setParams([{ key: "page", value: page }]);
+  };
+
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
+
   return (
     <>
       <div className="mb-4 pb-lg-3"></div>
-      <section className="shop-main container">
-        <div className="d-flex justify-content-between mb-4 pb-md-2">
-          <div className="breadcrumb mb-0 d-none d-md-block flex-grow-1">
-            <BreadCumb />
-          </div>
-
-          <div className="shop-acs d-flex align-items-center justify-content-between justify-content-md-end flex-grow-1">
-            <select
-              className="shop-acs__select form-select w-auto border-0 py-0 order-1 order-md-0"
-              aria-label="Sort Items"
-              name="total-number"
-              value={sortingValue || "all"}
-              onChange={handleChange}
-            >
-              {sortingOptions.map((option, index) => (
-                <option key={index} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-
-            <div className="shop-asc__seprator mx-3 bg-light d-none d-md-block order-md-0"></div>
-            {/* <!-- /.col-size --> */}
-
-            <div className="shop-asc__seprator mx-3 bg-light d-none d-lg-block order-md-1"></div>
-
-            <div className="shop-filter d-flex align-items-center order-0 order-md-3">
-              <button
-                className="btn-link btn-link_f d-flex align-items-center ps-0 js-open-aside"
-                onClick={openModalShopFilter}
-              >
-                <svg
-                  className="d-inline-block align-middle me-2"
-                  width="14"
-                  height="10"
-                  viewBox="0 0 14 10"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <use href="#icon_filter" />
-                </svg>
-                <span className="text-uppercase fw-medium d-inline-block align-middle">
-                  Bộ lọc
-                </span>
-              </button>
-            </div>
-            {/* <!-- /.col-size d-flex align-items-center ms-auto ms-md-3 --> */}
-          </div>
-          {/* <!-- /.shop-acs --> */}
-        </div>
-        {/* <!-- /.d-flex justify-content-between --> */}
-
-        <div
-          className={`products-grid row row-cols-2 row-cols-md-3 row-cols-lg-6`}
-          id="products-grid"
-        >
-          <List
-            data={products}
-            isFetching={isFetching}
-            renderItem={renderItem}
-            n={12}
-            skeleton={SkeletonProduct1}
-          />
-        </div>
-        {/* <!-- /.products-grid row --> */}
-
-        <p className="mb-5 text-center fw-medium">
-          Tổng {products?.length} / {totalElements} sản phẩm
-        </p>
-        <Pagination1
-          currentItems={products?.length}
-          totalItems={totalElements}
-        />
-
-        <div className="text-center">
-          <button
-            className="btn-link btn-link_lg text-uppercase fw-medium"
-            onClick={() => fetchNextPage()}
+      <section className="shop-main container d-flex">
+        <div className="shop-sidebar side-sticky bg-body">
+          <div
+            onClick={openModalShopFilter}
+            className="aside-header d-flex d-lg-none align-items-center"
           >
-            Xem thêm
-          </button>
+            <h3 className="text-uppercase fs-6 mb-0">Filter By</h3>
+            <button className="btn-close-lg js-close-aside btn-close-aside ms-auto"></button>
+          </div>
+
+          <div className="pt-4 pt-lg-0"></div>
+
+          <FilterAll />
+        </div>
+
+        <div className="shop-list flex-grow-1">
+          <div className="d-flex justify-content-between mb-4 pb-md-2">
+            <div className="breadcrumb mb-0 d-none d-md-block flex-grow-1">
+              <BreadCumb />
+            </div>
+
+            <div className="shop-acs d-flex align-items-center justify-content-between justify-content-md-end flex-grow-1">
+              <select
+                className="shop-acs__select form-select w-auto border-0 py-0 order-1 order-md-0"
+                aria-label="Sort Items"
+                name="total-number"
+                value={sortingValue || "all"}
+                onChange={handleChange}
+              >
+                {sortingOptions.map((option, index) => (
+                  <option key={index} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+
+              <div className="shop-asc__seprator mx-3 bg-light d-none d-md-block order-md-0"></div>
+
+              <div className="shop-filter d-flex align-items-center order-0 order-md-3 d-lg-none">
+                <button
+                  className="btn-link btn-link_f d-flex align-items-center ps-0 js-open-aside"
+                  onClick={openModalShopFilter}
+                >
+                  <svg
+                    className="d-inline-block align-middle me-2"
+                    width="14"
+                    height="10"
+                    viewBox="0 0 14 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <use href="#icon_filter" />
+                  </svg>
+                  <span className="text-uppercase fw-medium d-inline-block align-middle">
+                    Bộ lọc
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className={`products-grid row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-5`}
+            id="products-grid"
+          >
+            <List
+              data={products}
+              isFetching={isFetching}
+              renderItem={renderItem}
+              skeleton={SkeletonProduct1}
+            />
+          </div>
+          <Pagination totalItems={totalElements} onChange={onPageChange} />
         </div>
       </section>
     </>

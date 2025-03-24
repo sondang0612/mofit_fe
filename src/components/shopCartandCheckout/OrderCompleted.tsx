@@ -1,8 +1,14 @@
 "use client";
 
 import { Order } from "@/types/api";
+import { formatPrice } from "@/utils/formatPrice";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+
+const paymentMethodTxt = {
+  payment_gateway: "Chuyển khoản ngân hàng",
+  cod: "Thanh toán tiến mặt",
+};
 
 export default function OrderCompleted() {
   const [order, setOrder] = useState<Order | null>(null);
@@ -46,36 +52,42 @@ export default function OrderCompleted() {
             fill="white"
           />
         </svg>
-        <h3>Your order is completed!</h3>
-        <p>Thank you. Your order has been received.</p>
+        <h3>Đặt hàng thành công!</h3>
+        <p>Đơn hàng của bạn đang được xử lý.</p>
       </div>
       <div className="order-info">
         <div className="order-info__item">
-          <label>Order Number</label>
+          <label>Mã đơn hàng</label>
           <span>{order?.id}</span>
         </div>
         <div className="order-info__item">
-          <label>Date</label>
+          <label>Ngày tạo</label>
           <span>{new Date().toLocaleDateString()}</span>
         </div>
         <div className="order-info__item">
-          <label>Total</label>
+          <label>Tổng tiền</label>
 
-          <span>${order?.totalPrice}</span>
+          <span>{formatPrice(order?.totalPrice)}</span>
         </div>
         <div className="order-info__item">
-          <label>Paymetn Method</label>
-          <span>{order?.paymentMethod}</span>
+          <label>Phương thức thanh toán</label>
+          <span>
+            {
+              paymentMethodTxt[
+                order?.paymentMethod as "payment_gateway" | "cod"
+              ]
+            }
+          </span>
         </div>
       </div>
       <div className="checkout__totals-wrapper">
         <div className="checkout__totals">
-          <h3>Order Details</h3>
+          <h3>Chi tiết đơn hàng</h3>
           <table className="checkout-cart-items">
             <thead>
               <tr>
-                <th>PRODUCT</th>
-                <th>SUBTOTAL</th>
+                <th>Sản phẩm</th>
+                <th>Ước tính</th>
               </tr>
             </thead>
             <tbody>
@@ -84,7 +96,7 @@ export default function OrderCompleted() {
                   <td>
                     {elm?.product?.title} x {elm?.quantity}
                   </td>
-                  <td>${elm?.product?.price}</td>
+                  <td>{formatPrice(elm?.product?.price)}</td>
                 </tr>
               ))}
             </tbody>
@@ -92,20 +104,20 @@ export default function OrderCompleted() {
           <table className="checkout-totals">
             <tbody>
               <tr>
-                <th>SUBTOTAL</th>
-                <td>${order?.subTotal}</td>
+                <th>Tạm tính</th>
+                <td>{formatPrice(order?.subTotal)}</td>
               </tr>
               <tr>
-                <th>SHIPPING</th>
+                <th>Vận chuyển</th>
                 <td>Free shipping</td>
               </tr>
               <tr>
                 <th>VAT</th>
-                <td>${order?.vat}</td>
+                <td>{order?.vat}</td>
               </tr>
               <tr>
-                <th>TOTAL</th>
-                <td>${order?.totalPrice}</td>
+                <th>Tổng</th>
+                <td>{formatPrice(order?.totalPrice)}</td>
               </tr>
             </tbody>
           </table>

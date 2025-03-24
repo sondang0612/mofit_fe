@@ -39,9 +39,7 @@ export default function HomePage1() {
           <div className="mb-4 pb-4 mb-xl-5 pb-xl-5"></div>
 
           <FadeInWrapper>
-            <div className="scroll-section">
-              <NewArrivals />
-            </div>
+            <NewArrivals />
           </FadeInWrapper>
           <div className="mb-4 pb-4 mb-xl-5 pb-xl-5"></div>
         </main>
