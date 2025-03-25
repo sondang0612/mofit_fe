@@ -11,8 +11,6 @@ const Page: React.FC = () => {
     editorRef.current = editor;
   };
 
-  console.log(content);
-
   return (
     <div>
       <SunEditor
@@ -48,6 +46,7 @@ const Page: React.FC = () => {
               "preview",
               "print",
               "save",
+              "list",
             ],
           ],
         }}

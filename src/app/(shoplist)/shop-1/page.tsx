@@ -15,8 +15,8 @@ const ShopFilter = dynamic(() => import("@/components/asides/ShopFilter"), {
 });
 
 export const metadata = {
-  title: "Shop 1 || Uomo eCommerce React Nextjs Template",
-  description: "Uomo eCommerce React Nextjs Template",
+  title: "Shop 1 || Double Fish eCommerce React Nextjs Template",
+  description: "Double Fish eCommerce React Nextjs Template",
 };
 export default function ShopPage1() {
   return (

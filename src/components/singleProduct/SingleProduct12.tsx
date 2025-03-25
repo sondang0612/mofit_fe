@@ -1,49 +1,29 @@
 "use client";
-import { useContextElement } from "@/context/Context";
-import { useState } from "react";
+import { useProduct } from "@/hooks/react-query/products/useProduct";
+import { usePageId } from "@/hooks/usePageId";
+import { formatPrice } from "@/utils/formatPrice";
 import ShareComponent from "../common/ShareComponent";
 import Star from "../common/Star";
 import AdditionalInfo from "./AdditionalInfo";
 import BreadCumb from "./BreadCumb";
-import Colors from "./Colors";
 import Description from "./Description";
-import Reviews from "./Reviews";
-import Size from "./Size";
 import ProductSlider1 from "./sliders/ProductSlider1";
-export default function SingleProduct12({ product }) {
-  const { cartProducts, setCartProducts } = useContextElement();
-  const [quantity, setQuantity] = useState(1);
+import { getProductAttributeNames } from "@/utils/getProductAttributeNames";
 
-  const isIncludeCard = () => {
-    const item = cartProducts.filter((elm) => elm.id == product.id)[0];
-    return item;
-  };
-  const setQuantityCartItem = (id, quantity) => {
-    if (isIncludeCard()) {
-      if (quantity >= 1) {
-        const item = cartProducts.filter((elm) => elm.id == id)[0];
-        const items = [...cartProducts];
-        const itemIndex = items.indexOf(item);
-        item.quantity = quantity;
-        items[itemIndex] = item;
-        setCartProducts(items);
-      }
-    } else {
-      setQuantity(quantity - 1 ? quantity : 1);
-    }
-  };
-  const addToCart = () => {
-    if (!isIncludeCard()) {
-      const item = product;
-      item.quantity = quantity;
-      setCartProducts((pre) => [...pre, item]);
-    }
-  };
+interface Props {
+  id?: number;
+}
+
+export default function SingleProduct12(props: Props) {
+  const { id } = props;
+
+  const { data: product } = useProduct({ id });
+
   return (
     <section className="product-single container">
       <div className="row">
         <div className="col-lg-7">
-          <ProductSlider1 />
+          <ProductSlider1 product={product} />
         </div>
         <div className="col-lg-5">
           <div className="d-flex justify-content-between mb-4 pb-md-2">
@@ -51,91 +31,38 @@ export default function SingleProduct12({ product }) {
               <BreadCumb />
             </div>
           </div>
-          <h1 className="product-single__name">{product.title}</h1>
+          <h1 className="product-single__name">{product?.title}</h1>
           <div className="product-single__rating">
             <div className="reviews-group d-flex">
               <Star stars={5} />
             </div>
-            <span className="reviews-note text-lowercase text-secondary ms-1">
-              8k+ reviews
-            </span>
           </div>
           <div className="product-single__price">
-            <span className="current-price">${product.price}</span>
+            <span className="current-price">{formatPrice(product?.price)}</span>
           </div>
           <div className="product-single__short-desc">
-            <p>
-              Phasellus sed volutpat orci. Fusce eget lore mauris vehicula
-              elementum gravida nec dui. Aenean aliquam varius ipsum, non
-              ultricies tellus sodales eu. Donec dignissim viverra nunc, ut
-              aliquet magna posuere eget.
-            </p>
+            <p>{product?.shortDescription}</p>
           </div>
           <form onSubmit={(e) => e.preventDefault()}>
-            <div className="product-single__swatches">
-              <div className="product-swatch text-swatches">
-                <label>Sizes</label>
-                <div className="swatch-list">
-                  <Size />
-                </div>
-                <a
-                  href="#"
-                  className="sizeguide-link"
-                  data-bs-toggle="modal"
-                  data-bs-target="#sizeGuide"
-                >
-                  Size Guide
-                </a>
-              </div>
-              <div className="product-swatch color-swatches">
-                <label>Color</label>
-                <div className="swatch-list">
-                  <Colors />
-                </div>
-              </div>
-            </div>
             <div className="product-single__addtocart">
               <div className="qty-control position-relative">
                 <input
                   type="number"
                   name="quantity"
-                  value={isIncludeCard() ? isIncludeCard().quantity : quantity}
                   min="1"
-                  onChange={(e) =>
-                    setQuantityCartItem(product.id, e.target.value)
-                  }
+                  value={1}
                   className="qty-control__number text-center"
+                  onChange={() => console.log(123)}
                 />
-                <div
-                  onClick={() =>
-                    setQuantityCartItem(
-                      product.id,
-                      isIncludeCard()?.quantity - 1 || quantity - 1
-                    )
-                  }
-                  className="qty-control__reduce"
-                >
-                  -
-                </div>
-                <div
-                  onClick={() =>
-                    setQuantityCartItem(
-                      product.id,
-                      isIncludeCard()?.quantity + 1 || quantity + 1
-                    )
-                  }
-                  className="qty-control__increase"
-                >
-                  +
-                </div>
+                <div className="qty-control__reduce">-</div>
+                <div className="qty-control__increase">+</div>
               </div>
               {/* <!-- .qty-control --> */}
               <button
                 type="submit"
                 className="btn btn-primary btn-addtocart js-open-aside"
-                onClick={() => addToCart()}
               >
-                {isIncludeCard() ? "Already Added" : "Add to Cart"}
+                Thêm vào giỏ hàng
               </button>
             </div>
           </form>
@@ -150,22 +77,22 @@ export default function SingleProduct12({ product }) {
               >
                 <use href="#icon_heart" />
               </svg>
-              <span>Add to Wishlist</span>
+              <span>Thích</span>
             </a>
-            <ShareComponent title={product.title} />
+            <ShareComponent title={product?.title} />
           </div>
           <div className="product-single__meta-info">
             <div className="meta-item">
               <label>SKU:</label>
-              <span>N/A</span>
+              <span>{product?.sku || "N/A"}</span>
             </div>
             <div className="meta-item">
-              <label>Categories:</label>
-              <span>Casual & Urban Wear, Jackets, Men</span>
+              <label>Loại:&nbsp;</label>
+              <span>{product?.category?.name}</span>
             </div>
             <div className="meta-item">
-              <label>Tags:</label>
-              <span>biker, black, bomber, leather</span>
+              <label>Thuộc tính:&nbsp;</label>
+              <span>{getProductAttributeNames(product)}</span>
             </div>
           </div>
         </div>
@@ -206,7 +133,7 @@ export default function SingleProduct12({ product }) {
             role="tabpanel"
             aria-labelledby="tab-description-tab"
           >
-            <Description />
+            <Description product={product} />
           </div>
           <div
             className="tab-pane fade"

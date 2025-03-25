@@ -5,8 +5,8 @@ import Terms from "@/components/otherPages/Terms";
 import React from "react";
 
 export const metadata = {
-  title: "Terms || Uomo eCommerce React Nextjs Template",
-  description: "Uomo eCommerce React Nextjs Template",
+  title: "Terms || Double Fish eCommerce React Nextjs Template",
+  description: "Double Fish eCommerce React Nextjs Template",
 };
 export default function TermsPage() {
   return (

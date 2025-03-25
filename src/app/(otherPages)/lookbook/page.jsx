@@ -5,8 +5,8 @@ import Lookbook from "@/components/otherPages/Lookbook";
 import React from "react";
 
 export const metadata = {
-  title: "Lookbook || Uomo eCommerce React Nextjs Template",
-  description: "Uomo eCommerce React Nextjs Template",
+  title: "Lookbook || Double Fish eCommerce React Nextjs Template",
+  description: "Double Fish eCommerce React Nextjs Template",
 };
 export default function LookbookPage() {
   return (

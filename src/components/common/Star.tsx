@@ -3,7 +3,7 @@ import React from "react";
 export default function Star({ stars = 5 }) {
   return (
     <>
-      {[...Array(stars), 1, 1, 1, 1].map((elm2, i2) => (
+      {[...Array(stars)].map((elm2, i2) => (
         <svg
           key={i2}
           className="review-star"

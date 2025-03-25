@@ -5,8 +5,8 @@ import Faq from "@/components/otherPages/Faq";
 import React from "react";
 
 export const metadata = {
-  title: "Faq || Uomo eCommerce React Nextjs Template",
-  description: "Uomo eCommerce React Nextjs Template",
+  title: "Faq || Double Fish eCommerce React Nextjs Template",
+  description: "Double Fish eCommerce React Nextjs Template",
 };
 export default function FaqPage() {
   return (

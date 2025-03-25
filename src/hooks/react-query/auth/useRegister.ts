@@ -6,12 +6,15 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 
 type Form = {
+  email?: string;
   username?: string;
+  phoneNumber?: string;
   password?: string;
-  role?: ERole;
+  firstName?: string;
+  lastName?: string;
 };
 
-export type LoginData = {
+export type RegisterData = {
   access_token: string;
   fullName: string;
   message: string;
@@ -19,22 +22,28 @@ export type LoginData = {
 };
 
 const fetchData = async (form: Form) => {
-  const response = await axiosInstance.post("auth/login", form);
+  const response = await axiosInstance.post("auth/register", form);
   return response.data;
 };
 
-const useLogin = () => {
+const useRegister = () => {
   return useMutation({
     mutationFn: fetchData,
-    onSuccess: async (data: LoginData) => {
+    onSuccess: async (data: RegisterData) => {
       Cookies.set(cookiesKey.ACCESS_TOKEN, data?.access_token);
       Cookies.set(cookiesKey.ROLE, data?.role);
       window.location.href = "/";
     },
-    onError: (_) => {
-      toast.error(`Tài khoản hoặc mật khẩu không đúng`);
+    onError: (error: any) => {
+      console.log(error?.response?.data?.message);
+
+      if (error?.response?.data?.message) {
+        toast.error(error?.response?.data?.message);
+      } else {
+        toast.error(`Đăng ký thất bại!!!`);
+      }
     },
   });
 };
 
-export { useLogin };
+export { useRegister };

@@ -10,7 +10,7 @@ import Link from "next/link";
 export default function Footer1() {
   return (
     <footer className="footer footer_type_1 dark">
-      <div className="footer-middle mx-4">
+      <div className="footer-middle px-24">
         <div className="row row-cols-lg-5 row-cols-2">
           <div className="footer-column footer-store-info col-12 mb-4 mb-lg-0">
             <p className="footer-address">

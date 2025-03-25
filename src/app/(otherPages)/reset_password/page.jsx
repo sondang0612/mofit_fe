@@ -5,8 +5,8 @@ import ResetPassword from "@/components/otherPages/ResetPassword";
 import React from "react";
 
 export const metadata = {
-  title: "Reset Password || Uomo eCommerce React Nextjs Template",
-  description: "Uomo eCommerce React Nextjs Template",
+  title: "Reset Password || Double Fish eCommerce React Nextjs Template",
+  description: "Double Fish eCommerce React Nextjs Template",
 };
 export default function ResetPasswordPage() {
   return (

@@ -22,6 +22,9 @@ export interface Product {
   category?: Category | undefined;
   attributes?: Attribute[] | undefined;
   discount?: Discount | undefined;
+  shortDescription?: string | undefined;
+  description?: string | undefined;
+  sku?: string | undefined;
 }
 
 export interface Category {
@@ -99,4 +102,11 @@ export interface Category {
 export interface Discount {
   id?: number | undefined;
   percentage?: number | undefined;
+}
+
+export interface Contact {
+  id?: number | undefined;
+  email?: string | undefined;
+  name?: string | undefined;
+  message?: string | undefined;
 }

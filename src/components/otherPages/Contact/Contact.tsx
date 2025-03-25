@@ -1,27 +1,23 @@
 "use client";
 
-import { storesLocations } from "@/data/storeLocations";
-
 export default function Contact() {
   return (
     <section className="contact-us container">
       <div className="mw-930">
         <div className="row mb-5">
-          {storesLocations.slice(0, 2).map((elm, i) => (
-            <div key={i} className="col-lg-6">
-              <h3 className="mb-4">Store in {elm.city}</h3>
-              <p className="mb-4">
-                {elm.address}
-                <br />
-                {elm.country}
-              </p>
-              <p className="mb-4">
-                {elm.emailAddress}
-                <br />
-                {elm.phone}
-              </p>
-            </div>
-          ))}
+          <div className="col-lg-6">
+            <h3 className="mb-4">Cửa hàng tại Hồ Chí Minh</h3>
+            <p className="mb-4">
+              Địa chỉ
+              <br />
+              Quốc gia
+            </p>
+            <p className="mb-4">
+              Email
+              <br />
+              Số điện thoại
+            </p>
+          </div>
         </div>
         <div className="contact-us__form">
           <form
@@ -53,8 +49,8 @@ export default function Contact() {
               <textarea
                 className="form-control form-control_gray"
                 placeholder="Your Message"
-                cols="30"
-                rows="8"
+                cols={30}
+                rows={8}
                 required
               ></textarea>
             </div>

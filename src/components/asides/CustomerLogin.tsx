@@ -88,17 +88,6 @@ export default function CustomerLogin() {
               />
             </div>
             <div className="d-flex align-items-center mb-3 pb-2">
-              <div className="form-check mb-0">
-                <input
-                  name="remember"
-                  className="form-check-input form-check-input_fill"
-                  type="checkbox"
-                  defaultValue={0}
-                />
-                <label className="form-check-label text-secondary">
-                  Nhớ mật khẩu
-                </label>
-              </div>
               <div
                 onClick={() => navigate("/reset_password")}
                 className="btn-text ms-auto"

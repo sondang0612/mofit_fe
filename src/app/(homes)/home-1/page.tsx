@@ -8,8 +8,8 @@ import NewArrivals from "@/components/homes/home-1/NewArrivals";
 import TryNow from "@/components/homes/home-1/TryNow";
 
 export const metadata = {
-  title: "Home 1 || Uomo eCommerce React Nextjs Template",
-  description: "Uomo eCommerce React Nextjs Template",
+  title: "Home 1 || Double Fish eCommerce React Nextjs Template",
+  description: "Double Fish eCommerce React Nextjs Template",
 };
 
 export default function HomePage1() {

@@ -2,13 +2,12 @@
 
 import { useBrands } from "@/hooks/react-query/brands/useBrands";
 import { useCategories } from "@/hooks/react-query/categories/useCategories";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useUrlParams } from "@/hooks/useUrlParams";
+import { formatPrice } from "@/utils/formatPrice";
+import { debounce } from "lodash";
 import Slider from "rc-slider";
 import React, { useState } from "react";
-import { debounce } from "lodash";
-import { useUrlParams } from "@/hooks/useUrlParams";
 import FilterCategoryItem from "./FilterCategoryItem";
-import { formatPrice } from "@/utils/formatPrice";
 
 export default function FilterAll() {
   const { getAllParams, getParam } = useUrlParams();

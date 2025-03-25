@@ -6,48 +6,47 @@ import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
 
+const swiperOptions = {
+  autoplay: false,
+  slidesPerView: 4,
+  slidesPerGroup: 4,
+  effect: "none",
+  loop: true,
+  modules: [Pagination, Navigation],
+  pagination: {
+    el: "#related_products .products-pagination",
+    type: "bullets",
+    clickable: true,
+  },
+  navigation: {
+    nextEl: ".ssn11",
+    prevEl: ".ssp11",
+  },
+  breakpoints: {
+    320: {
+      slidesPerView: 2,
+      slidesPerGroup: 2,
+      spaceBetween: 14,
+    },
+    768: {
+      slidesPerView: 3,
+      slidesPerGroup: 3,
+      spaceBetween: 24,
+    },
+    992: {
+      slidesPerView: 4,
+      slidesPerGroup: 4,
+      spaceBetween: 30,
+    },
+  },
+};
 export default function RelatedSlider() {
   const { toggleWishlist, isAddedtoWishlist } = useContextElement();
-  const { setQuickViewItem } = useContextElement();
   const { addProductToCart, isAddedToCartProducts } = useContextElement();
-  const swiperOptions = {
-    autoplay: false,
-    slidesPerView: 4,
-    slidesPerGroup: 4,
-    effect: "none",
-    loop: true,
-    modules: [Pagination, Navigation],
-    pagination: {
-      el: "#related_products .products-pagination",
-      type: "bullets",
-      clickable: true,
-    },
-    navigation: {
-      nextEl: ".ssn11",
-      prevEl: ".ssp11",
-    },
-    breakpoints: {
-      320: {
-        slidesPerView: 2,
-        slidesPerGroup: 2,
-        spaceBetween: 14,
-      },
-      768: {
-        slidesPerView: 3,
-        slidesPerGroup: 3,
-        spaceBetween: 24,
-      },
-      992: {
-        slidesPerView: 4,
-        slidesPerGroup: 4,
-        spaceBetween: 30,
-      },
-    },
-  };
   return (
     <section className="products-carousel container">
       <h2 className="h3 text-uppercase mb-4 pb-xl-2 mb-xl-4">
-        Related <strong>Products</strong>
+        Sản phẩm liên quan
       </h2>
 
       <div id="related_products" className="position-relative">
