@@ -3,11 +3,11 @@ import { currencyOptions, languageOptions } from "@/data/footer";
 
 import { socialLinks } from "@/data/socials";
 
-import React, { useEffect, useState } from "react";
-import CartLength from "./components/CartLength";
 import { openCart } from "@/utils/openCart";
-import MobileNav from "./components/MobileNav";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import CartLength from "./components/CartLength";
+import MobileNav from "./components/MobileNav";
 
 export default function MobileHeader() {
   const [scrollDirection, setScrollDirection] = useState("down");

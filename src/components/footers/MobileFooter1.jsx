@@ -1,10 +1,11 @@
 import { useContextElement } from "@/context/Context";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function MobileFooter1() {
   const [showFooter, setShowFooter] = useState(false);
   const { wishList } = useContextElement();
+
   useEffect(() => {
     setShowFooter(true);
   }, []);

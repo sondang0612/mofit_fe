@@ -1,9 +1,42 @@
 "use client";
 import { useLogin } from "@/hooks/react-query/auth/useLogin";
+import { ERole } from "@/utils/constants/role.enum";
 import React from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+
+type Form = {
+  username: string;
+  password: string;
+};
+
+const defaultValues = {
+  username: "",
+  password: "",
+};
 
 const LoginForm = () => {
   const { mutate: login } = useLogin();
+  const { register, handleSubmit } = useForm<Form>({
+    defaultValues,
+  });
+
+  const checkValid = (data: Form) => {
+    if (data?.password && data?.password?.length < 6) {
+      toast.error("Mật khẩu phải hơn 6 kí tự");
+      return false;
+    }
+
+    return true;
+  };
+
+  const onSubmit = (data: Form) => {
+    const isValid = checkValid(data);
+    if (isValid) {
+      login({ ...data, role: ERole.ADMIN });
+    }
+  };
+
   return (
     <section className="container d-flex justify-content-center align-items-center vh-100">
       <div
@@ -11,9 +44,9 @@ const LoginForm = () => {
         style={{ maxWidth: "400px", width: "100%" }}
       >
         <h3 className="text-center mb-4">Đăng nhập Admin</h3>
-        <form className="needs-validation">
+        <form className="needs-validation" onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-3">
-            <label className="form-label">Email address *</label>
+            <label className="form-label">Email / Username *</label>
             <div className="input-group">
               <span className="input-group-text">
                 {/* SVG Icon Email */}
@@ -31,17 +64,16 @@ const LoginForm = () => {
                 </svg>
               </span>
               <input
-                name="login_email"
-                type="email"
                 className="form-control"
-                placeholder="Nhập email"
+                placeholder="Nhập email / Username"
                 required
+                {...register("username")}
               />
             </div>
           </div>
 
           <div className="mb-3">
-            <label className="form-label">Password *</label>
+            <label className="form-label">Mật khẩu *</label>
             <div className="input-group">
               <span className="input-group-text">
                 {/* SVG Icon Lock */}
@@ -59,11 +91,11 @@ const LoginForm = () => {
                 </svg>
               </span>
               <input
-                name="login_password"
                 type="password"
                 className="form-control"
                 placeholder="Nhập mật khẩu"
                 required
+                {...register("password")}
               />
             </div>
           </div>

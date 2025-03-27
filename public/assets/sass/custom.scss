@@ -180,7 +180,7 @@ body {
   color: #f32121;
 }
 
-.bg-white {
+.bg-transparent {
   background-color: transparent !important;
 }
 
@@ -323,4 +323,12 @@ body {
 
 .visibility-hidden {
   visibility: hidden;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.bg-gray-200 {
+  background-color: #f2f2f2;
 }

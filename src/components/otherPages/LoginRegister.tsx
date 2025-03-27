@@ -124,6 +124,7 @@ export default function LoginRegister() {
               <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="needs-validation"
+                style={{ minHeight: 500 }}
               >
                 <div className="form-floating mb-3">
                   <input

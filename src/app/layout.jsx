@@ -17,14 +17,16 @@ import Context from "@/context/Context";
 import { AuthProvider } from "@/providers/AuthProvider";
 import QueryProvider from "@/providers/QueryProvider";
 import "rc-slider/assets/index.css";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-tooltip/dist/react-tooltip.css";
 import "tippy.js/dist/tippy.css";
 import "../../public/assets/css/plugins/swiper.min.css";
 import "../../public/assets/sass/style.scss";
+import { usePathname } from "next/navigation";
 
 export default function RootLayout({ children }) {
+  const pathName = usePathname();
   useEffect(() => {
     if (typeof window !== "undefined") {
       // Import the script only on the client side
@@ -33,6 +35,11 @@ export default function RootLayout({ children }) {
       });
     }
   }, []);
+
+  const isAdmin = React.useMemo(() => {
+    return pathName?.includes("admin");
+  }, [pathName?.includes("admin")]);
+
   return (
     <html lang="en">
       <head>
@@ -52,9 +59,9 @@ export default function RootLayout({ children }) {
           <QueryProvider>
             <Svgs />
             <Context>
-              <MobileHeader />
+              {!isAdmin && <MobileHeader />}
               {children}
-              <MobileFooter1 />
+              {!isAdmin && <MobileFooter1 />}
               {/* //modals and asides */}
               <LoginFormPopup />
               <QuickView />
@@ -62,7 +69,7 @@ export default function RootLayout({ children }) {
               {/* <CookieContainer /> */}
               <SizeGuide />
               <Delivery />
-              <CartDrawer />
+              {!isAdmin && <CartDrawer />}
               <SiteMap />
               <CustomerLogin />
               <ProductDescription />

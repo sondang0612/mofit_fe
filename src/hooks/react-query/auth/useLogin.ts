@@ -29,7 +29,11 @@ const useLogin = () => {
     onSuccess: async (data: LoginData) => {
       Cookies.set(cookiesKey.ACCESS_TOKEN, data?.access_token);
       Cookies.set(cookiesKey.ROLE, data?.role);
-      window.location.href = "/";
+      if (data?.role === ERole.ADMIN) {
+        window.location.href = "/admin/dashboard";
+      } else {
+        window.location.href = "/";
+      }
     },
     onError: (_) => {
       toast.error(`Tài khoản hoặc mật khẩu không đúng`);

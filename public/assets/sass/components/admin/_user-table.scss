@@ -1,0 +1,39 @@
+.table-container {
+  padding: 20px;
+  overflow-x: auto;
+}
+.table-wrapper {
+  overflow-x: auto;
+  max-width: 100%;
+}
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background-color: #fff;
+
+  thead {
+    background-color: #f8f9fa;
+
+    th {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 2px solid #dee2e6;
+      font-weight: bold;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid #dee2e6;
+
+      &:hover {
+        background-color: #f1f3f5;
+      }
+    }
+
+    td {
+      padding: 12px;
+    }
+  }
+}

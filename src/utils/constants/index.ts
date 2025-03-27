@@ -21,3 +21,10 @@ export const contacts = [
     phone: "0911.020.020",
   },
 ];
+
+export const adminSlidebar = [
+  { label: "Dashboard", href: "/admin/dashboard" },
+  { label: "Người dùng", href: "/admin/users" },
+  { label: "Sản phẩm", href: "/admin/products" },
+  { label: "Đơn hàng", href: "/admin/orders" },
+];
