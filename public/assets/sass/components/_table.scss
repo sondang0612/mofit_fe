@@ -1,16 +1,23 @@
 .table-container {
-  padding: 20px;
-  overflow-x: auto;
+  padding: 12px;
 }
+
 .table-wrapper {
   overflow-x: auto;
   max-width: 100%;
+  border: 1px #dee2e6 solid;
+  border-radius: 8px;
+  max-height: calc(100vh - 150px);
+  min-height: calc(100vh - 150px);
+  background-color: #fff;
 }
+
 .employee-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
   background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm box shadow */
 
   thead {
     background-color: #f8f9fa;
@@ -26,9 +33,9 @@
   tbody {
     tr {
       border-bottom: 1px solid #dee2e6;
-
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
       &:hover {
-        background-color: #f1f3f5;
+        background-color: rgba(23, 103, 169, 0.2);
       }
     }
 

@@ -8,4 +8,5 @@ export const queryKey = {
   CATEGORIES: "CATEGORIES",
   NEWEST_CATEGORY: "NEWEST_CATEGORY",
   BRANDS: "BRANDS",
+  USERS: "USERS",
 };

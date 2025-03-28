@@ -1,0 +1,25 @@
+.custom-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.admin-badge {
+  background-color: #b71c1c;
+  color: #fff;
+  border: 1px solid #8c0e0e;
+}
+
+.user-badge {
+  background-color: #fff;
+  color: #578bda;
+  border: 1px solid #578bda;
+}
+
+.default-badge {
+  background-color: #6c757d;
+  color: white;
+}

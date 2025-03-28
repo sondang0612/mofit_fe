@@ -3,6 +3,7 @@ import {
   EPaymentMethod,
   EShippingMethod,
 } from "@/utils/constants/order.enum";
+import { ERole } from "@/utils/constants/role.enum";
 
 export interface ApiResponse<T> {
   data: T;
@@ -54,6 +55,7 @@ export interface User {
   lastName?: string | undefined;
   phoneNumber?: string | undefined;
   username?: string | undefined;
+  role?: ERole | undefined;
 }
 
 export interface CartItem {

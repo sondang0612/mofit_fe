@@ -1,5 +1,6 @@
 .sidebar {
   width: 14rem;
+  min-width: 14rem;
   height: 100vh;
   background-color: white;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
@@ -15,10 +16,11 @@
     padding: 12px 15px;
     color: #333;
     transition: 0.3s;
+    font-size: 0.75rem;
 
     &:hover {
-      background-color: #7cb5f3;
-      color: white;
+      background-color: #d2d3d4;
+      color: #333;
     }
 
     &.active {
@@ -29,6 +31,8 @@
 
   @media (max-width: 768px) {
     width: 10rem;
+    min-width: 10rem;
+
     .nav-link {
       font-size: 14px;
     }

@@ -1,3 +1,4 @@
+"use client";
 import { ITEMS_PER_PAGE } from "@/utils/constants";
 import React, { useState, useEffect } from "react";
 
