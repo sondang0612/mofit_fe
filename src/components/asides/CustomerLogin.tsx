@@ -77,8 +77,7 @@ export default function CustomerLogin() {
               <label>Email *</label>
             </div>
             <div className="pb-3" />
-            <div className="form-label-fixed mb-3">
-              <label className="form-label">Mật khẩu *</label>
+            <div className="form-floating mb-3">
               <input
                 name="password"
                 className="form-control form-control_gray"
@@ -86,6 +85,7 @@ export default function CustomerLogin() {
                 placeholder="********"
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <label className="form-label">Mật khẩu *</label>
             </div>
             <div className="d-flex align-items-center mb-3 pb-2">
               <div
