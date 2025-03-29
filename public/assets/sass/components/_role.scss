@@ -1,0 +1,50 @@
+.custom-badge {
+  display: inline-block;
+  padding: 0px 10px;
+  border-radius: 2px;
+  font-weight: 500;
+  font-size: 10px;
+  text-transform: uppercase;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+.admin-badge {
+  background-color: #b71c1c;
+  color: #fff;
+  border: 1px solid #8c0e0e;
+}
+
+.user-badge {
+  background-color: #fff;
+  color: #578bda;
+  border: 1px solid #578bda;
+}
+
+.default-badge {
+  background-color: #6c757d;
+  color: white;
+}
+
+/* Hiệu ứng hover */
+.custom-badge::after {
+  content: attr(data-hover-text); /* Lấy nội dung từ data attribute */
+  position: absolute;
+  bottom: -22px; /* Điều chỉnh vị trí */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 10px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.custom-badge:hover::after {
+  opacity: 1;
+  visibility: visible;
+}

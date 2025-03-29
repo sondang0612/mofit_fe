@@ -11,7 +11,7 @@ export default function AdminLayout({ children }: any) {
       <div className="d-flex flex-column flex-grow-1">
         <Header />
 
-        <main className="flex-grow-1 p-2 bg-light overflow-auto">
+        <main className="flex-grow-1 p-2 bg-light overflow-auto p-3">
           {children}
         </main>
       </div>

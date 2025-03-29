@@ -1,6 +1,7 @@
 import { cookiesKey } from "@/libs/cookiesKey";
 import Cookies from "js-cookie";
 import { ERole } from "./constants/role.enum";
+import { toast } from "react-toastify";
 
 interface AuthOptions {
   roles?: string[];

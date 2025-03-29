@@ -1,13 +1,13 @@
 import { User } from "@/types/api";
 import React from "react";
 
-interface Props {
+type Props = {
   data?: User;
   size?: number;
-}
+} & React.CSSProperties;
 
 const Avatar = (props: Props) => {
-  const { data, size = 24 } = props;
+  const { data, size = 24, ...styles } = props;
 
   const name = React.useMemo(() => {
     if (!data?.firstName || !data?.lastName) return "MF";
@@ -15,7 +15,10 @@ const Avatar = (props: Props) => {
   }, [data?.firstName, data?.lastName]);
 
   return (
-    <div style={{ width: size, height: size }} className="avatar-circle">
+    <div
+      style={{ width: size, height: size, ...styles }}
+      className="avatar-circle"
+    >
       {name}
     </div>
   );

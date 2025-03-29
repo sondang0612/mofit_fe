@@ -44,8 +44,8 @@ const Table = <T,>({ columns, data = [], loading = false }: Props<T>) => {
           <tbody>
             {displayedData.map((row, rowIndex) => (
               <tr key={rowIndex}>
-                {columns.map((col) => (
-                  <td key={col.dataIndex as string}>
+                {columns.map((col, colIndex) => (
+                  <td key={colIndex}>
                     {loading ? (
                       <div
                         style={{
