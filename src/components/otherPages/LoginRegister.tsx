@@ -4,6 +4,7 @@ import { useRegister } from "@/hooks/react-query/auth/useRegister";
 import { useUrlParams } from "@/hooks/useUrlParams";
 import { ERole } from "@/utils/constants/role.enum";
 import Link from "next/link";
+import { Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
