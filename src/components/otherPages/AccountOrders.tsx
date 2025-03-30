@@ -1,14 +1,14 @@
 "use client";
 
-import { useOrders } from "@/hooks/react-query/orders/useOrders";
 import React from "react";
 import Order from "./order/Order";
+import { useMyOrder } from "@/hooks/react-query/orders/useMyOrders";
 
 const LIMIT = 5;
 
 export default function AccountOrders() {
   const [page, setPage] = React.useState(1);
-  const { data: orders } = useOrders({ page, limit: LIMIT });
+  const { data: orders } = useMyOrder({ page, limit: LIMIT });
 
   const totalPages = React.useMemo(() => {
     if (!orders?.total) return 0;

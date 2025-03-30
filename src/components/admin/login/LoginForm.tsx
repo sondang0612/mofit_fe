@@ -100,15 +100,13 @@ const LoginForm = () => {
             </div>
           </div>
 
-          <div className="mb-3 form-check">
+          <div className="d-flex mb-3 align-items-center gap-2">
             <input
               type="checkbox"
               className="form-check-input"
               id="rememberMe"
             />
-            <label className="form-check-label" htmlFor="rememberMe">
-              Nhớ mật khẩu
-            </label>
+            <span className="form-check-label">Nhớ mật khẩu</span>
           </div>
 
           <button

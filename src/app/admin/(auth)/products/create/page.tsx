@@ -1,18 +1,39 @@
+"use client";
 import React from "react";
 
 const Page = () => {
   return (
-    <div className="bg-white p-3">
-      <h4 className="font-bold">Tạo sản phẩm mới</h4>
-      <form>
-        <div className="form-group gap-2 d-flex">
-          <label>Tên sản phẩm</label>
+    <div className="container mt-4 p-4 bg-light shadow-sm bg-white">
+      <h4 className="fw-bold mb-4 text-primary">Tạo sản phẩm mới</h4>
+      <form className="needs-validation" style={{ minHeight: 500 }}>
+        <div className="form-floating mb-3">
           <input
             type="name"
-            className="form-control"
-            placeholder="Nhập tên sản phẩm"
+            className="form-control form-control_gray"
+            placeholder="Email address *"
+            required
           />
+          <label>Tên *</label>
         </div>
+
+        <div className="pb-3"></div>
+
+        <div className="form-floating mb-3">
+          <input
+            type="password"
+            className="form-control form-control_gray"
+            id="customerPasswodInput"
+            placeholder="Password *"
+            required
+          />
+          <label htmlFor="customerPasswodInput">Mật khẩu *</label>
+        </div>
+
+        <div className="d-flex align-items-center mb-3 pb-2"></div>
+
+        <button className="btn btn-primary w-100 text-uppercase" type="submit">
+          Đăng nhập
+        </button>
       </form>
     </div>
   );

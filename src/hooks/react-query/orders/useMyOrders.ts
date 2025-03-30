@@ -12,17 +12,17 @@ type Params = {
 
 const fetchData = asyncAuth(
   async (params?: Params) => {
-    const response = await axiosInstance.get("orders", { params });
+    const response = await axiosInstance.get("orders/me", { params });
     return response?.data?.data;
   },
   { roles: [ERole.ADMIN, ERole.USER] }
 );
 
-const useOrders = (params: Params) => {
+const useMyOrder = (params: Params) => {
   return useQuery<ApiResponse<Order[]>>({
     queryKey: [queryKey.ORDERS, params],
     queryFn: () => fetchData(params),
   });
 };
 
-export { useOrders };
+export { useMyOrder };

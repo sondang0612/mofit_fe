@@ -1,6 +1,6 @@
 import React from "react";
 
-const INIT_LENGTH = 20;
+const INIT_LENGTH = 0;
 
 export interface Column<T> {
   title: string;
