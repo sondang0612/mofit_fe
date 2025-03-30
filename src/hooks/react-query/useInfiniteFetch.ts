@@ -10,6 +10,7 @@ export enum QueryParam {
   BRANDS = "brands",
   MIN_PRICE = "minPrice",
   MAX_PRICE = "maxPrice",
+  SEARCH_QUERY = "searchQuery",
 }
 
 export enum QueryValue {

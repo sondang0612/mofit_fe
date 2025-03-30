@@ -18,7 +18,8 @@
 .form-check-input {
   width: $form-check-input-width;
   height: $form-check-input-height;
-  margin-top: ($line-height-base * $font-size-base - $form-check-input-height) / 2; // line-height minus check height
+  margin-top: ($line-height-base * $font-size-base - $form-check-input-height) /
+    2; // line-height minus check height
   vertical-align: top;
   background-color: $form-check-input-bg;
   background-repeat: no-repeat;
@@ -46,7 +47,7 @@
     border-width: $checkbox-border-width;
 
     &:after {
-      content: '';
+      content: "";
       display: block;
       position: absolute;
       left: $checkbox-border-width;
@@ -70,7 +71,8 @@
 
     &[type="checkbox"] {
       @if $enable-gradients {
-        background-image: escape-svg($form-check-input-checked-bg-image), var(--#{$variable-prefix}gradient);
+        background-image: escape-svg($form-check-input-checked-bg-image),
+          var(--#{$variable-prefix}gradient);
       } @else {
         background-image: escape-svg($form-check-input-checked-bg-image);
       }
@@ -78,7 +80,8 @@
 
     &[type="radio"] {
       @if $enable-gradients {
-        background-image: escape-svg($form-check-radio-checked-bg-image), var(--#{$variable-prefix}gradient);
+        background-image: escape-svg($form-check-radio-checked-bg-image),
+          var(--#{$variable-prefix}gradient);
       } @else {
         background-image: escape-svg($form-check-radio-checked-bg-image);
       }
@@ -99,7 +102,8 @@
     border-color: $form-check-input-indeterminate-border-color;
 
     @if $enable-gradients {
-      background-image: escape-svg($form-check-input-indeterminate-bg-image), var(--#{$variable-prefix}gradient);
+      background-image: escape-svg($form-check-input-indeterminate-bg-image),
+        var(--#{$variable-prefix}gradient);
     } @else {
       background-image: escape-svg($form-check-input-indeterminate-bg-image);
     }
@@ -150,7 +154,8 @@
       background-position: $form-switch-checked-bg-position;
 
       @if $enable-gradients {
-        background-image: escape-svg($form-switch-checked-bg-image), var(--#{$variable-prefix}gradient);
+        background-image: escape-svg($form-switch-checked-bg-image),
+          var(--#{$variable-prefix}gradient);
       } @else {
         background-image: escape-svg($form-switch-checked-bg-image);
       }

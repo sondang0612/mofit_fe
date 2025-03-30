@@ -1,15 +1,33 @@
 "use client";
+import { useCategories } from "@/hooks/react-query/categories/useCategories";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+
+type Form = {
+  searchQuery: string;
+};
+
+const defaultValues = {
+  searchQuery: "",
+};
 
 export default function SearchPopup() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const containerRef = useRef(null);
-
-  const handleClickOutside = (event) => {
+  const { register, handleSubmit } = useForm<Form>({ defaultValues });
+  const containerRef = useRef<any>(null);
+  const { data: categories } = useCategories();
+  const router = useRouter();
+  const handleClickOutside = (event: any) => {
     if (containerRef.current && !containerRef.current.contains(event.target)) {
       setIsPopupOpen(false);
     }
+  };
+
+  const onSubmit = (data: Form) => {
+    setIsPopupOpen(false);
+    router.push(`/shop-1?searchQuery=${data?.searchQuery}`);
   };
 
   useEffect(() => {
@@ -21,6 +39,7 @@ export default function SearchPopup() {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
   return (
     <div
       ref={containerRef}
@@ -50,18 +69,18 @@ export default function SearchPopup() {
 
       <div className="search-popup js-hidden-content">
         <form
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={handleSubmit(onSubmit)}
           className="search-field container"
         >
           <p className="text-uppercase text-secondary fw-medium mb-4">
-            What are you looking for?
+            Bạn đang trông đợi điều gì?
           </p>
           <div className="position-relative">
             <input
               className="search-field__input search-popup__input w-100 fw-medium"
               type="text"
-              name="search-keyword"
-              placeholder="Search products"
+              placeholder="Tìm kiếm sản phẩm"
+              {...register("searchQuery")}
             />
             <button className="btn-icon search-popup__submit" type="submit">
               <svg
@@ -83,33 +102,18 @@ export default function SearchPopup() {
 
           <div className="search-popup__results">
             <div className="sub-menu search-suggestion">
-              <h6 className="sub-menu__title fs-base">Quicklinks</h6>
+              <h6 className="sub-menu__title fs-base">Dòng sản phẩm chính</h6>
               <ul className="sub-menu__list list-unstyled">
-                <li className="sub-menu__item">
-                  <Link href="/shop-2" className="menu-link menu-link_us-s">
-                    New Arrivals
-                  </Link>
-                </li>
-                <li className="sub-menu__item">
-                  <a href="#" className="menu-link menu-link_us-s">
-                    Dresses
-                  </a>
-                </li>
-                <li className="sub-menu__item">
-                  <Link href="/shop-3" className="menu-link menu-link_us-s">
-                    Accessories
-                  </Link>
-                </li>
-                <li className="sub-menu__item">
-                  <a href="#" className="menu-link menu-link_us-s">
-                    Footwear
-                  </a>
-                </li>
-                <li className="sub-menu__item">
-                  <a href="#" className="menu-link menu-link_us-s">
-                    Sweatshirt
-                  </a>
-                </li>
+                {categories?.data?.map((item, index) => (
+                  <li className="sub-menu__item" key={index}>
+                    <Link
+                      href={`/shop-1?activeCategory=${item?.id}`}
+                      className="menu-link menu-link_us-s"
+                    >
+                      {item?.name}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
 

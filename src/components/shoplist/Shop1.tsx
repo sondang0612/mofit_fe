@@ -29,6 +29,7 @@ const Shop1 = () => {
   const minPrice = getParam("minPrice");
   const maxPrice = getParam("maxPrice");
   const currentPage = Number(getParam("page") || 1);
+  const searchQuery = getParam("searchQuery");
 
   const router = useRouter();
   const {
@@ -47,6 +48,7 @@ const Shop1 = () => {
       QueryParam.BRANDS,
       QueryParam.MIN_PRICE,
       QueryParam.MAX_PRICE,
+      QueryParam.SEARCH_QUERY,
     ],
     queryValues: [
       QueryValue.CREATED_AT,
@@ -56,6 +58,7 @@ const Shop1 = () => {
       brands,
       minPrice,
       maxPrice,
+      searchQuery,
     ],
   });
 

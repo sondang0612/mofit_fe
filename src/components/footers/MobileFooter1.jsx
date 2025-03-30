@@ -1,10 +1,12 @@
 import { useContextElement } from "@/context/Context";
+import { useProfile } from "@/hooks/react-query/auth/useProfile";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { LuUserRound } from "react-icons/lu";
 
 export default function MobileFooter1() {
   const [showFooter, setShowFooter] = useState(false);
-  const { wishList } = useContextElement();
+  const { data: profile } = useProfile();
 
   useEffect(() => {
     setShowFooter(true);
@@ -59,25 +61,15 @@ export default function MobileFooter1() {
 
         <div className="col-4">
           <Link
-            href="/account_wishlist"
+            href={
+              profile?.data
+                ? "/account_edit"
+                : "login_register?isRegister=false"
+            }
             className="footer-mobile__link d-flex flex-column align-items-center"
           >
-            <div className="position-relative">
-              <svg
-                className="d-block"
-                width="18"
-                height="18"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <use href="#icon_heart" />
-              </svg>
-              <span className="wishlist-amount d-block position-absolute js-wishlist-count">
-                {wishList.length}
-              </span>
-            </div>
-            <span>Wishlist</span>
+            <LuUserRound size={18} />
+            <span>{profile?.data ? "Tài khoản" : "Đăng nhập"}</span>
           </Link>
         </div>
         {/* <!-- /.col-3 --> */}

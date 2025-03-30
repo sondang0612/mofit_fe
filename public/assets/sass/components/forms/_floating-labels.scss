@@ -65,7 +65,8 @@
     top: -$fixed-label-padding-y - $font-size-base * $line-height-base / 2;
     left: 1rem;
     margin: 0;
-    padding: $fixed-label-padding-y $fixed-label-padding-right $fixed-label-padding-y $fixed-label-padding-right;
+    padding: $fixed-label-padding-y $fixed-label-padding-right
+      $fixed-label-padding-y $fixed-label-padding-right;
     background-color: $fixed-label-background;
     color: $fixed-label-color;
     z-index: 1;

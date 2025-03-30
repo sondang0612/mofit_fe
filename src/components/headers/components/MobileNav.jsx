@@ -1,26 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
-import {
-  additionalShopPageitems,
-  blogmenuItems,
-  homePages,
-  othersMenuItems,
-  shopDetails,
-  shopList,
-} from "@/data/menu";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 export default function MobileNav() {
   const pathname = usePathname();
-  const isMenuActive = (menu) => {
-    return menu.split("/")[1] == pathname.split("/")[1];
-  };
-  const isActiveParentMenu = (menus) => {
-    return menus.some(
-      (menu) => menu.href.split("/")[1] == pathname.split("/")[1]
-    );
-  };
 
   useEffect(() => {
     const selectors = {
@@ -155,372 +139,55 @@ export default function MobileNav() {
   return (
     <>
       <li className="navigation__item">
-        <a
-          href="#"
-          className={`navigation__link js-nav-right d-flex align-items-center ${
-            isActiveParentMenu(homePages) ? "menu-active" : ""
+        <Link
+          href="/"
+          className={`navigation__link w-full ${
+            pathname === "/" ? "menu-active" : ""
           }`}
         >
-          Home
-          <svg
-            className="ms-auto"
-            width="7"
-            height="11"
-            viewBox="0 0 7 11"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <use href="#icon_next_sm" />
-          </svg>
-        </a>
-        <div className="sub-menu position-absolute top-0 start-100 w-100 d-none">
-          <a
-            href="#"
-            className="navigation__link js-nav-left d-flex align-items-center border-bottom mb-2"
-          >
-            <svg
-              className="me-2"
-              width="7"
-              height="11"
-              viewBox="0 0 7 11"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <use href="#icon_prev_sm" />
-            </svg>
-            Home
-          </a>
-          <ul className="list-unstyled">
-            {homePages.map((elm, i) => (
-              <li key={i} className="sub-menu__item">
-                <Link
-                  href={elm.href}
-                  className={`menu-link menu-link_us-s ${
-                    isMenuActive(elm.href) ? "menu-active" : ""
-                  }`}
-                >
-                  {elm.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          {/* <!-- /.box-menu --> */}
-        </div>
+          Trang chủ
+        </Link>
       </li>
       <li className="navigation__item">
-        <a
-          href="#"
-          className={`navigation__link js-nav-right d-flex align-items-center ${
-            isActiveParentMenu([
-              ...shopList,
-              ...shopDetails,
-              ...additionalShopPageitems,
-            ])
-              ? "menu-active"
-              : ""
+        <Link
+          href="/shop-1"
+          className={`navigation__link w-full ${
+            pathname == "/shop-1" ? "menu-active" : ""
           }`}
         >
-          Shop
-          <svg
-            className="ms-auto"
-            width="7"
-            height="11"
-            viewBox="0 0 7 11"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <use href="#icon_next_sm" />
-          </svg>
-        </a>
-        <div className="sub-menu position-absolute top-0 start-100 w-100 d-none">
-          <a
-            href="#"
-            className="navigation__link js-nav-left d-flex align-items-center border-bottom mb-3"
-          >
-            <svg
-              className="me-2"
-              width="7"
-              height="11"
-              viewBox="0 0 7 11"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <use href="#icon_prev_sm" />
-            </svg>
-            Shop
-          </a>
-          <div className="sub-menu__wrapper">
-            <a
-              href="#"
-              className={`navigation__link js-nav-right d-flex align-items-center ${
-                isActiveParentMenu(shopList) ? "menu-active" : ""
-              }`}
-            >
-              Shop List
-              <svg
-                className="ms-auto"
-                width="7"
-                height="11"
-                viewBox="0 0 7 11"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <use href="#icon_next_sm" />
-              </svg>
-            </a>
-            <div className="sub-menu__wrapper position-absolute top-0 start-100 w-100 d-none">
-              <a
-                href="#"
-                className="navigation__link js-nav-left d-flex align-items-center border-bottom mb-2"
-              >
-                <svg
-                  className="me-2"
-                  width="7"
-                  height="11"
-                  viewBox="0 0 7 11"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <use href="#icon_prev_sm" />
-                </svg>
-                Shop List
-              </a>
-              <ul className="sub-menu__list list-unstyled">
-                {shopList.map((elm, i) => (
-                  <li key={i} className="sub-menu__item">
-                    <Link
-                      href={elm.href}
-                      className={`menu-link menu-link_us-s ${
-                        isMenuActive(elm.href) ? "menu-active" : ""
-                      }`}
-                    >
-                      {elm.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            {/* <!-- /.sub-menu__wrapper --> */}
-
-            <a
-              href="#"
-              className={`navigation__link js-nav-right d-flex align-items-center ${
-                isActiveParentMenu(shopDetails) ? "menu-active" : ""
-              }`}
-            >
-              Shop Detail
-              <svg
-                className="ms-auto"
-                width="7"
-                height="11"
-                viewBox="0 0 7 11"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <use href="#icon_next_sm" />
-              </svg>
-            </a>
-            <div className="sub-menu__wrapper position-absolute top-0 start-100 w-100 d-none">
-              <a
-                href="#"
-                className="navigation__link js-nav-left d-flex align-items-center border-bottom mb-2"
-              >
-                <svg
-                  className="me-2"
-                  width="7"
-                  height="11"
-                  viewBox="0 0 7 11"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <use href="#icon_prev_sm" />
-                </svg>
-                Shop Detail
-              </a>
-              <ul className="sub-menu__list list-unstyled">
-                {shopDetails.map((elm, i) => (
-                  <li key={i} className="sub-menu__item">
-                    <Link
-                      href={elm.href}
-                      className={`menu-link menu-link_us-s ${
-                        isMenuActive(elm.href) ? "menu-active" : ""
-                      }`}
-                    >
-                      {elm.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            {/* <!-- /.sub-menu__wrapper --> */}
-
-            <a
-              href="#"
-              className={`navigation__link js-nav-right d-flex align-items-center ${
-                isActiveParentMenu(additionalShopPageitems) ? "menu-active" : ""
-              }`}
-            >
-              Other Pages
-              <svg
-                className="ms-auto"
-                width="7"
-                height="11"
-                viewBox="0 0 7 11"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <use href="#icon_next_sm" />
-              </svg>
-            </a>
-            <div className="sub-menu__wrapper position-absolute top-0 start-100 w-100 d-none">
-              <a
-                href="#"
-                className="navigation__link js-nav-left d-flex align-items-center border-bottom mb-2"
-              >
-                <svg
-                  className="me-2"
-                  width="7"
-                  height="11"
-                  viewBox="0 0 7 11"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <use href="#icon_prev_sm" />
-                </svg>
-                Other Pages
-              </a>
-              <ul className="sub-menu__list list-unstyled">
-                {additionalShopPageitems.map((elm, i) => (
-                  <li key={i} className="sub-menu__item">
-                    <Link
-                      href={elm.href}
-                      className={`menu-link menu-link_us-s ${
-                        isMenuActive(elm.href) ? "menu-active" : ""
-                      }`}
-                    >
-                      {elm.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            {/* <!-- /.sub-menu__wrapper --> */}
-          </div>
-          {/* <!-- /.sub-menu__wrapper --> */}
-        </div>
-        {/* <!-- /.sub-menu --> */}
-      </li>
-
-      <li className="navigation__item">
-        <a
-          href="#"
-          className={`navigation__link js-nav-right d-flex align-items-center ${
-            isActiveParentMenu(blogmenuItems) ? "menu-active" : ""
-          }`}
-        >
-          Blog
-          <svg
-            className="ms-auto"
-            width="7"
-            height="11"
-            viewBox="0 0 7 11"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <use href="#icon_next_sm" />
-          </svg>
-        </a>
-        <div className="sub-menu position-absolute top-0 start-100 w-100 d-none">
-          <a
-            href="#"
-            className="navigation__link js-nav-left d-flex align-items-center border-bottom mb-2"
-          >
-            <svg
-              className="me-2"
-              width="7"
-              height="11"
-              viewBox="0 0 7 11"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <use href="#icon_prev_sm" />
-            </svg>
-            Blog
-          </a>
-          <ul className="list-unstyled">
-            {blogmenuItems.map((elm, i) => (
-              <li key={i} className="sub-menu__item">
-                <Link
-                  href={elm.href}
-                  className={`menu-link menu-link_us-s ${
-                    isMenuActive(elm.href) ? "menu-active" : ""
-                  }`}
-                >
-                  {elm.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </li>
-
-      <li className="navigation__item">
-        <a
-          href="#"
-          className={`navigation__link js-nav-right d-flex align-items-center ${
-            isActiveParentMenu(othersMenuItems) ? "menu-active" : ""
-          }`}
-        >
-          Pages
-          <svg
-            className="ms-auto"
-            width="7"
-            height="11"
-            viewBox="0 0 7 11"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <use href="#icon_next_sm" />
-          </svg>
-        </a>
-        <div className="sub-menu position-absolute top-0 start-100 w-100 d-none">
-          <a
-            href="#"
-            className="navigation__link js-nav-left d-flex align-items-center border-bottom mb-2"
-          >
-            <svg
-              className="me-2"
-              width="7"
-              height="11"
-              viewBox="0 0 7 11"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <use href="#icon_prev_sm" />
-            </svg>
-            Pages
-          </a>
-          <ul className="list-unstyled">
-            {othersMenuItems.map((elm, i) => (
-              <li key={i} className="sub-menu__item">
-                <Link
-                  href={elm.href}
-                  className={`menu-link menu-link_us-s ${
-                    isMenuActive(elm.href) ? "menu-active" : ""
-                  }`}
-                >
-                  {elm.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+          Cửa hàng
+        </Link>
       </li>
 
       <li className="navigation__item">
         <Link
           href="/about"
-          className={`navigation__link ${
+          className={`navigation__link w-full ${
             pathname == "/about" ? "menu-active" : ""
           }`}
         >
-          About
+          Về Double Fish
+        </Link>
+      </li>
+
+      <li className="navigation__item">
+        <Link
+          href="/blog_list2"
+          className={`navigation__link w-full ${
+            pathname === "/blog_list2" ? "menu-active" : ""
+          }`}
+        >
+          Tin tức
         </Link>
       </li>
       <li className="navigation__item">
         <Link
           href="/contact"
-          className={`navigation__link ${
+          className={`navigation__link w-full ${
             pathname == "/contact" ? "menu-active" : ""
           }`}
         >
-          Contact
+          Liên hệ
         </Link>
       </li>
     </>

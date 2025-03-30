@@ -16,17 +16,15 @@ const Page = () => {
           <label>Tên *</label>
         </div>
 
-        <div className="pb-3"></div>
-
         <div className="form-floating mb-3">
           <input
-            type="password"
+            type="text"
             className="form-control form-control_gray"
             id="customerPasswodInput"
             placeholder="Password *"
             required
           />
-          <label htmlFor="customerPasswodInput">Mật khẩu *</label>
+          <label htmlFor="customerPasswodInput">SKU *</label>
         </div>
 
         <div className="d-flex align-items-center mb-3 pb-2"></div>
