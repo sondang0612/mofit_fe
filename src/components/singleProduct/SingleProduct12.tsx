@@ -9,6 +9,7 @@ import BreadCumb from "./BreadCumb";
 import Description from "./Description";
 import ProductSlider1 from "./sliders/ProductSlider1";
 import { getProductAttributeNames } from "@/utils/getProductAttributeNames";
+import { useCreateCartItem } from "@/hooks/react-query/cart-items/useCreateCartItem";
 
 interface Props {
   id?: number;
@@ -16,8 +17,17 @@ interface Props {
 
 export default function SingleProduct12(props: Props) {
   const { id } = props;
+  const { mutate: createCartItem } = useCreateCartItem();
 
   const { data: product } = useProduct({ id });
+
+  const handleAddToCart = (productId?: number, quantity?: number) => {
+    if (!productId || !quantity) {
+      return undefined;
+    }
+
+    createCartItem({ productId, quantity });
+  };
 
   return (
     <section className="product-single container">
@@ -61,6 +71,7 @@ export default function SingleProduct12(props: Props) {
               <button
                 type="submit"
                 className="btn btn-primary btn-addtocart js-open-aside"
+                onClick={() => handleAddToCart(product?.id, 1)}
               >
                 Thêm vào giỏ hàng
               </button>

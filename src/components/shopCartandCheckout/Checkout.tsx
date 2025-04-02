@@ -1,21 +1,19 @@
 "use client";
 
+import { useAddresses } from "@/hooks/react-query/addresses/useAddresses";
 import { useCart } from "@/hooks/react-query/cart/useCart";
+import { useCreateOrder } from "@/hooks/react-query/orders/useCreateOrder";
+import { EPaymentMethod, EShippingMethod } from "@/utils/constants/order.enum";
+import { formatPrice } from "@/utils/formatPrice";
 import { getSubTotal } from "@/utils/getSubTotal";
 import { getTotal } from "@/utils/getTotal";
 import { getTotalPrice } from "@/utils/getTotalPrice";
 import Link from "next/link";
-import ListCartItems from "./ListCartItems";
-import React from "react";
-import { useAddresses } from "@/hooks/react-query/addresses/useAddresses";
-import Address from "../otherPages/address/Address";
-import { useCreateOrder } from "@/hooks/react-query/orders/useCreateOrder";
-import { toast } from "react-toastify";
 import { useRouter, useSearchParams } from "next/navigation";
-import { EPaymentMethod, EShippingMethod } from "@/utils/constants/order.enum";
-import { useCreatePaymentTransaction } from "@/hooks/react-query/payment-gateway/useCreatePaymentTransaction";
-import { useCreatePaymentTransactionOrder } from "@/hooks/react-query/payment-gateway/useCreatePaymentTransactionOrder";
-import { formatPrice } from "@/utils/formatPrice";
+import React from "react";
+import { toast } from "react-toastify";
+import Address from "../otherPages/address/Address";
+import ListCartItems from "./ListCartItems";
 
 const paymentMethods = [
   {
@@ -32,26 +30,14 @@ const paymentMethods = [
 
 export default function Checkout() {
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   const { data: cart } = useCart();
   const { data: addresses } = useAddresses();
-  const {
-    mutate: createOrder,
-    isSuccess: isCreateOrderSuccess,
-    data: order,
-  } = useCreateOrder();
-  const { mutate: createPaymentTransaction } = useCreatePaymentTransaction();
+  const { mutate: createOrder } = useCreateOrder();
 
   const [paymentMethod, setPaymentMethod] = React.useState<EPaymentMethod>(
     EPaymentMethod.PAYMENT_GATEWAY
   );
-
-  const {
-    mutate: createPaymentTransactionOrder,
-    isSuccess: isCreatePaymentTransactionOrderSuccess,
-    data: paymentTransactionOrder,
-  } = useCreatePaymentTransactionOrder();
 
   const subTotal = React.useMemo(() => {
     return getSubTotal(cart?.data);
@@ -76,78 +62,18 @@ export default function Checkout() {
 
     if (!isValid) return;
 
-    if (paymentMethod === EPaymentMethod.COD) {
-      createOrder({
-        addressId: addresses?.data[0].id,
-        cartItemIds: cart?.data?.map((item) => item.id),
-        discount: 0,
-        vat: 0,
-        paymentMethod: EPaymentMethod.COD,
-        shippingMethod: EShippingMethod.OWN_DELIVERY,
-        shippingPrice: 0,
-        subTotal,
-        totalPrice: getTotal(subTotal, 0, 0),
-      });
-      return;
-    }
-
-    if (paymentMethod === EPaymentMethod.PAYMENT_GATEWAY) {
-      createPaymentTransaction({
-        orderInfo: "Hello World",
-        totalPrice: getTotal(subTotal, 0, 0),
-      });
-      return;
-    }
-  };
-
-  const handleCreateOrderTransaction = () => {
-    createPaymentTransactionOrder({
-      query: Object.fromEntries(searchParams.entries()),
+    createOrder({
       addressId: addresses?.data[0].id,
       cartItemIds: cart?.data?.map((item) => item.id),
       discount: 0,
       vat: 0,
-      paymentMethod: EPaymentMethod.PAYMENT_GATEWAY,
+      paymentMethod,
       shippingMethod: EShippingMethod.OWN_DELIVERY,
       shippingPrice: 0,
       subTotal,
       totalPrice: getTotal(subTotal, 0, 0),
     });
   };
-
-  React.useEffect(() => {
-    if (isCreateOrderSuccess && order) {
-      sessionStorage.setItem("order", JSON.stringify(order?.data));
-      router.push("/shop_order_complete");
-    }
-  }, [isCreateOrderSuccess, order]);
-
-  React.useEffect(() => {
-    if (isCreatePaymentTransactionOrderSuccess && paymentTransactionOrder) {
-      sessionStorage.setItem(
-        "order",
-        JSON.stringify(paymentTransactionOrder?.data)
-      );
-      router.push("/shop_order_complete");
-    }
-  }, [isCreatePaymentTransactionOrderSuccess, paymentTransactionOrder]);
-
-  React.useEffect(() => {
-    const queryString = new URLSearchParams(
-      Object.fromEntries(searchParams.entries())
-    ).toString();
-
-    if (
-      queryString &&
-      queryString?.length > 0 &&
-      cart &&
-      cart?.data?.length > 0 &&
-      addresses &&
-      addresses?.data?.length > 0
-    ) {
-      handleCreateOrderTransaction();
-    }
-  }, [addresses, cart]);
 
   return (
     <form onSubmit={(e) => e.preventDefault()}>

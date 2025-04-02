@@ -94,6 +94,7 @@ export interface Order {
   vat?: number | undefined;
   subTotal?: number | undefined;
   totalPrice?: number | undefined;
+  txnRef?: string | undefined;
 }
 
 export interface Category {

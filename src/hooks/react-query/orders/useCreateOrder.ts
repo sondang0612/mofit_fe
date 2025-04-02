@@ -25,9 +25,13 @@ const useCreateOrder = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: fetchData,
-    onSuccess: () => {
-      toast.success(`Đặt hàng thành công`);
-      queryClient.invalidateQueries({ queryKey: [queryKey.CART_INFO] });
+    onSuccess: (data) => {
+      if (data?.redirectUrl) {
+        window.location.href = data?.redirectUrl;
+      } else {
+        toast.success(`Đặt hàng thành công`);
+        queryClient.invalidateQueries({ queryKey: [queryKey.CART_INFO] });
+      }
     },
   });
 };
