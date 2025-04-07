@@ -23,9 +23,9 @@ export default function FilterAll() {
 
   const filterFacts = React.useMemo(() => {
     const result = [];
-    if (activeCategory && categories?.data) {
-      for (let i = 0; i < categories?.data?.length; i++) {
-        const item = categories.data[i];
+    if (activeCategory && categories) {
+      for (let i = 0; i < categories?.length; i++) {
+        const item = categories[i];
         if (item.id === activeCategory) {
           result?.push({
             id: item?.id,
@@ -51,7 +51,7 @@ export default function FilterAll() {
 
     if (Array.isArray(activeBrands)) {
       activeBrands.forEach((id) => {
-        const temp = brands?.data?.find((_item) => `${_item.id}` === id);
+        const temp = brands?.find((_item) => `${_item.id}` === id);
         result?.push({ id: temp?.id, label: temp?.name, key: "brands" });
       });
     }
@@ -110,7 +110,7 @@ export default function FilterAll() {
           >
             <div className="accordion-body px-0 pb-0">
               <ul className="list list-inline mb-0">
-                {categories?.data?.map((category, index) => (
+                {categories?.map((category, index) => (
                   <FilterCategoryItem
                     isActive={category?.id === activeCategory}
                     category={category}
@@ -168,7 +168,7 @@ export default function FilterAll() {
                 />
               </div>
               <ul className="multi-select__list list-unstyled">
-                {brands?.data
+                {brands
                   ?.filter((item) =>
                     item?.name
                       ?.toLocaleLowerCase()

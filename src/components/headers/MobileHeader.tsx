@@ -91,7 +91,7 @@ export default function MobileHeader() {
           </a>
         </div>
         {/* <!-- /.logo --> */}
-        {profile?.data && (
+        {profile && (
           <a
             onClick={() => openCart()}
             className="header-tools__item header-tools__cart js-open-aside"

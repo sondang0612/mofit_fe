@@ -10,6 +10,8 @@ export enum QueryParam {
   BRANDS = "brands",
   MIN_PRICE = "minPrice",
   MAX_PRICE = "maxPrice",
+  ID = "id",
+  TXN_REF = "txnRef",
 }
 
 export enum QueryValue {
@@ -52,16 +54,18 @@ const fetchData = async <T>({
 
 const useFetch = <T>({
   endpoint,
-  page,
+  page = 1,
   limit = 10,
   queryParams = [],
   queryValues = [],
+  enabled,
 }: {
   endpoint: string;
-  page: number;
+  page?: number;
   limit?: number;
   queryParams?: string[];
   queryValues?: any[];
+  enabled?: any;
 }) => {
   const queryKey = [endpoint, page, { limit, queryParams, queryValues }];
 
@@ -78,6 +82,7 @@ const useFetch = <T>({
     queryKey,
     queryFn,
     placeholderData: (previousData) => previousData,
+    enabled,
   });
 
   return {

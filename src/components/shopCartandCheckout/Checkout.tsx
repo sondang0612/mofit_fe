@@ -40,8 +40,8 @@ export default function Checkout() {
   );
 
   const subTotal = React.useMemo(() => {
-    return getSubTotal(cart?.data);
-  }, [cart?.data]);
+    return getSubTotal(cart);
+  }, [cart]);
 
   const checkValid = () => {
     if (addresses?.data?.length === 0 || !addresses?.data) {
@@ -49,7 +49,7 @@ export default function Checkout() {
       return false;
     }
 
-    if (cart?.data?.length === 0 || !cart?.data) {
+    if (cart?.length === 0 || !cart) {
       toast.error("Vui lòng thêm sản phẩm vào giỏ hàng");
       return false;
     }
@@ -64,7 +64,7 @@ export default function Checkout() {
 
     createOrder({
       addressId: addresses?.data[0].id,
-      cartItemIds: cart?.data?.map((item) => item.id),
+      cartItemIds: cart?.map((item) => item.id),
       discount: 0,
       vat: 0,
       paymentMethod,
@@ -80,7 +80,7 @@ export default function Checkout() {
       <div className="checkout-form">
         <div className="billing-info__wrapper">
           <h4>Chi tiết đơn hàng</h4>
-          <ListCartItems data={cart?.data} canEdit={false} />
+          <ListCartItems data={cart} canEdit={false} />
         </div>
         <div className="checkout__totals-wrapper">
           <div className="sticky-content">
@@ -94,7 +94,7 @@ export default function Checkout() {
                   </tr>
                 </thead>
                 <tbody>
-                  {cart?.data?.map((elm, i) => (
+                  {cart?.map((elm, i) => (
                     <tr key={i}>
                       <td style={{ width: "65%" }}>
                         {elm.product?.title} x {elm.quantity}

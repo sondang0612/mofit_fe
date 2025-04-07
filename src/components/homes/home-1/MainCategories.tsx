@@ -59,7 +59,7 @@ const MainCategories = () => {
           {...(swiperOptions as any)}
           className="swiper-container js-swiper-slider"
         >
-          {categories?.data?.map((elm, i) => (
+          {categories?.map((elm, i) => (
             <SwiperSlide key={i} className="swiper-slide product-card">
               <div className="pc__img-wrapper">
                 <Link href={`/shop-1?activeCategory=${elm.id}`}>

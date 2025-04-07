@@ -31,6 +31,7 @@ const useCreateOrder = () => {
       } else {
         toast.success(`Đặt hàng thành công`);
         queryClient.invalidateQueries({ queryKey: [queryKey.CART_INFO] });
+        window.location.href = `/shop_order_complete?orderId=${data?.data?.id}`;
       }
     },
   });

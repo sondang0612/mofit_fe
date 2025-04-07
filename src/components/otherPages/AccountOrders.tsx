@@ -1,62 +1,70 @@
 "use client";
-
+import Pagination from "@/components/shoplist/Pagination";
+import Table, { Column } from "@/components/Table";
+import { QueryParam, QueryValue, useFetch } from "@/hooks/react-query/useFetch";
+import { Order, OrderItem } from "@/types/api";
+import { ITEMS_PER_PAGE } from "@/utils/constants";
+import { apiEndpoints } from "@/utils/constants/apiEndpoints";
+import { formatPrice } from "@/utils/formatPrice";
 import React from "react";
-import Order from "./order/Order";
-import { useMyOrder } from "@/hooks/react-query/orders/useMyOrders";
 
-const LIMIT = 5;
+const columns: Column<Order>[] = [
+  {
+    title: "ID",
+    dataIndex: "id",
+    width: 50,
+  },
+  {
+    title: "Số lượng sản phẩm",
+    dataIndex: "orderItems",
+    renderItem: (value: OrderItem[]) =>
+      value?.map((item, index) => (
+        <div key={index}>- {item?.product?.title}</div>
+      )),
+  },
+  {
+    title: "Trạng thái đơn hàng",
+    dataIndex: "orderStatus",
+  },
+  {
+    title: "Phương thức thanh toán",
+    dataIndex: "paymentMethod",
+  },
+  {
+    title: "Đơn vị vận chuyển",
+    dataIndex: "shippingMethod",
+  },
+  {
+    title: "Thành tiền",
+    dataIndex: "totalPrice",
+    renderItem: (value) => formatPrice(value),
+  },
+];
 
-export default function AccountOrders() {
+const Page = () => {
   const [page, setPage] = React.useState(1);
-  const { data: orders } = useMyOrder({ page, limit: LIMIT });
+  const {
+    data: orders,
+    isFetching,
+    totalElements,
+  } = useFetch<Order>({
+    page: page,
+    endpoint: `${apiEndpoints.ORDERS}`,
+    limit: ITEMS_PER_PAGE,
+    queryParams: [QueryParam.SORT_BY, QueryParam.SORT],
+    queryValues: [QueryValue.CREATED_AT, QueryValue.DESC],
+  });
 
-  const totalPages = React.useMemo(() => {
-    if (!orders?.total) return 0;
-
-    return Math.ceil(orders?.total / LIMIT);
-  }, [orders?.total, LIMIT]);
-
-  const next = () => {
-    if (page < totalPages) {
-      setPage((prev) => prev + 1);
-    }
-  };
-
-  const prev = () => {
-    if (page > 1) {
-      setPage((prev) => prev - 1);
-    }
+  const onPageChange = (page: number) => {
+    setPage(page);
   };
 
   return (
-    <div className="col-lg-9">
-      <div className="page-content my-account__orders-list">
-        <table className="orders-table">
-          <thead>
-            <tr>
-              <th>Đơn hàng</th>
-              <th>Ngày đặt</th>
-              <th>Trạng thái</th>
-              <th>Tổng</th>
-              <th>Hành động</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders?.data?.map((item) => (
-              <Order data={item} key={item?.id} />
-            ))}
-          </tbody>
-        </table>
-        <div className="pagination-controls">
-          <button className="btn btn-primary" onClick={prev}>
-            ← Previous
-          </button>
-          <span className="mx-3">Page {page}</span>
-          <button className="btn btn-primary" onClick={next}>
-            Next →
-          </button>
-        </div>
-      </div>
+    <div>
+      <Table columns={columns} data={orders} loading={isFetching} />
+      <Pagination totalItems={totalElements} onChange={onPageChange} />
     </div>
   );
-}
+};
+
+export default Page;

@@ -50,10 +50,10 @@ const SideBar = () => {
         style={{ paddingTop: 12, paddingBottom: 12 }}
       >
         <div className="d-flex align-items-center">
-          <Avatar data={profile?.data} marginRight={8} size={40} />
+          <Avatar data={profile} marginRight={8} size={40} />
           <div>
-            <div className="text-sm">{profile?.data?.username}</div>
-            <Role role={profile?.data?.role} />
+            <div className="text-sm">{profile?.username}</div>
+            <Role role={profile?.role} />
           </div>
         </div>
         <IoLogOutOutline size={24} color="red" className="cursor-pointer" />

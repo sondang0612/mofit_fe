@@ -1,7 +1,10 @@
 "use client";
 
 import { useOrderByTxnRef } from "@/hooks/react-query/orders/useOrderByTxnRef";
+import { QueryParam, useFetch } from "@/hooks/react-query/useFetch";
 import { useUrlParams } from "@/hooks/useUrlParams";
+import { Order } from "@/types/api";
+import { apiEndpoints } from "@/utils/constants/apiEndpoints";
 import {
   EVnpayResponseCode,
   EVnpayTransactionNo,
@@ -22,26 +25,44 @@ export default function OrderCompleted() {
   const transactionStatus = getParam("vnp_TransactionStatus");
   const responseCode = getParam("vnp_ResponseCode");
   const transactionNo = getParam("vnp_TransactionNo");
-  const { data: order } = useOrderByTxnRef({
-    txnRef,
-    transactionStatus,
-    responseCode,
-    transactionNo,
+  const orderId = getParam("orderId");
+
+  const {
+    data: orders,
+    isSuccess: isSuccessOrder,
+    isLoading,
+  } = useFetch<Order>({
+    endpoint: apiEndpoints.ORDERS,
+    limit: 1,
+    queryParams: [QueryParam.ID, QueryParam.TXN_REF],
+    queryValues: [orderId, txnRef],
+    enabled:
+      (!!txnRef && !!transactionNo && !!responseCode && !!transactionStatus) ||
+      !!orderId,
   });
+
   const isSuccess = React.useMemo(() => {
     return (
-      transactionStatus === EVnpayTransactionStatus.SUCCESS &&
-      responseCode === EVnpayResponseCode.SUCCESS &&
-      transactionNo !== EVnpayTransactionNo.FAIL
+      (transactionStatus === EVnpayTransactionStatus.SUCCESS &&
+        responseCode === EVnpayResponseCode.SUCCESS &&
+        transactionNo !== EVnpayTransactionNo.FAIL) ||
+      isSuccessOrder
     );
   }, [
-    transactionStatus === EVnpayTransactionStatus.SUCCESS &&
+    (transactionStatus === EVnpayTransactionStatus.SUCCESS &&
       responseCode === EVnpayResponseCode.SUCCESS &&
-      transactionNo !== EVnpayTransactionNo.FAIL,
+      transactionNo !== EVnpayTransactionNo.FAIL) ||
+      isSuccessOrder,
   ]);
 
-  if (!transactionStatus || !responseCode || !transactionNo || !txnRef) {
+  if (!txnRef && !orderId) {
     return <div>Shop now</div>;
+  }
+
+  const order = orders[0];
+
+  if (isLoading) {
+    return <p>Loading</p>;
   }
 
   return (

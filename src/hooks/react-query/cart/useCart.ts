@@ -14,10 +14,15 @@ const fetchData = asyncAuth(async () => {
 });
 
 const useCart = (param?: Params) => {
-  return useQuery<ApiResponse<CartItem[]>>({
+  const { data, ...query } = useQuery<ApiResponse<CartItem[]>>({
     queryKey: [queryKey.CART_INFO, param?.id],
     queryFn: fetchData,
   });
+
+  return {
+    ...query,
+    data: data?.data,
+  };
 };
 
 export { useCart };

@@ -70,8 +70,8 @@ export default function EditAccount() {
   };
 
   React.useEffect(() => {
-    if (profile?.data) {
-      reset(profile?.data);
+    if (profile) {
+      reset(profile);
     } else {
       reset();
     }

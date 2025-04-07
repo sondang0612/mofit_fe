@@ -9,10 +9,15 @@ const fetchData = async () => {
 };
 
 const useBrands = () => {
-  return useQuery<ApiResponse<Brand[]>>({
+  const { data, ...query } = useQuery<ApiResponse<Brand[]>>({
     queryKey: [queryKey.BRANDS],
     queryFn: fetchData,
   });
+
+  return {
+    ...query,
+    data: data?.data,
+  };
 };
 
 export { useBrands };

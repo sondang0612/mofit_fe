@@ -104,7 +104,7 @@ export default function SearchPopup() {
             <div className="sub-menu search-suggestion">
               <h6 className="sub-menu__title fs-base">Dòng sản phẩm chính</h6>
               <ul className="sub-menu__list list-unstyled">
-                {categories?.data?.map((item, index) => (
+                {categories?.map((item, index) => (
                   <li className="sub-menu__item" key={index}>
                     <Link
                       href={`/shop-1?activeCategory=${item?.id}`}

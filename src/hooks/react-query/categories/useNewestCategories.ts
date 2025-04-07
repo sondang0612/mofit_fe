@@ -9,10 +9,12 @@ const fetchData = async () => {
 };
 
 const useNewestCategory = () => {
-  return useQuery<ApiResponse<Category>>({
+  const { data, ...query } = useQuery<ApiResponse<Category>>({
     queryKey: [queryKey.NEWEST_CATEGORY],
     queryFn: fetchData,
   });
+
+  return { ...query, data: data?.data };
 };
 
 export { useNewestCategory };

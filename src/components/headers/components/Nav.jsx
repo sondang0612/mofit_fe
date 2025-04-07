@@ -87,7 +87,7 @@ export default function Nav() {
                 Dòng sản phẩm chính
               </a>
               <ul className="sub-menu__list list-unstyled">
-                {categories?.data?.map((elm, i) => (
+                {categories?.map((elm, i) => (
                   <li key={i} className="sub-menu__item">
                     <Link
                       href={`/shop-1?activeCategory=${elm?.id}`}
@@ -107,7 +107,7 @@ export default function Nav() {
                 Thương hiệu
               </a>
               <ul className="sub-menu__list list-unstyled">
-                {brands?.data?.map((elm, i) => (
+                {brands?.map((elm, i) => (
                   <li key={i} className="sub-menu__item">
                     <Link
                       href={`/shop-1?brands=${elm?.id}`}

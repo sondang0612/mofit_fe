@@ -14,7 +14,7 @@ const NewArrivals = () => {
       <h2 className="section-title mb-4 pb-xl-2 mb-xl-2">Mới ra mắt</h2>
 
       <div className="position-relative grid grid-cols-3 gap-sm">
-        {category?.data?.subCategories?.map?.((elm, i) => (
+        {category?.subCategories?.map?.((elm, i) => (
           <div className="pc__img-wrapper position-relative" key={i}>
             <div className="absolute insets-0 z-100 bg-overlay-20">
               <p className="absolute top-4 right-4 text-8 text-white text-right uppercase font-bold">

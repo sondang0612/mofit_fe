@@ -32,12 +32,12 @@ export default function CartDrawer() {
   };
 
   const subTotal = React.useMemo(() => {
-    return cart?.data?.reduce((prev, cur) => {
+    return cart?.reduce((prev, cur) => {
       const curQuantity = cur?.quantity || 0;
       const curPrice = cur?.product?.price || 0;
       return prev + curQuantity * curPrice;
     }, 0);
-  }, [cart?.data]);
+  }, [cart]);
 
   useEffect(() => {
     closeCart();
@@ -53,7 +53,7 @@ export default function CartDrawer() {
           <h3 className="text-uppercase fs-6 mb-0">
             Giỏ hàng (
             <span className="cart-amount js-cart-items-count">
-              {cart?.data?.length}
+              {cart?.length}
             </span>
             )
           </h3>
@@ -62,9 +62,9 @@ export default function CartDrawer() {
             className="btn-close-lg js-close-aside btn-close-aside ms-auto"
           ></button>
         </div>
-        {cart?.data?.length ? (
+        {cart?.length ? (
           <div className="aside-content cart-drawer-items-list">
-            {cart?.data?.map((elm, i) => (
+            {cart?.map((elm, i) => (
               <React.Fragment key={i}>
                 <div className="cart-drawer-item d-flex position-relative">
                   <div className="position-relative">
@@ -145,7 +145,7 @@ export default function CartDrawer() {
             </span>
           </div>
           {/* <!-- /.d-flex justify-content-between --> */}
-          {cart?.data?.length ? (
+          {cart?.length ? (
             <>
               <Link href="/shop_cart" className="btn btn-light mt-3 d-block">
                 Xem giỏ hàng

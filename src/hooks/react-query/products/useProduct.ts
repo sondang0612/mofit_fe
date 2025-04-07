@@ -14,11 +14,13 @@ const fetchData = async (params?: Params) => {
 };
 
 const useProduct = (params: Params) => {
-  return useQuery<Product>({
+  const { data, ...query } = useQuery<Product>({
     queryKey: [queryKey.PRODUCTS, params?.id],
     queryFn: () => fetchData(params),
     enabled: !!params?.id,
   });
+
+  return { ...query, data };
 };
 
 export { useProduct };

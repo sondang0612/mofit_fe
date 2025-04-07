@@ -1,15 +1,16 @@
 import axiosInstance from "@/libs/axiosInstance";
-import { Address, ApiResponse, Order } from "@/types/api";
+import { ApiResponse, Order } from "@/types/api";
 import { asyncAuth } from "@/utils/asyncAuth";
+import { ERole } from "@/utils/constants/role.enum";
 import { useQuery } from "@tanstack/react-query";
 import { queryKey } from "../queryKey";
-import { ERole } from "@/utils/constants/role.enum";
 
 type Params = {
   txnRef?: string | undefined | null;
   transactionStatus?: string | undefined | null;
   responseCode?: string | undefined | null;
   transactionNo?: string | undefined | null;
+  orderId?: string | undefined | null;
 };
 
 const fetchData = asyncAuth(

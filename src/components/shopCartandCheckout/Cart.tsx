@@ -12,10 +12,10 @@ export default function Cart() {
   return (
     <div className="shopping-cart" style={{ minHeight: "calc(100vh - 300px)" }}>
       <div className="cart-table__wrapper">
-        {cart?.data?.length ? (
+        {cart?.length ? (
           <>
             <ListCartItems
-              data={cart.data}
+              data={cart}
               onRemove={(cartItemId) => removeCartItem({ cartItemId })}
             />
             <div className="cart-table-footer">

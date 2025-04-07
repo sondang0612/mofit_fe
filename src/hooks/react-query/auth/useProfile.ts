@@ -14,10 +14,15 @@ const fetchData = asyncAuth(
 );
 
 const useProfile = () => {
-  return useQuery<ApiResponse<User>>({
+  const { data, ...query } = useQuery<ApiResponse<User>>({
     queryKey: [queryKey.PROFILE],
     queryFn: fetchData,
   });
+
+  return {
+    ...query,
+    data: data?.data,
+  };
 };
 
 export { useProfile };

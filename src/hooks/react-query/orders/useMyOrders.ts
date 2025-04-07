@@ -19,10 +19,15 @@ const fetchData = asyncAuth(
 );
 
 const useMyOrder = (params: Params) => {
-  return useQuery<ApiResponse<Order[]>>({
+  const { data, ...query } = useQuery<ApiResponse<Order[]>>({
     queryKey: [queryKey.ORDERS, params],
     queryFn: () => fetchData(params),
   });
+
+  return {
+    ...query,
+    data: data?.data,
+  };
 };
 
 export { useMyOrder };

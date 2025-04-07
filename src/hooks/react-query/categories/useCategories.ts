@@ -9,10 +9,15 @@ const fetchData = async () => {
 };
 
 const useCategories = () => {
-  return useQuery<ApiResponse<Category[]>>({
+  const { data, ...query } = useQuery<ApiResponse<Category[]>>({
     queryKey: [queryKey.CATEGORIES],
     queryFn: fetchData,
   });
+
+  return {
+    ...query,
+    data: data?.data,
+  };
 };
 
 export { useCategories };

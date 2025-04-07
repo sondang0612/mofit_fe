@@ -85,7 +85,7 @@ export default function Header1() {
             {profile ? (
               <>
                 <div className="user-menu-dropdown_wrapper">
-                  <Avatar data={profile.data} />
+                  <Avatar data={profile} />
                   <div className="user-menu-dropdown">
                     <Link href="/account_edit">Tài khoản của tôi</Link>
                     <Link href="/account_wishlist">Sản phẩm yêu thích</Link>
