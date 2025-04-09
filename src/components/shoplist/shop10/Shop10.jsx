@@ -115,7 +115,7 @@ export default function Shop10() {
                   >
                     {[elm.imgSrc, elm.imgSrc2].map((elm2, i) => (
                       <SwiperSlide key={i} className="swiper-slide">
-                        <Link href={`/product1_simple/${elm.id}`}>
+                        <Link href={`/${elm.id}`}>
                           <Image
                             loading="lazy"
                             src={elm2}
@@ -171,7 +171,7 @@ export default function Shop10() {
                 <div className="pc__info position-relative">
                   <p className="pc__category">{elm.category}</p>
                   <h6 className="pc__title">
-                    <Link href={`/product1_simple/${elm.id}`}>{elm.title}</Link>
+                    <Link href={`/${elm.id}`}>{elm.title}</Link>
                   </h6>
                   <div className="product-card__price d-flex">
                     {elm.priceOld ? (

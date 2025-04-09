@@ -1,23 +1,22 @@
 import axiosInstance from "@/libs/axiosInstance";
-import { Address, ApiResponse, Order, Product } from "@/types/api";
-import { asyncAuth } from "@/utils/asyncAuth";
+import { Product } from "@/types/api";
 import { useQuery } from "@tanstack/react-query";
 import { queryKey } from "../queryKey";
 
 type Params = {
-  id?: number;
+  slug?: string;
 };
 
 const fetchData = async (params?: Params) => {
-  const response = await axiosInstance.get(`products/${params?.id}`);
+  const response = await axiosInstance.get(`products/${params?.slug}`);
   return response?.data?.data;
 };
 
 const useProduct = (params: Params) => {
   const { data, ...query } = useQuery<Product>({
-    queryKey: [queryKey.PRODUCTS, params?.id],
+    queryKey: [queryKey.PRODUCTS, params?.slug],
     queryFn: () => fetchData(params),
-    enabled: !!params?.id,
+    enabled: !!params?.slug,
   });
 
   return { ...query, data };

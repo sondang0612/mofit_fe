@@ -21,7 +21,7 @@ export const metadata = {
   description:
     "Double Fish Sport Group,Sport Equipments Manufacturer-doublefish.com.vn",
 };
-export default function ShopPage1() {
+export default function Store() {
   return (
     <>
       <Header1 />

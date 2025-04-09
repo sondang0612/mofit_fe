@@ -18,7 +18,7 @@ export default function Style10() {
           <div className="product-card product-card_style10 mb-3 mb-md-4 mb-xxl-5">
             <div className="position-relative pb-3">
               <div className="pc__img-wrapper pc__img-wrapper_wide3">
-                <Link href={`/product1_simple/${elm.id}`}>
+                <Link href={`/${elm.id}`}>
                   <Image
                     loading="lazy"
                     src={elm.imgSrc}
@@ -50,7 +50,7 @@ export default function Style10() {
 
             <div className="pc__info position-relative d-flex flex-column align-items-center mb-3 mb-md-4 mb-xxl-5">
               <h6 className="pc__title text-uppercase fw-semi-bold">
-                <Link href={`/product1_simple/${elm.id}`}>{elm.title}</Link>
+                <Link href={`/${elm.id}`}>{elm.title}</Link>
               </h6>
               <div className="product-card__price d-flex text-secondary mb-2">
                 <span className="money price">${elm.price}</span>

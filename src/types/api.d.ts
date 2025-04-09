@@ -26,6 +26,7 @@ export interface Product {
   shortDescription?: string | undefined;
   description?: string | undefined;
   sku?: string | undefined;
+  slug?: string | undefined;
 }
 
 export interface Category {

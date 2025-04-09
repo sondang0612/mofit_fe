@@ -18,16 +18,16 @@ export default function Nav() {
   const { data: categories } = useCategories();
   const { data: brands } = useBrands();
 
-  const isMenuActive = (menu) => {
+  const isMenuActive = (menu: any) => {
     return menu?.split("/")[1] == pathname.split("/")[1];
   };
-  const isActiveParentMenu = (menus) => {
+  const isActiveParentMenu = (menus: any) => {
     return menus.some(
-      (menu) => menu.href.split("/")[1] == pathname.split("/")[1]
+      (menu: any) => menu.href.split("/")[1] == pathname.split("/")[1]
     );
   };
   useEffect(() => {
-    function setBoxMenuPosition(menu) {
+    function setBoxMenuPosition(menu: any) {
       const scrollBarWidth = 17; // You might need to calculate or define this value
       const limitR = window.innerWidth - menu.offsetWidth - scrollBarWidth;
       const limitL = 0;
@@ -92,9 +92,7 @@ export default function Nav() {
                   <li key={i} className="sub-menu__item">
                     <Link
                       href={`${pathNames.STORE}?activeCategory=${elm?.id}`}
-                      className={`menu-link menu-link_us-s ${
-                        isMenuActive(elm.href) ? "menu-active" : ""
-                      }`}
+                      className={`menu-link menu-link_us-s`}
                     >
                       {elm.name}
                     </Link>
@@ -112,9 +110,7 @@ export default function Nav() {
                   <li key={i} className="sub-menu__item">
                     <Link
                       href={`${pathNames.STORE}?brands=${elm?.id}`}
-                      className={`menu-link menu-link_us-s ${
-                        isMenuActive(elm.href) ? "menu-active" : ""
-                      }`}
+                      className={`menu-link menu-link_us-s`}
                     >
                       {elm?.name}
                     </Link>
@@ -128,9 +124,9 @@ export default function Nav() {
       </li>
       <li className="navigation__item">
         <Link
-          href="/about"
+          href={pathNames.ABOUT_US}
           className={`navigation__link ${
-            pathname == "/about" ? "menu-active" : ""
+            pathname == pathNames.ABOUT_US ? "menu-active" : ""
           }`}
         >
           Về Double Fish

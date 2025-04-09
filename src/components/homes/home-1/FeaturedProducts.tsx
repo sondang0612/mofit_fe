@@ -1,10 +1,10 @@
 "use client";
 import { useContextElement } from "@/context/Context";
 import { products1 } from "@/data/products/fashion";
+import Image from "next/image";
 import Link from "next/link";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Image from "next/image";
 
 const swiperOptions = {
   modules: [Pagination, Navigation, Autoplay],
@@ -59,7 +59,7 @@ export default function FeaturedProducts() {
           {products1.map((elm, i) => (
             <SwiperSlide key={i} className="swiper-slide product-card">
               <div className="pc__img-wrapper">
-                <Link href={`/product1_simple/${elm.id}`}>
+                <Link href={`/${elm.id}`}>
                   <Image
                     loading="lazy"
                     src={elm.imgSrc}
@@ -87,7 +87,7 @@ export default function FeaturedProducts() {
               <div className="pc__info position-relative">
                 {/* <p className="pc__category">{elm.category}</p> */}
                 <h6 className="pc__title">
-                  <Link href={`/product1_simple/${elm.id}`}>{elm.title}</Link>
+                  <Link href={`/${elm.id}`}>{elm.title}</Link>
                 </h6>
                 <div className="product-card__price d-flex">
                   <span className="money price">${elm.price}</span>

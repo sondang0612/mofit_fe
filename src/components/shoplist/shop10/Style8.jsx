@@ -18,7 +18,7 @@ export default function Style8() {
         <div key={i} className="product-card-wrapper">
           <div className="product-card product-card_style8 mb-3 mb-md-4 mb-xxl-5">
             <div className="pc__img-wrapper pc__img-wrapper_wide2">
-              <Link href={`/product1_simple/${elm.id}`}>
+              <Link href={`/${elm.id}`}>
                 <Image
                   loading="lazy"
                   src={elm.imgSrc}
@@ -33,7 +33,7 @@ export default function Style8() {
             <div className="pc__info position-relative">
               <p className="pc__category">{elm.category}</p>
               <h6 className="pc__title">
-                <Link href={`/product1_simple/${elm.id}`}>{elm.title}</Link>
+                <Link href={`/${elm.id}`}>{elm.title}</Link>
               </h6>
               <div className="product-card__review d-sm-flex align-items-center">
                 <div className="reviews-group d-flex">

@@ -33,7 +33,7 @@ export default function Style3() {
                 }}
               >
                 <SwiperSlide className="swiper-slide">
-                  <Link href={`/product1_simple/${elm.id}`}>
+                  <Link href={`/${elm.id}`}>
                     <Image
                       loading="lazy"
                       src={elm.imgSrc}
@@ -45,7 +45,7 @@ export default function Style3() {
                   </Link>
                 </SwiperSlide>
                 <SwiperSlide className="swiper-slide">
-                  <Link href={`/product1_simple/${elm.id}`}>
+                  <Link href={`/${elm.id}`}>
                     <Image
                       loading="lazy"
                       src={elm.imgSrc2}
@@ -82,7 +82,7 @@ export default function Style3() {
 
             <div className="pc__info position-relative">
               <h6 className="pc__title">
-                <Link href={`/product1_simple/${elm.id}`}>{elm.title}</Link>
+                <Link href={`/${elm.id}`}>{elm.title}</Link>
               </h6>
               <div className="product-card__price d-flex">
                 <span className="money price">${elm.price}</span>

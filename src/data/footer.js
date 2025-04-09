@@ -1,5 +1,7 @@
+import { pathNames } from "@/utils/constants/paths";
+
 export const footerLinks1 = [
-  { href: "/about", text: "Về Double Fish" },
+  { href: pathNames.ABOUT_US, text: "Về Double Fish" },
   { href: "/blog_list2", text: "Tin tức" },
   { href: "/contact", text: "Liên hệ" },
 ];
@@ -8,12 +10,12 @@ export const footerLinks2 = [
   { href: "/store?sortingValue=best_seller", text: "Bán chạy" },
 ];
 export const footerLinks3 = [
-  { href: "/about", text: "Customer Service" },
+  { href: pathNames.ABOUT_US, text: "Customer Service" },
   { href: "/account_dashboard", text: "My Account" },
   { href: "/store_location", text: "Find a Store" },
   { href: "/terms", text: "Legal & Privacy" },
   { href: "/contact", text: "Contact" },
-  { href: "/about", text: "Gift Card" },
+  { href: pathNames.ABOUT_US, text: "Gift Card" },
 ];
 
 export const languageOptions = [

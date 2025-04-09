@@ -12,14 +12,14 @@ import { getProductAttributeNames } from "@/utils/getProductAttributeNames";
 import { useCreateCartItem } from "@/hooks/react-query/cart-items/useCreateCartItem";
 
 interface Props {
-  id?: number;
+  slug?: string;
 }
 
 export default function SingleProduct12(props: Props) {
-  const { id } = props;
+  const { slug } = props;
   const { mutate: createCartItem } = useCreateCartItem();
 
-  const { data: product } = useProduct({ id });
+  const { data: product } = useProduct({ slug });
 
   const handleAddToCart = (productId?: number, quantity?: number) => {
     if (!productId || !quantity) {
@@ -41,7 +41,7 @@ export default function SingleProduct12(props: Props) {
               <BreadCumb />
             </div>
           </div>
-          <h1 className="product-single__name">{product?.title}</h1>
+          <h1 className="product-single__name">{product?.title || "Tittle"}</h1>
           <div className="product-single__rating">
             <div className="reviews-group d-flex">
               <Star stars={5} />
@@ -51,7 +51,7 @@ export default function SingleProduct12(props: Props) {
             <span className="current-price">{formatPrice(product?.price)}</span>
           </div>
           <div className="product-single__short-desc">
-            <p>{product?.shortDescription}</p>
+            <p>{product?.shortDescription || "Product description"}</p>
           </div>
           <form onSubmit={(e) => e.preventDefault()}>
             <div className="product-single__addtocart">
@@ -108,7 +108,7 @@ export default function SingleProduct12(props: Props) {
           </div>
         </div>
       </div>
-      <div className="product-single__details-tab">
+      {/* <div className="product-single__details-tab">
         <ul className="nav nav-tabs" id="myTab1" role="tablist">
           <li className="nav-item" role="presentation">
             <a
@@ -155,7 +155,7 @@ export default function SingleProduct12(props: Props) {
             <AdditionalInfo />
           </div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }

@@ -1,21 +1,21 @@
-import Image from "next/image";
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { pathNames } from "@/utils/constants/paths";
 
-export default function SiteMap() {
+export default function SiteMapModal() {
   return (
-    <div className="modal fade" id="siteMap" tabIndex="-1">
+    <div className="modal fade" id="siteMap" tabIndex={1}>
       <div className="modal-dialog modal-fullscreen">
         <div className="sitemap d-flex">
           <div className="w-50 d-none d-lg-block">
             <Image
-              width={960}
-              height={950}
-              style={{ height: "fit-content" }}
               loading="lazy"
               src="/assets/images/nav-bg.jpg"
               alt="Site map"
               className="sitemap__bg"
+              width={960}
+              height={950}
             />
           </div>
           {/* <!-- /.sitemap__bg w-50 d-none d-lg-block --> */}
@@ -287,7 +287,7 @@ export default function SiteMap() {
                             </li>
                             <li className="sub-menu__item">
                               <Link
-                                href="/shop3"
+                                href="/shop-3"
                                 className="menu-link menu-link_us-s"
                               >
                                 Accessories
@@ -300,7 +300,7 @@ export default function SiteMap() {
                             </li>
                             <li className="sub-menu__item">
                               <Link
-                                href="/about"
+                                href={pathNames.ABOUT_US}
                                 className="menu-link menu-link_us-s"
                               >
                                 Gift Card
@@ -373,7 +373,7 @@ export default function SiteMap() {
                             </li>
                             <li className="sub-menu__item">
                               <Link
-                                href="/about"
+                                href={pathNames.ABOUT_US}
                                 className="menu-link menu-link_us-s"
                               >
                                 Gift Card
@@ -396,7 +396,7 @@ export default function SiteMap() {
                             </li>
                             <li className="sub-menu__item">
                               <Link
-                                href="/shop3"
+                                href="/shop-3"
                                 className="menu-link menu-link_us-s"
                               >
                                 Accessories
@@ -424,7 +424,7 @@ export default function SiteMap() {
                           <ul className="sub-menu list-unstyled">
                             <li className="sub-menu__item">
                               <Link
-                                href="/about"
+                                href={pathNames.ABOUT_US}
                                 className="menu-link menu-link_us-s"
                               >
                                 Gift Card
@@ -487,7 +487,7 @@ export default function SiteMap() {
                             </li>
                             <li className="sub-menu__item">
                               <Link
-                                href="/shop3"
+                                href="/shop-3"
                                 className="menu-link menu-link_us-s"
                               >
                                 Accessories

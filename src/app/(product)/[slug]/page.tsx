@@ -4,18 +4,18 @@ import Header1 from "@/components/headers/Header1";
 import SingleProduct12 from "@/components/singleProduct/SingleProduct12";
 
 interface Props {
-  params?: { id?: number };
+  params?: { slug?: string };
 }
 
-export default function ProductDetailsPage1(props: Props) {
+export default function Product(props: Props) {
   const { params } = props;
+
   return (
     <>
       <Header1 />
-      <main className="page-wrapper">
+      <main className="page-wrapper" style={{ paddingBottom: 64 }}>
         <div className="mb-md-1 pb-md-3"></div>
-        <SingleProduct12 id={params?.id} />
-        {/* <RelatedSlider /> */}
+        <SingleProduct12 slug={params?.slug} />
       </main>
       <Footer1 />
     </>

@@ -54,7 +54,7 @@ export default function Products2() {
       <div className="col-6 col-md-4 col-lg-3">
         <div className="product-card mb-3 mb-md-4 mb-xxl-5">
           <div className="pc__img-wrapper">
-            <Link href={`/product1_simple/${data?.id}`}>
+            <Link href={`/${data?.slug}`}>
               <Image
                 loading="lazy"
                 src={data?.imgSrc || EDefaultValue.IMAGE}
@@ -93,7 +93,7 @@ export default function Products2() {
           <div className="pc__info position-relative">
             {/* <p className="pc__category">{data?.category?.name}</p> */}
             <h6 className="pc__title">
-              <Link href={`/product1_simple/${data.id}`}>{data.title}</Link>
+              <Link href={`/${data.id}`}>{data.title}</Link>
             </h6>
             <div className="product-card__price d-flex">
               {data?.discount ? (

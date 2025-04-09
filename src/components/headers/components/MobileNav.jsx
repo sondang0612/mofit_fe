@@ -162,9 +162,9 @@ export default function MobileNav() {
 
       <li className="navigation__item">
         <Link
-          href="/about"
+          href={pathNames.ABOUT_US}
           className={`navigation__link w-full ${
-            pathname == "/about" ? "menu-active" : ""
+            pathname == pathNames.ABOUT_US ? "menu-active" : ""
           }`}
         >
           Về Double Fish

@@ -58,7 +58,7 @@ export default function RelatedSlider() {
           {products51.map((elm, i) => (
             <SwiperSlide key={i} className="swiper-slide product-card">
               <div className="pc__img-wrapper">
-                <Link href={`/product1_simple/${elm.id}`}>
+                <Link href={`/${elm.id}`}>
                   <Image
                     loading="lazy"
                     src={elm.imgSrc}
@@ -94,7 +94,7 @@ export default function RelatedSlider() {
               <div className="pc__info position-relative">
                 <p className="pc__category">{elm.category}</p>
                 <h6 className="pc__title">
-                  <Link href={`/product1_simple/${elm.id}`}>{elm.title}</Link>
+                  <Link href={`/${elm.id}`}>{elm.title}</Link>
                 </h6>
                 <div className="product-card__price d-flex">
                   <span className="money price">${elm.price}</span>

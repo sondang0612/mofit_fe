@@ -1,20 +1,22 @@
-import React from "react";
-import Link from "next/link";
+import { pathNames } from "@/utils/constants/paths";
 import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
-export default function SiteMapModal() {
+export default function SiteMap() {
   return (
-    <div className="modal fade" id="siteMap" tabIndex="-1">
+    <div className="modal fade" id="siteMap" tabIndex={1}>
       <div className="modal-dialog modal-fullscreen">
         <div className="sitemap d-flex">
           <div className="w-50 d-none d-lg-block">
             <Image
+              width={960}
+              height={950}
+              style={{ height: "fit-content" }}
               loading="lazy"
               src="/assets/images/nav-bg.jpg"
               alt="Site map"
               className="sitemap__bg"
-              width={960}
-              height={950}
             />
           </div>
           {/* <!-- /.sitemap__bg w-50 d-none d-lg-block --> */}
@@ -286,7 +288,7 @@ export default function SiteMapModal() {
                             </li>
                             <li className="sub-menu__item">
                               <Link
-                                href="/shop-3"
+                                href="/shop3"
                                 className="menu-link menu-link_us-s"
                               >
                                 Accessories
@@ -299,7 +301,7 @@ export default function SiteMapModal() {
                             </li>
                             <li className="sub-menu__item">
                               <Link
-                                href="/about"
+                                href={pathNames.ABOUT_US}
                                 className="menu-link menu-link_us-s"
                               >
                                 Gift Card
@@ -395,7 +397,7 @@ export default function SiteMapModal() {
                             </li>
                             <li className="sub-menu__item">
                               <Link
-                                href="/shop-3"
+                                href="/shop3"
                                 className="menu-link menu-link_us-s"
                               >
                                 Accessories
@@ -486,7 +488,7 @@ export default function SiteMapModal() {
                             </li>
                             <li className="sub-menu__item">
                               <Link
-                                href="/shop-3"
+                                href="/shop3"
                                 className="menu-link menu-link_us-s"
                               >
                                 Accessories
