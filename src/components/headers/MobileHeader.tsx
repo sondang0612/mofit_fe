@@ -5,7 +5,7 @@ import { socialLinks } from "@/data/socials";
 import { useProfile } from "@/hooks/react-query/auth/useProfile";
 import { openCart } from "@/utils/openCart";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import CartLength from "./components/CartLength";
 import MobileNav from "./components/MobileNav";
 import { useForm } from "react-hook-form";
@@ -192,7 +192,9 @@ export default function MobileHeader() {
           </ul>
         </div>
       </nav>
-      <SoftFilter isMobile />
+      <Suspense fallback={<div />}>
+        <SoftFilter isMobile />
+      </Suspense>
       {/* <!-- /.navigation --> */}
     </div>
   );

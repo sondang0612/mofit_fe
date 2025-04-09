@@ -26,7 +26,7 @@ export default function Hero() {
     <Swiper
       style={{ maxWidth: "100%", overflow: "hidden" }}
       className="swiper-container js-swiper-slider slideshow full-width_padding swiper-container-fade swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events"
-      {...swiperOptions}
+      {...(swiperOptions as any)}
     >
       {" "}
       {slides1.map((elm, i) => (

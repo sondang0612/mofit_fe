@@ -14,7 +14,7 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <>
-      <Header1 />
+      {/* <Header1 /> */}
       <main className="page-wrapper">
         <Breadcrumb />
 

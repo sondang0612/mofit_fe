@@ -4,7 +4,7 @@ import { useProfile } from "@/hooks/react-query/auth/useProfile";
 import { openCart } from "@/utils/openCart";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { Suspense } from "react";
 import SoftFilter from "../shoplist/filter/SoftFilter";
 import Avatar from "./components/Avatar";
 import CartLength from "./components/CartLength";
@@ -126,7 +126,9 @@ export default function Header1() {
         </div>
         {/* <!-- /.header-desk header-desk_type_1 --> */}
       </div>
-      <SoftFilter />
+      <Suspense fallback={<div />}>
+        <SoftFilter />
+      </Suspense>
       {/* <!-- /.container --> */}
     </header>
   );
