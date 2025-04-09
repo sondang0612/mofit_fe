@@ -4,8 +4,10 @@ import Header1 from "@/components/headers/Header1";
 import Notfound from "@/components/otherPages/Notfound";
 
 export const metadata = {
-  title: "Page Not Found || Double Fish eCommerce React Nextjs Template",
-  description: "Double Fish eCommerce React Nextjs Template",
+  title:
+    "Page không tồn tại || Double Fish Sport Group,Sport Equipments Manufacturer-doublefish.com.vn",
+  description:
+    "Double Fish Sport Group,Sport Equipments Manufacturer-doublefish.com.vn",
 };
 export default function PageNotFound() {
   return (

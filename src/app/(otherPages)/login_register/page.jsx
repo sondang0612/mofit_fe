@@ -5,8 +5,10 @@ import LoginRegister from "@/components/otherPages/LoginRegister";
 import React, { Suspense } from "react";
 
 export const metadata = {
-  title: "Login Register || Double Fish eCommerce React Nextjs Template",
-  description: "Double Fish eCommerce React Nextjs Template",
+  title:
+    "Đăng nhập || Double Fish Sport Group,Sport Equipments Manufacturer-doublefish.com.vn",
+  description:
+    "Double Fish Sport Group,Sport Equipments Manufacturer-doublefish.com.vn",
 };
 export default function LoginPage() {
   return (

@@ -1,8 +1,10 @@
 import HomePage1 from "./(homes)/home-1/page";
 
 export const metadata = {
-  title: "Home 1 || Double Fish eCommerce React Nextjs Template",
-  description: "Double Fish eCommerce React Nextjs Template",
+  title:
+    "Trang chủ || Double Fish Sport Group,Sport Equipments Manufacturer-doublefish.com.vn",
+  description:
+    "Double Fish Sport Group,Sport Equipments Manufacturer-doublefish.com.vn",
 };
 export default function Home() {
   return (

@@ -15,7 +15,11 @@ const NewArrivals = () => {
 
       <div className="position-relative grid grid-cols-3 gap-sm">
         {category?.subCategories?.map?.((elm, i) => (
-          <div className="pc__img-wrapper position-relative" key={i}>
+          <div
+            className="pc__img-wrapper position-relative"
+            key={i}
+            style={{ paddingTop: "125%" }}
+          >
             <div className="absolute insets-0 z-100 bg-overlay-20">
               <p className="absolute top-4 right-4 text-8 text-white text-right uppercase font-bold">
                 {elm?.name}
@@ -29,7 +33,7 @@ const NewArrivals = () => {
                 width="348"
                 height="348"
                 alt="Cropped Faux leather Jacket"
-                className="pc__img object-fit-none"
+                className="pc__img"
               />
             </Link>
           </div>

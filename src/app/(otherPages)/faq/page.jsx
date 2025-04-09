@@ -5,8 +5,10 @@ import Faq from "@/components/otherPages/Faq";
 import React from "react";
 
 export const metadata = {
-  title: "Faq || Double Fish eCommerce React Nextjs Template",
-  description: "Double Fish eCommerce React Nextjs Template",
+  title:
+    "Faq || Double Fish Sport Group,Sport Equipments Manufacturer-doublefish.com.vn",
+  description:
+    "Double Fish Sport Group,Sport Equipments Manufacturer-doublefish.com.vn",
 };
 export default function FaqPage() {
   return (

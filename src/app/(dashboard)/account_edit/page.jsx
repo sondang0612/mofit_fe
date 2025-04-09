@@ -17,7 +17,6 @@ export default function AccountEditPage() {
       <main className="page-wrapper">
         <div className="mb-4 pb-4"></div>
         <section className="my-account container">
-          <h2 className="page-title">Thông tin tài khoản</h2>
           <div className="row">
             <DashboardSidebar />
             <EditAccount />

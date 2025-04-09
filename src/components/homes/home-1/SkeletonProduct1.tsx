@@ -4,7 +4,7 @@ const SkeletonProduct1 = () => {
       <div className={`productCard animate-pulse`}>
         <div className="imgWrapper pc__img-wrapper"></div>
 
-        <div className="infoWrapper">
+        <div className="infoWrapper px-3">
           <div className="category"></div>
           <div className="title"></div>
           <div className="price"></div>

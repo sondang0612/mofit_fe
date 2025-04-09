@@ -5,8 +5,10 @@ import Header1 from "@/components/headers/Header1";
 import { contacts } from "@/utils/constants";
 
 export const metadata = {
-  title: "Contact || Double Fish eCommerce React Nextjs Template",
-  description: "Double Fish eCommerce React Nextjs Template",
+  title:
+    "Liên hệ || Double Fish Sport Group,Sport Equipments Manufacturer-doublefish.com.vn",
+  description:
+    "Double Fish Sport Group,Sport Equipments Manufacturer-doublefish.com.vn",
 };
 export default function ContactPage() {
   return (

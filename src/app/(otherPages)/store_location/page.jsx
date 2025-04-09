@@ -6,8 +6,10 @@ import StoreLocator from "@/components/otherPages/StoreLocator";
 import React from "react";
 
 export const metadata = {
-  title: "Store Location || Double Fish eCommerce React Nextjs Template",
-  description: "Double Fish eCommerce React Nextjs Template",
+  title:
+    "Vị trí cửa hàng || Double Fish Sport Group,Sport Equipments Manufacturer-doublefish.com.vn",
+  description:
+    "Double Fish Sport Group,Sport Equipments Manufacturer-doublefish.com.vn",
 };
 export default function StoreLocationPage() {
   return (

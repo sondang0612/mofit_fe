@@ -1,0 +1,50 @@
+.shop-filter-header {
+  width: 100%;
+  background-color: #fff;
+  .shop-filter-container {
+    display: flex;
+    font-size: 10px;
+
+    svg {
+      width: 16px;
+      height: 16px;
+      margin-right: 4px;
+    }
+
+    .shop-acs {
+      option {
+        font-size: 10px;
+      }
+      select {
+        font-size: 10px;
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
+      button span {
+        font-size: 12px;
+      }
+
+      .shop-acs {
+        option {
+          font-size: 12px;
+        }
+        select {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+.shop-main {
+  margin-top: 80px;
+
+  @include media-breakpoint-up(lg) {
+    margin-top: 100px;
+  }
+}
+
+.shop-list {
+  top: 12px;
+}

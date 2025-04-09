@@ -5,8 +5,10 @@ import Lookbook from "@/components/otherPages/Lookbook";
 import React from "react";
 
 export const metadata = {
-  title: "Lookbook || Double Fish eCommerce React Nextjs Template",
-  description: "Double Fish eCommerce React Nextjs Template",
+  title:
+    "Lookbook || Double Fish Sport Group,Sport Equipments Manufacturer-doublefish.com.vn",
+  description:
+    "Double Fish Sport Group,Sport Equipments Manufacturer-doublefish.com.vn",
 };
 export default function LookbookPage() {
   return (

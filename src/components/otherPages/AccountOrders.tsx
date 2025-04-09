@@ -60,9 +60,10 @@ const Page = () => {
   };
 
   return (
-    <div>
-      <Table columns={columns} data={orders} loading={isFetching} />
-      <Pagination totalItems={totalElements} onChange={onPageChange} />
+    <div className="col-lg-9">
+      <div className="page-content my-account__address">
+        <p className="notice">Quản lý đơn hàng</p>
+      </div>
     </div>
   );
 };

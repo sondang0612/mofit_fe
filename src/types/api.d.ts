@@ -113,3 +113,9 @@ export interface Contact {
   name?: string | undefined;
   message?: string | undefined;
 }
+
+export interface Attribute {
+  id?: number | undefined;
+  label?: string | undefined;
+  value?: string | undefined;
+}

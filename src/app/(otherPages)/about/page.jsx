@@ -7,8 +7,10 @@ import Services from "@/components/otherPages/about/Services";
 import React from "react";
 
 export const metadata = {
-  title: "About || Double Fish eCommerce React Nextjs Template",
-  description: "Double Fish eCommerce React Nextjs Template",
+  title:
+    "Về Double Fish || Double Fish Sport Group,Sport Equipments Manufacturer-doublefish.com.vn",
+  description:
+    "Double Fish Sport Group,Sport Equipments Manufacturer-doublefish.com.vn",
 };
 export default function AboutPage() {
   return (

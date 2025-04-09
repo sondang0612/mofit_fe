@@ -17,7 +17,6 @@ export default function AccountWishlistPage() {
       <main className="page-wrapper">
         <div className="mb-4 pb-4"></div>
         <section className="my-account container">
-          <h2 className="page-title">Sản phẩm yêu thích</h2>
           <div className="row">
             <DashboardSidebar />
             <AccountWishlist />

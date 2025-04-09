@@ -5,8 +5,10 @@ import ResetPassword from "@/components/otherPages/ResetPassword";
 import React from "react";
 
 export const metadata = {
-  title: "Reset Password || Double Fish eCommerce React Nextjs Template",
-  description: "Double Fish eCommerce React Nextjs Template",
+  title:
+    "Quên mật khẩu || Double Fish Sport Group,Sport Equipments Manufacturer-doublefish.com.vn",
+  description:
+    "Double Fish Sport Group,Sport Equipments Manufacturer-doublefish.com.vn",
 };
 export default function ResetPasswordPage() {
   return (

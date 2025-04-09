@@ -1,15 +1,17 @@
 "use client";
+import { useLogout } from "@/hooks/react-query/auth/useLogout";
 import { useProfile } from "@/hooks/react-query/auth/useProfile";
 import { openCart } from "@/utils/openCart";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import SoftFilter from "../shoplist/filter/SoftFilter";
+import Avatar from "./components/Avatar";
 import CartLength from "./components/CartLength";
 import Nav from "./components/Nav";
 import SearchPopup from "./components/SearchPopup";
 import User from "./components/User";
-import Avatar from "./components/Avatar";
-import { useLogout } from "@/hooks/react-query/auth/useLogout";
+import { usePathname } from "next/navigation";
 
 export default function Header1() {
   const [scrollDirection, setScrollDirection] = React.useState("down");
@@ -124,6 +126,7 @@ export default function Header1() {
         </div>
         {/* <!-- /.header-desk header-desk_type_1 --> */}
       </div>
+      <SoftFilter />
       {/* <!-- /.container --> */}
     </header>
   );

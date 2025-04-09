@@ -2,12 +2,13 @@ import Footer1 from "@/components/footers/Footer1";
 
 import Header1 from "@/components/headers/Header1";
 import CommingSoon from "@/components/otherPages/CommingSoon";
-import Faq from "@/components/otherPages/Faq";
 import React from "react";
 
 export const metadata = {
-  title: "Comming Soon || Double Fish eCommerce React Nextjs Template",
-  description: "Double Fish eCommerce React Nextjs Template",
+  title:
+    "Comming Soon || Double Fish Sport Group,Sport Equipments Manufacturer-doublefish.com.vn",
+  description:
+    "Double Fish Sport Group,Sport Equipments Manufacturer-doublefish.com.vn",
 };
 export default function CommingSoonPage() {
   return (

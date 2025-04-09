@@ -1,3 +1,7 @@
+import { FaHeart, FaUser } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
+import { RiFileListFill } from "react-icons/ri";
+
 export const homePages = [
   { id: 1, title: "Home 1", href: "/" },
   { id: 2, title: "Home 2", href: "/home-2" },
@@ -181,38 +185,37 @@ export const othersMenuItems = [
 export const dashboardMenuItems = [
   {
     id: 1,
-    href: "/account_dashboard",
-    title: "Trang quản lí",
-    value: "dashboard",
+    href: "/account_edit",
+    title: "Thông tin tài khoản",
+    value: "account_edit",
+    Icon: FaUser,
   },
   {
     id: 2,
     href: "/account_orders",
-    title: "Đơn hàng",
+    title: "Quản lý đơn hàng",
     value: "account_orders",
+    Icon: RiFileListFill,
   },
   {
     id: 3,
     href: "/account_edit_address",
-    title: "Địa chỉ",
+    title: "Sổ địa chỉ",
     value: "account_edit_address",
+    Icon: FaLocationDot,
   },
-  {
-    id: 4,
-    href: "/account_edit",
-    title: "Thông tin tài khoản",
-    value: "account_edit",
-  },
+  // {
+  //   id: 4,
+  //   href: "/account_wishlist",
+  //   title: "Sản phẩm yêu thích",
+  //   value: "account_wishlist",
+  //   Icon: FaHeart,
+  // },
   {
     id: 5,
-    href: "/account_wishlist",
-    title: "Sản phẩm yêu thích",
-    value: "account_wishlist",
-  },
-  {
-    id: 6,
     href: "/login_register",
-    title: "Thoát",
+    title: "Đăng xuất",
     value: "logout",
+    Icon: null,
   },
 ];

@@ -10,6 +10,7 @@ import CartLength from "./components/CartLength";
 import MobileNav from "./components/MobileNav";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import SoftFilter from "../shoplist/filter/SoftFilter";
 
 type Form = {
   searchQuery: string;
@@ -190,6 +191,7 @@ export default function MobileHeader() {
           </ul>
         </div>
       </nav>
+      <SoftFilter isMobile />
       {/* <!-- /.navigation --> */}
     </div>
   );

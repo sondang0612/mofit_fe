@@ -1,10 +1,19 @@
 export const ITEMS_PER_PAGE = 20;
 
 export const ATTRIBUTE_LABEL: Record<string, string> = {
+  all: "Tất cả",
   top_rated: "Đánh giá cao",
   best_seller: "Hàng bán chạy",
   new_arrivals: "Hàng mới về",
   featured: "Sản phẩm nổi bậc",
+};
+
+export const ATTRIBUTE_VALUE: Record<string, string> = {
+  all: "all",
+  top_rated: "top_rated",
+  best_seller: "best_seller",
+  new_arrivals: "new_arrivals",
+  featured: "featured",
 };
 
 export const contacts = [

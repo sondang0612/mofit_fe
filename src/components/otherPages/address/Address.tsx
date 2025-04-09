@@ -1,7 +1,10 @@
-import { useDeleteAddress } from "@/hooks/react-query/addresses/useDeleteAddress";
 import { Address as IAddress } from "@/types/api";
 import { getFullName } from "@/utils/getFullName";
-import React from "react";
+import { FaUser } from "react-icons/fa";
+import { FaPhoneAlt } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
+import { AiOutlineDelete } from "react-icons/ai";
+import { getFullAddress } from "@/utils/getAddress";
 
 interface Props {
   data?: IAddress;
@@ -15,15 +18,12 @@ const Address = (props: Props) => {
   return (
     <div className="my-account__address-item">
       <div className="my-account__address-item__title">
-        <h5>Địa chỉ giao hàng</h5>
+        <div className="my-account__address-item__title-wrapper">
+          <h5>Địa chỉ nhận hàng</h5>
+          {data?.isDefault && <p>Mặc Định</p>}
+        </div>
         {canEdit && onRemove && (
-          <a
-            href="#"
-            className="text-red-500"
-            onClick={() => onRemove(data?.id)}
-          >
-            Xoá
-          </a>
+          <AiOutlineDelete size={18} color="red" className="cursor-pointer" />
         )}
         {canEdit && !data?.isDefault && onSetDefault && (
           <div
@@ -35,13 +35,18 @@ const Address = (props: Props) => {
         )}
       </div>
       <div className="my-account__address-item__detail">
-        <p>
-          {getFullName(data?.firstName, data?.lastName)} - {data?.phoneNumber}
-        </p>
-        <p>{data?.streetAddress}</p>
-        <p>{data?.district}</p>
-        <p>{data?.city}</p>
-        {data?.isDefault && <p>Mặc Định</p>}
+        <div>
+          <FaUser size={18} color="#333333" />
+          {getFullName(data?.firstName, data?.lastName)}
+        </div>
+        <div>
+          <FaPhoneAlt size={18} color="#333333" />
+          {data?.streetAddress}
+        </div>
+        <div>
+          <FaLocationDot size={18} color="#333333" />
+          {getFullAddress(data)}
+        </div>
       </div>
     </div>
   );

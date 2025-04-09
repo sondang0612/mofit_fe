@@ -140,7 +140,7 @@ export default function EditAccount() {
               </div>
               <div className="col-md-12">
                 <div className="my-3">
-                  <h5 className="text-uppercase mb-0">Password Change</h5>
+                  <h5 className="text-uppercase mb-0">Đổi mật khẩu</h5>
                 </div>
               </div>
               <div className="col-md-12">
@@ -189,7 +189,7 @@ export default function EditAccount() {
               </div>
               <div className="col-md-12">
                 <div className="my-3">
-                  <button className="btn btn-primary">Save Changes</button>
+                  <button className="btn btn-primary">Lưu thay đổi</button>
                 </div>
               </div>
             </div>

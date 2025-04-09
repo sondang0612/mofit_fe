@@ -10,6 +10,8 @@ import Link from "next/link";
 import React from "react";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { AiFillPlusSquare } from "react-icons/ai";
+
 interface Props {
   data: IProduct;
 }
@@ -89,13 +91,17 @@ const Product = (props: Props) => {
           </Swiper>
         </div>
 
-        <div className="pc__info position-relative">
-          {/* <p className="pc__category">{data?.category?.name}</p> */}
+        <div className="pc__info position-relative bg-white">
+          <p className="pc__category">
+            {data?.category?.parentCategory
+              ? data?.category?.parentCategory.name
+              : data?.category?.name}
+          </p>
           <h6
             className="pc__title line-clamp-2"
             style={{
               fontSize: 14,
-              fontWeight: 700,
+              fontWeight: 500,
               minHeight: 34,
               overflow: "hidden",
             }}
@@ -110,23 +116,19 @@ const Product = (props: Props) => {
             >
               {price}
             </div>
-            <div className="money price price-sale">{discountedPrice}</div>
+            <div
+              className="money price price-sale"
+              style={{ color: "#222222" }}
+            >
+              {discountedPrice}
+            </div>
           </div>
           <button
             className="pc__btn-wl position-absolute  end-0 bg-transparent border-0"
-            style={{ bottom: 5 }}
+            style={{ bottom: 12, right: 12 }}
             onClick={() => handleAddToCart(data?.id, 1)}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              className="bi bi-cart"
-              viewBox="0 0 16 16"
-            >
-              <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
-            </svg>
+            <AiFillPlusSquare size={24} color="black" />
           </button>
         </div>
         {data?.discount && (

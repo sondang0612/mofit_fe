@@ -11,12 +11,15 @@ const Shop1 = dynamic(() => import("@/components/shoplist/Shop1"), {
 
 const ShopFilter = dynamic(() => import("@/components/asides/ShopFilter"), {
   ssr: false,
-  loading: () => <div>Loading Filter...</div>,
+  loading: () => <div />,
 });
 
 export const metadata = {
-  title: "Shop 1 || Double Fish eCommerce React Nextjs Template",
-  description: "Double Fish eCommerce React Nextjs Template",
+  title:
+    "Cửa hàng || Double Fish Sport Group,Sport Equipments Manufacturer-doublefish.com.vn",
+
+  description:
+    "Double Fish Sport Group,Sport Equipments Manufacturer-doublefish.com.vn",
 };
 export default function ShopPage1() {
   return (
