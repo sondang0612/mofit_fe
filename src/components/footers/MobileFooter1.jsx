@@ -1,5 +1,6 @@
 import { useContextElement } from "@/context/Context";
 import { useProfile } from "@/hooks/react-query/auth/useProfile";
+import { pathNames } from "@/utils/constants/paths";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { LuUserRound } from "react-icons/lu";
@@ -41,7 +42,7 @@ export default function MobileFooter1() {
 
         <div className="col-4">
           <Link
-            href="/shop-1"
+            href={pathNames.STORE}
             className="footer-mobile__link d-flex flex-column align-items-center"
           >
             <svg

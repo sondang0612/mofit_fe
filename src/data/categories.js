@@ -250,38 +250,7 @@ export const categories3 = [
   { id: 7, name: "Jeans", imgSrc: "/assets/images/home/demo5/category_7.png" },
   { id: 8, name: "Shirts", imgSrc: "/assets/images/home/demo5/category_8.png" },
 ];
-export const collectionsData = [
-  {
-    id: 1,
-    imageSrc: "/assets/images/home/demo9/collection_grid_1.jpg",
-    title: "Furniture",
-    productCount: "954 Products",
-  },
-  {
-    id: 2,
-    imageSrc: "/assets/images/home/demo9/collection_grid_2.jpg",
-    title: "Clocks",
-    productCount: "710 Products",
-  },
-  {
-    id: 3,
-    imageSrc: "/assets/images/home/demo9/collection_grid_3.jpg",
-    title: "Accessories",
-    productCount: "954 Products",
-  },
-  {
-    id: 4,
-    imageSrc: "/assets/images/home/demo9/collection_grid_4.jpg",
-    title: "Lighting",
-    productCount: "184 Products",
-  },
-  {
-    id: 5,
-    imageSrc: "/assets/images/home/demo9/collection_grid_5.jpg",
-    title: "Toys",
-    productCount: "245 Products",
-  },
-];
+
 export const categories4 = [
   {
     id: 1,

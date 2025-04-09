@@ -80,6 +80,7 @@ export default function EditAccount() {
   return (
     <div className="col-lg-9">
       <div className="page-content my-account__edit">
+        <p className="notice">Thông tin tài khoản</p>
         <div className="my-account__edit-form">
           <form onSubmit={handleSubmit(onSubmit)} className="needs-validation">
             <div className="row">

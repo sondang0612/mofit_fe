@@ -18,6 +18,7 @@ import React, { Fragment, useState } from "react";
 import { getFinalPrice } from "@/utils/getFinalPrice";
 import List from "./List";
 import SkeletonProduct1 from "./SkeletonProduct1";
+import { pathNames } from "@/utils/constants/paths";
 
 export default function Products2() {
   const { toggleWishlist, isAddedtoWishlist } = useContextElement();
@@ -173,7 +174,7 @@ export default function Products2() {
           <div className="text-center mt-2">
             <Link
               className="btn-link btn-link_lg default-underline text-uppercase fw-medium"
-              href={`/shop-1?sortingValue=${selectedAttributeValue}`}
+              href={`${pathNames.STORE}?sortingValue=${selectedAttributeValue}`}
             >
               Xem thêm
             </Link>

@@ -1,5 +1,6 @@
 "use client";
 import { useCategories } from "@/hooks/react-query/categories/useCategories";
+import { pathNames } from "@/utils/constants/paths";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -27,7 +28,7 @@ export default function SearchPopup() {
 
   const onSubmit = (data: Form) => {
     setIsPopupOpen(false);
-    router.push(`/shop-1?searchQuery=${data?.searchQuery}`);
+    router.push(`${pathNames.STORE}?searchQuery=${data?.searchQuery}`);
   };
 
   useEffect(() => {
@@ -107,7 +108,7 @@ export default function SearchPopup() {
                 {categories?.map((item, index) => (
                   <li className="sub-menu__item" key={index}>
                     <Link
-                      href={`/shop-1?activeCategory=${item?.id}`}
+                      href={`${pathNames.STORE}?activeCategory=${item?.id}`}
                       className="menu-link menu-link_us-s"
                     >
                       {item?.name}

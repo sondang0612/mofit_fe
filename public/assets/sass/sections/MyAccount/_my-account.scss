@@ -31,7 +31,8 @@
   }
 
   .page-content {
-    padding-top: 2.5rem;
+    padding-top: 0;
+    min-height: 600px;
   }
 
   &__dashboard {
@@ -84,14 +85,13 @@
       }
     }
   }
+  .notice {
+    margin-bottom: 2rem;
+    font-size: 18px;
+    color: #64646d;
+  }
 
   &__address {
-    .notice {
-      margin-bottom: 3.75rem;
-      font-size: 18px;
-      color: #64646d;
-    }
-
     .add-new {
       cursor: pointer;
       font-size: 16px;

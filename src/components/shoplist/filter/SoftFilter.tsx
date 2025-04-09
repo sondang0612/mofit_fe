@@ -2,6 +2,7 @@ import Breadcrumbs from "@/components/BreqadCumb";
 import { sortingOptions } from "@/data/products/productCategories";
 import { useUrlParams } from "@/hooks/useUrlParams";
 import { openModalShopFilter } from "@/utils/aside";
+import { pathNames } from "@/utils/constants/paths";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { BiTransfer } from "react-icons/bi";
@@ -29,7 +30,7 @@ const SoftFilter = (props: Props) => {
   };
 
   return (
-    pathName === "/shop-1" && (
+    pathName === pathNames.STORE && (
       <div className="bg-white">
         <div
           className={`shop-filter-header pb-1 ${
@@ -39,7 +40,7 @@ const SoftFilter = (props: Props) => {
           <Breadcrumbs
             items={[
               { label: "Trang chủ", href: "/" },
-              { label: "Cửa hàng", href: "/shop-1" },
+              { label: "Cửa hàng", href: "/store" },
             ]}
           />
 

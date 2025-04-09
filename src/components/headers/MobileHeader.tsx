@@ -11,6 +11,7 @@ import MobileNav from "./components/MobileNav";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import SoftFilter from "../shoplist/filter/SoftFilter";
+import { pathNames } from "@/utils/constants/paths";
 
 type Form = {
   searchQuery: string;
@@ -27,7 +28,7 @@ export default function MobileHeader() {
   const router = useRouter();
 
   const onSubmit = (data: Form) => {
-    router.push(`/shop-1?searchQuery=${data?.searchQuery}`);
+    router.push(`${pathNames.STORE}?searchQuery=${data?.searchQuery}`);
   };
   useEffect(() => {
     const handleScroll = () => {

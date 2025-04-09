@@ -9,6 +9,7 @@ import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useRemoveCartItem } from "@/hooks/react-query/cart-items/useRemoveCartItem";
 import { formatPrice } from "@/utils/formatPrice";
+import { pathNames } from "@/utils/constants/paths";
 
 export default function CartDrawer() {
   const { data: cart } = useCart();
@@ -23,7 +24,7 @@ export default function CartDrawer() {
   };
 
   const handleShopNow = () => {
-    const href = "/shop-1";
+    const href = pathNames.STORE;
     if (pathname === href) {
       closeCart();
     } else {
@@ -158,7 +159,7 @@ export default function CartDrawer() {
               </Link>
             </>
           ) : (
-            <Link href="/shop-1" className="btn btn-light mt-3 d-block">
+            <Link href={pathNames.STORE} className="btn btn-light mt-3 d-block">
               Explore shop
             </Link>
           )}

@@ -6,6 +6,7 @@ import { EffectFade, Pagination } from "swiper/modules";
 import { slides1 } from "@/data/heroslides";
 import Image from "next/image";
 import { socialLinks } from "@/data/socials";
+import { pathNames } from "@/utils/constants/paths";
 export default function Hero() {
   const swiperOptions = {
     autoplay: {
@@ -86,7 +87,7 @@ export default function Hero() {
                 ""
               )}
               <Link
-                href="/shop-1"
+                href={pathNames.STORE}
                 className="btn-link btn-link_lg default-underline text-uppercase fw-medium animate animate_fade animate_btt animate_delay-7"
               >
                 Discover More

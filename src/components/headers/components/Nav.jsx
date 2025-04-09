@@ -8,6 +8,7 @@ import {
 } from "@/data/menu";
 import { useBrands } from "@/hooks/react-query/brands/useBrands";
 import { useCategories } from "@/hooks/react-query/categories/useCategories";
+import { pathNames } from "@/utils/constants/paths";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
@@ -71,7 +72,7 @@ export default function Nav() {
       </li>
       <li className="navigation__item">
         <Link
-          href="/shop-1"
+          href={pathNames.STORE}
           className={`navigation__link
            ${isActiveParentMenu(shopList) ? "menu-active" : ""}
            ${isActiveParentMenu(shopDetails) ? "menu-active" : ""}
@@ -90,7 +91,7 @@ export default function Nav() {
                 {categories?.map((elm, i) => (
                   <li key={i} className="sub-menu__item">
                     <Link
-                      href={`/shop-1?activeCategory=${elm?.id}`}
+                      href={`${pathNames.STORE}?activeCategory=${elm?.id}`}
                       className={`menu-link menu-link_us-s ${
                         isMenuActive(elm.href) ? "menu-active" : ""
                       }`}
@@ -110,7 +111,7 @@ export default function Nav() {
                 {brands?.map((elm, i) => (
                   <li key={i} className="sub-menu__item">
                     <Link
-                      href={`/shop-1?brands=${elm?.id}`}
+                      href={`${pathNames.STORE}?brands=${elm?.id}`}
                       className={`menu-link menu-link_us-s ${
                         isMenuActive(elm.href) ? "menu-active" : ""
                       }`}

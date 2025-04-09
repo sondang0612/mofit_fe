@@ -4,8 +4,8 @@ export const footerLinks1 = [
   { href: "/contact", text: "Liên hệ" },
 ];
 export const footerLinks2 = [
-  { href: "/shop-1?sortingValue=new_arrivals", text: "Hàng mới về" },
-  { href: "/shop-1?sortingValue=best_seller", text: "Bán chạy" },
+  { href: "/store?sortingValue=new_arrivals", text: "Hàng mới về" },
+  { href: "/store?sortingValue=best_seller", text: "Bán chạy" },
 ];
 export const footerLinks3 = [
   { href: "/about", text: "Customer Service" },

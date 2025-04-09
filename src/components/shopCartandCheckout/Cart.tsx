@@ -4,6 +4,7 @@ import { useCart } from "@/hooks/react-query/cart/useCart";
 import { useRemoveCartItem } from "@/hooks/react-query/cart-items/useRemoveCartItem";
 import Link from "next/link";
 import ListCartItems from "./ListCartItems";
+import { pathNames } from "@/utils/constants/paths";
 
 export default function Cart() {
   const { data: cart } = useCart();
@@ -45,7 +46,7 @@ export default function Cart() {
             <div className="fs-20">Giò hàng đang trống</div>
 
             <button className="btn mt-3 btn-light">
-              <Link href={"/shop-1"}>Shopping now!</Link>
+              <Link href={pathNames.STORE}>Shopping now!</Link>
             </button>
           </>
         )}

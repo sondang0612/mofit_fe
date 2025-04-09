@@ -1,6 +1,7 @@
 "use client";
 import { useCategories } from "@/hooks/react-query/categories/useCategories";
 import { EDefaultValue } from "@/utils/constants/default-value.enum";
+import { pathNames } from "@/utils/constants/paths";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -62,7 +63,7 @@ const MainCategories = () => {
           {categories?.map((elm, i) => (
             <SwiperSlide key={i} className="swiper-slide product-card">
               <div className="pc__img-wrapper">
-                <Link href={`/shop-1?activeCategory=${elm.id}`}>
+                <Link href={`${pathNames.STORE}?activeCategory=${elm.id}`}>
                   <Image
                     loading="lazy"
                     src={elm.imgSrc || EDefaultValue.IMAGE}
@@ -76,7 +77,7 @@ const MainCategories = () => {
 
               <div className="pc__info position-relative">
                 <h6 className="pc__title font-medium">
-                  <Link href={`/shop-1?activeCategory=${elm.id}`}>
+                  <Link href={`${pathNames.STORE}?activeCategory=${elm.id}`}>
                     {elm?.name}
                   </Link>
                 </h6>
@@ -89,7 +90,7 @@ const MainCategories = () => {
         <div className="d-flex align-items-center justify-content-center w-full">
           <button
             className="rounded-10 px-3 py-1"
-            onClick={() => router.push("/shop-1")}
+            onClick={() => router.push(pathNames.STORE)}
           >
             Xem tất cả
           </button>

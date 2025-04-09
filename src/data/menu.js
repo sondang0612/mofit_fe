@@ -2,86 +2,13 @@ import { FaHeart, FaUser } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { RiFileListFill } from "react-icons/ri";
 
-export const homePages = [
-  { id: 1, title: "Home 1", href: "/" },
-  { id: 2, title: "Home 2", href: "/home-2" },
-  { id: 3, title: "Home 3", href: "/home-3" },
-  { id: 4, title: "Home 4", href: "/home-4" },
-  { id: 5, title: "Home 5", href: "/home-5" },
-  { id: 6, title: "Home 6", href: "/home-6" },
-  { id: 7, title: "Home 7", href: "/home-7" },
-  { id: 8, title: "Home 8", href: "/home-8" },
-  { id: 9, title: "Home 9", href: "/home-9" },
-  { id: 10, title: "Home 10", href: "/home-10" },
-  { id: 11, title: "Home 11", href: "/home-11" },
-  { id: 12, title: "Home 12", href: "/home-12" },
-  { id: 13, title: "Home 13", href: "/home-13" },
-  { id: 14, title: "Home 14", href: "/home-14" },
-  { id: 15, title: "Home 15", href: "/home-15" },
-  { id: 16, title: "Home 16", href: "/home-16" },
-  { id: 17, title: "Home 17", href: "/home-17" },
-  { id: 18, title: "Home 18", href: "/home-18" },
-  { id: 19, title: "Home 19", href: "/home-19" },
-  { id: 20, title: "Home 20", href: "/home-20" },
-  { id: 21, title: "Home 21", href: "/home-21" },
-  { id: 22, title: "Home 22", href: "/home-22" },
-];
+export const homePages = [{ id: 1, title: "Home 1", href: "/" }];
 
 export const shopList = [
   {
     id: 1,
-    href: "/shop-1",
-    title: "Shop List V1",
-  },
-  {
-    id: 2,
-    href: "/shop-2",
-    title: "Shop List V2",
-  },
-  {
-    id: 3,
-    href: "/shop-3",
-    title: "Shop List V3",
-  },
-  {
-    id: 4,
-    href: "/shop-4",
-    title: "Shop List V4",
-  },
-  {
-    id: 5,
-    href: "/shop-5",
-    title: "Shop List V5",
-  },
-  {
-    id: 6,
-    href: "/shop-6",
-    title: "Shop List V6",
-  },
-  {
-    id: 7,
-    href: "/shop-7",
-    title: "Shop List V7",
-  },
-  {
-    id: 8,
-    href: "/shop-8",
-    title: "Shop List V8",
-  },
-  {
-    id: 9,
-    href: "/shop-9",
-    title: "Shop List V9",
-  },
-  {
-    id: 10,
-    href: "/shop-10",
-    title: "Shop Item Style",
-  },
-  {
-    id: 11,
-    href: "/shop-11",
-    title: "Horizontal Scroll",
+    href: "/store",
+    title: "Cửa hàng",
   },
 ];
 export const shopDetails = [

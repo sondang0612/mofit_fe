@@ -1,5 +1,6 @@
 "use client";
 
+import { pathNames } from "@/utils/constants/paths";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
@@ -150,9 +151,9 @@ export default function MobileNav() {
       </li>
       <li className="navigation__item">
         <Link
-          href="/shop-1"
+          href={pathNames.STORE}
           className={`navigation__link w-full ${
-            pathname == "/shop-1" ? "menu-active" : ""
+            pathname == pathNames.STORE ? "menu-active" : ""
           }`}
         >
           Cửa hàng

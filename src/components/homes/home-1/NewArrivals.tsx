@@ -1,6 +1,7 @@
 "use client";
 import { useNewestCategory } from "@/hooks/react-query/categories/useNewestCategories";
 import { EDefaultValue } from "@/utils/constants/default-value.enum";
+import { pathNames } from "@/utils/constants/paths";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -26,7 +27,7 @@ const NewArrivals = () => {
               </p>
             </div>
 
-            <Link href={`/shop-1?activeCategory=${elm.id}`}>
+            <Link href={`${pathNames.STORE}?activeCategory=${elm.id}`}>
               <Image
                 loading="lazy"
                 src={elm.imgSrc || EDefaultValue.IMAGE}
