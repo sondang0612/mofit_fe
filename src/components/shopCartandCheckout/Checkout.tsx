@@ -14,6 +14,9 @@ import React from "react";
 import { toast } from "react-toastify";
 import Address from "../otherPages/address/Address";
 import CartWithoutDiscount from "./CartWithoutDiscount";
+import { useFetch } from "@/hooks/react-query/useFetch";
+import { Address as IAddress } from "@/types/api";
+import { apiEndpoints } from "@/utils/constants/apiEndpoints";
 
 const paymentMethods = [
   {
@@ -32,7 +35,11 @@ export default function Checkout() {
   const router = useRouter();
 
   const { data: cart } = useCart();
-  const { data: addresses } = useAddresses();
+  const { data: addresses } = useFetch<IAddress>({
+    page: 1,
+    endpoint: apiEndpoints.ADDRESSES,
+    limit: 1,
+  });
   const { mutate: createOrder } = useCreateOrder();
 
   const [paymentMethod, setPaymentMethod] = React.useState<EPaymentMethod>(
@@ -44,7 +51,7 @@ export default function Checkout() {
   }, [cart]);
 
   const checkValid = () => {
-    if (addresses?.data?.length === 0 || !addresses?.data) {
+    if (addresses?.length === 0 || !addresses) {
       toast.error("Vui lòng chọn địa chỉ nhận hàng");
       return false;
     }
@@ -63,7 +70,7 @@ export default function Checkout() {
     if (!isValid) return;
 
     createOrder({
-      addressId: addresses?.data[0].id,
+      addressId: addresses[0].id,
       cartItemIds: cart?.map((item) => item.id),
       discount: 0,
       vat: 0,
@@ -130,14 +137,14 @@ export default function Checkout() {
               </table>
             </div>
             <div className="checkout__totals">
-              {addresses && addresses?.data?.length > 0 && (
-                <Address data={addresses?.data[0]} />
+              {addresses && addresses?.length > 0 && (
+                <Address data={addresses[0]} />
               )}
               <span
                 className="underline cursor-pointer text-blue-500"
                 onClick={() => router.push("/account_edit_address")}
               >
-                {addresses && addresses?.data?.length > 0
+                {addresses && addresses?.length > 0
                   ? "Đặt lại địa chỉ mặc định"
                   : "Thêm địa chỉ giao hàng"}
               </span>
