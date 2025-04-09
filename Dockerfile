@@ -1,4 +1,4 @@
-FROM node:20-alpine AS builder
+FROM node:20-alpine-slim AS builder
 WORKDIR /app
 
 COPY package.json yarn.lock ./
@@ -9,7 +9,7 @@ RUN yarn build
 
 RUN yarn install --frozen-lockfile --production=true
 
-FROM node:20-alpine
+FROM node:20-alpine-slim
 WORKDIR /app
 
 COPY --from=builder /app/.next/standalone ./
