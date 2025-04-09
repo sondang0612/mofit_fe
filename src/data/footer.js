@@ -2,7 +2,7 @@ import { pathNames } from "@/utils/constants/paths";
 
 export const footerLinks1 = [
   { href: pathNames.ABOUT_US, text: "Về Double Fish" },
-  { href: "/blog_list2", text: "Tin tức" },
+  { href: pathNames.BLOGS, text: "Tin tức" },
   { href: "/contact", text: "Liên hệ" },
 ];
 export const footerLinks2 = [

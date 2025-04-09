@@ -1,4 +1,4 @@
-import Breadcrumbs from "@/components/BreqadCumb";
+import Breadcrumb from "@/components/Breadcrumb";
 import { sortingOptions } from "@/data/products/productCategories";
 import { useUrlParams } from "@/hooks/useUrlParams";
 import { openModalShopFilter } from "@/utils/aside";
@@ -32,17 +32,8 @@ const SoftFilter = (props: Props) => {
   return (
     pathName === pathNames.STORE && (
       <div className="bg-white">
-        <div
-          className={`shop-filter-header pb-1 ${
-            isMobile ? "container" : "px-24"
-          }`}
-        >
-          <Breadcrumbs
-            items={[
-              { label: "Trang chủ", href: "/" },
-              { label: "Cửa hàng", href: "/store" },
-            ]}
-          />
+        <div className={`shop-filter-header pb-1 container`}>
+          <Breadcrumb />
 
           <div className="d-flex columns m-2 justify-content-between shop-filter-container">
             <div className="d-flex align-items-center order-0 order-md-3">

@@ -144,7 +144,7 @@ export default function OrderCompleted() {
                   </tr>
                   <tr>
                     <th>VAT</th>
-                    <td>{order?.vat}</td>
+                    <td>{formatPrice(order?.vat)}đ</td>
                   </tr>
                   <tr>
                     <th>Tổng</th>

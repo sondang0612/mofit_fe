@@ -7,6 +7,11 @@
   list-style: none;
   background-color: $breadcrumb-bg;
   @include border-radius($breadcrumb-border-radius);
+  margin-top: 8px;
+  margin-bottom: 8px;
+  @include media-breakpoint-up(lg) {
+    margin-top: 0px;
+  }
 }
 
 .breadcrumb-item {
@@ -18,7 +23,14 @@
       float: left; // Suppress inline spacings and underlining of the separator
       padding-right: $breadcrumb-item-padding-x;
       color: $breadcrumb-divider-color;
-      content: var(--#{$variable-prefix}breadcrumb-divider, escape-svg($breadcrumb-divider)) #{"/* rtl:"} var(--#{$variable-prefix}breadcrumb-divider, escape-svg($breadcrumb-divider-flipped)) #{"*/"};
+      content: var(
+          --#{$variable-prefix}breadcrumb-divider,
+          escape-svg($breadcrumb-divider)
+        )
+        #{"/* rtl:"} var(
+          --#{$variable-prefix}breadcrumb-divider,
+          escape-svg($breadcrumb-divider-flipped)
+        ) #{"*/"};
     }
   }
 

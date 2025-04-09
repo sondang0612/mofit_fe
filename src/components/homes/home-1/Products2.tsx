@@ -54,7 +54,7 @@ export default function Products2() {
       <div className="col-6 col-md-4 col-lg-3">
         <div className="product-card mb-3 mb-md-4 mb-xxl-5">
           <div className="pc__img-wrapper">
-            <Link href={`/${data?.slug}`}>
+            <Link href={`/${data?.slug}/product`}>
               <Image
                 loading="lazy"
                 src={data?.imgSrc || EDefaultValue.IMAGE}

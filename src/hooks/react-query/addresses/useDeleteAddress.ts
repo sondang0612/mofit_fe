@@ -3,6 +3,7 @@ import { asyncAuth } from "@/utils/asyncAuth";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { queryKey } from "../queryKey";
+import { apiEndpoints } from "@/utils/constants/apiEndpoints";
 
 type Params = {
   id?: number;
@@ -19,7 +20,7 @@ const useDeleteAddress = () => {
     mutationFn: fetchData,
     onSuccess: () => {
       toast.success(`Xoá địa chỉ thành công`);
-      queryClient.invalidateQueries({ queryKey: [queryKey.MY_ADDRESSES] });
+      queryClient.invalidateQueries({ queryKey: [apiEndpoints.ADDRESSES] });
     },
     onError: (error: any) => {
       if (error?.response?.data?.message?.includes("delete default")) {

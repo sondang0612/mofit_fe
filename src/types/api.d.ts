@@ -90,7 +90,7 @@ export interface Order {
   shippingMethod?: EShippingMethod | undefined;
   shippingPrice?: number | undefined;
   paymentMethod?: EPaymentMethod | undefined;
-  orderStatus?: EOrderStatus | undefined;
+  status?: EOrderStatus | undefined;
   discount?: number | undefined;
   vat?: number | undefined;
   subTotal?: number | undefined;

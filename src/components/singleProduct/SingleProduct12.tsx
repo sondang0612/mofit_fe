@@ -1,15 +1,12 @@
 "use client";
+import { useCreateCartItem } from "@/hooks/react-query/cart-items/useCreateCartItem";
 import { useProduct } from "@/hooks/react-query/products/useProduct";
-import { usePageId } from "@/hooks/usePageId";
 import { formatPrice } from "@/utils/formatPrice";
+import { getProductAttributeNames } from "@/utils/getProductAttributeNames";
 import ShareComponent from "../common/ShareComponent";
 import Star from "../common/Star";
-import AdditionalInfo from "./AdditionalInfo";
 import BreadCumb from "./BreadCumb";
-import Description from "./Description";
 import ProductSlider1 from "./sliders/ProductSlider1";
-import { getProductAttributeNames } from "@/utils/getProductAttributeNames";
-import { useCreateCartItem } from "@/hooks/react-query/cart-items/useCreateCartItem";
 
 interface Props {
   slug?: string;

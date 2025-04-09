@@ -16,7 +16,7 @@
     .sticky-content {
       padding-top: 3.125rem;
     }
-    
+
     .mobile_fixed-btn_wrapper {
       .button-wrapper:not(.fixed-btn) {
         padding: 0;
@@ -65,7 +65,8 @@
     table {
       width: 100%;
 
-      th, td {
+      th,
+      td {
         border-bottom: 1px solid $border-color;
         padding: 0.875rem 0;
         font-size: 0.875rem;
@@ -78,7 +79,8 @@
       }
 
       tr:last-child {
-        th, td {
+        th,
+        td {
           border-bottom: 0;
         }
       }
@@ -88,7 +90,8 @@
   .cart-table {
     width: 100%;
 
-    th, td {
+    th,
+    td {
       @include media-breakpoint-up(md) {
         border-bottom: 1px solid $border-color;
       }
@@ -115,7 +118,7 @@
         display: block;
         padding: 1.25rem 0;
         border-bottom: 1px solid $border-color;
-        transition: all .3s ease;
+        transition: all 0.3s ease;
 
         @include media-breakpoint-up(md) {
           display: table-row;
@@ -132,7 +135,7 @@
         }
 
         &:after {
-          content: '';
+          content: "";
           display: block;
           clear: both;
 
@@ -233,7 +236,8 @@
         }
       }
 
-      &__reduce, &__increase {
+      &__reduce,
+      &__increase {
         font-size: 1rem;
         text-align: center;
         top: 50%;

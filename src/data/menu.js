@@ -1,3 +1,4 @@
+import { pathNames } from "@/utils/constants/paths";
 import { FaHeart, FaUser } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { RiFileListFill } from "react-icons/ri";
@@ -48,7 +49,7 @@ export const blogmenuItems = [
   },
   {
     id: 2,
-    href: "/blog_list2",
+    href: pathNames.BLOGS,
 
     title: "Blog V2",
   },

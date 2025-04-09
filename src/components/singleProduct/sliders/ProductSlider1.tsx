@@ -11,6 +11,7 @@ import { Gallery, Item } from "react-photoswipe-gallery";
 import Image from "next/image";
 import tippy from "tippy.js";
 import { Product } from "@/types/api";
+import { EDefaultValue } from "@/utils/constants/default-value.enum";
 
 interface Props {
   product?: Product;
@@ -24,7 +25,10 @@ export default function ProductSlider1(props: Props) {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
 
   const images = React.useMemo(() => {
-    return [product?.imgSrc, product?.imgSrc2]?.filter(Boolean);
+    return [
+      product?.imgSrc || EDefaultValue.IMAGE,
+      product?.imgSrc2 || EDefaultValue.IMAGE,
+    ]?.filter(Boolean);
   }, [product?.imgSrc, product?.imgSrc2]);
 
   return (

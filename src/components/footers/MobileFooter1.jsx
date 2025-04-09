@@ -1,12 +1,15 @@
-import { useContextElement } from "@/context/Context";
 import { useProfile } from "@/hooks/react-query/auth/useProfile";
 import { pathNames } from "@/utils/constants/paths";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { LuUserRound } from "react-icons/lu";
+import { MdStorefront } from "react-icons/md";
+import { AiOutlineHome } from "react-icons/ai";
 
 export default function MobileFooter1() {
   const [showFooter, setShowFooter] = useState(false);
+  const pathName = usePathname();
   const { data: profile } = useProfile();
 
   useEffect(() => {
@@ -25,17 +28,8 @@ export default function MobileFooter1() {
             href="/"
             className="footer-mobile__link d-flex flex-column align-items-center"
           >
-            <svg
-              className="d-block"
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <use href="#icon_home" />
-            </svg>
-            <span>Home</span>
+            <AiOutlineHome size={18} />
+            <span>Trang chủ</span>
           </Link>
         </div>
         {/* <!-- /.col-3 --> */}
@@ -45,17 +39,8 @@ export default function MobileFooter1() {
             href={pathNames.STORE}
             className="footer-mobile__link d-flex flex-column align-items-center"
           >
-            <svg
-              className="d-block"
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <use href="#icon_hanger" />
-            </svg>
-            <span>Shop</span>
+            <MdStorefront size={18} />
+            <span>Cửa hàng</span>
           </Link>
         </div>
         {/* <!-- /.col-3 --> */}
@@ -63,14 +48,12 @@ export default function MobileFooter1() {
         <div className="col-4">
           <Link
             href={
-              profile?.data
-                ? "/account_edit"
-                : "login_register?isRegister=false"
+              profile ? "/account_edit" : "/login_register?isRegister=false"
             }
-            className="footer-mobile__link d-flex flex-column align-items-center"
+            className={`footer-mobile__link d-flex flex-column align-items-center`}
           >
             <LuUserRound size={18} />
-            <span>{profile?.data ? "Tài khoản" : "Đăng nhập"}</span>
+            <span>{profile ? "Tài khoản" : "Đăng nhập"}</span>
           </Link>
         </div>
         {/* <!-- /.col-3 --> */}

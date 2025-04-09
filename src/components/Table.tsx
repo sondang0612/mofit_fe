@@ -1,6 +1,6 @@
 import React from "react";
 
-const INIT_LENGTH = 0;
+const INIT_LENGTH = 10;
 
 export interface Column<T> {
   title: string;
@@ -31,11 +31,8 @@ const Table = <T,>({ columns, data = [], loading = false }: Props<T>) => {
         <table className="employee-table">
           <thead>
             <tr>
-              {columns.map((col) => (
-                <th
-                  key={col.dataIndex as string}
-                  style={{ width: col?.width || 200 }}
-                >
+              {columns.map((col, index) => (
+                <th key={index} style={{ width: col?.width || 200 }}>
                   {col.title}
                 </th>
               ))}

@@ -9,11 +9,11 @@ import { getSubTotal } from "@/utils/getSubTotal";
 import { getTotal } from "@/utils/getTotal";
 import { getTotalPrice } from "@/utils/getTotalPrice";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "react-toastify";
 import Address from "../otherPages/address/Address";
-import ListCartItems from "./ListCartItems";
+import CartWithoutDiscount from "./CartWithoutDiscount";
 
 const paymentMethods = [
   {
@@ -80,7 +80,7 @@ export default function Checkout() {
       <div className="checkout-form">
         <div className="billing-info__wrapper">
           <h4>Chi tiết đơn hàng</h4>
-          <ListCartItems data={cart} canEdit={false} />
+          <CartWithoutDiscount cart={cart || []} />
         </div>
         <div className="checkout__totals-wrapper">
           <div className="sticky-content">
@@ -120,7 +120,7 @@ export default function Checkout() {
                   </tr>
                   <tr>
                     <th>VAT</th>
-                    <td>${0}</td>
+                    <td>{formatPrice(0)}</td>
                   </tr>
                   <tr>
                     <th>Tổng tiền</th>

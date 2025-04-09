@@ -77,6 +77,7 @@ export default function Nav() {
            ${isActiveParentMenu(shopList) ? "menu-active" : ""}
            ${isActiveParentMenu(shopDetails) ? "menu-active" : ""}
            ${isActiveParentMenu(additionalShopPageitems) ? "menu-active" : ""}
+           ${pathname?.includes("product") ? "menu-active" : ""}
           `}
         >
           Cửa hàng
@@ -134,7 +135,7 @@ export default function Nav() {
       </li>
       <li className="navigation__item">
         <Link
-          href="/blog_list2"
+          href={pathNames.BLOGS}
           className={`navigation__link ${
             isActiveParentMenu(blogmenuItems) ? "menu-active" : ""
           }`}

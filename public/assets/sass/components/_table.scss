@@ -6,17 +6,22 @@
   overflow: auto;
   max-width: 100%;
   border-radius: 8px;
-  max-height: calc(100vh - 200px);
-  min-height: calc(100vh - 200px);
+  max-height: 500px;
+  min-height: 500px;
   background-color: #fff;
   position: relative;
 }
 
 .employee-table {
   width: 100%;
+  min-width: 500px;
   border-collapse: collapse;
   font-size: 0.75rem;
   background-color: #fff;
+
+  @include media-breakpoint-down(lg) {
+    font-size: 10px !important;
+  }
 
   thead {
     background-color: #f8f9fa;

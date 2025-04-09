@@ -1,5 +1,5 @@
 export enum EOrderStatus {
-  WAITING_PAYMENT = "waiting_payment",
+  DRAFT = "draft",
   PENDING = "pending",
   PROCESSING = "processing",
   SHIPPED = "shipped",
@@ -26,3 +26,22 @@ export enum EPaymentStatus {
   REFUNDED = "refunded",
   COD = "cod",
 }
+
+export const EOrderStatusLabel = {
+  [EOrderStatus.DRAFT]: "Đơn nháp",
+  [EOrderStatus.PENDING]: "Chờ xử lý",
+  [EOrderStatus.PROCESSING]: "Đang xử lý",
+  [EOrderStatus.SHIPPED]: "Đang vận chuyển",
+  [EOrderStatus.DELIVERED]: "Đã giao",
+  [EOrderStatus.CANCELED]: "Đã huỷ",
+  [EOrderStatus.RETURNED]: "Đã trả hàng",
+};
+
+export const EPaymentMethodLabel = {
+  [EPaymentMethod.COD]: "Tiền mặt",
+  [EPaymentMethod.PAYMENT_GATEWAY]: "Chuyển khoản",
+};
+
+export const EShippingMethodLabel = {
+  [EShippingMethod.OWN_DELIVERY]: "Tự vận chuyển",
+};

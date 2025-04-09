@@ -23,7 +23,7 @@ const defaultValues: Form = {
   streetAddress: "",
   note: "",
   phoneNumber: "",
-  isDefault: false,
+  isDefault: true,
 };
 
 interface Props {

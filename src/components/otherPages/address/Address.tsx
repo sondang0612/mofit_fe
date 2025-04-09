@@ -5,6 +5,7 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { AiOutlineDelete } from "react-icons/ai";
 import { getFullAddress } from "@/utils/getAddress";
+import { MdOutlineAddLocation } from "react-icons/md";
 
 interface Props {
   data?: IAddress;
@@ -16,23 +17,38 @@ interface Props {
 const Address = (props: Props) => {
   const { data, canEdit = true, onRemove, onSetDefault } = props;
   return (
-    <div className="my-account__address-item">
+    <div className="my-account__address-item relative mb-2">
       <div className="my-account__address-item__title">
         <div className="my-account__address-item__title-wrapper">
           <h5>Địa chỉ nhận hàng</h5>
           {data?.isDefault && <p>Mặc Định</p>}
         </div>
-        {canEdit && onRemove && (
-          <AiOutlineDelete size={18} color="red" className="cursor-pointer" />
-        )}
-        {canEdit && !data?.isDefault && onSetDefault && (
-          <div
-            className="underline cursor-pointer"
-            onClick={() => onSetDefault(data?.id)}
-          >
-            Đặt làm mặc định
-          </div>
-        )}
+        <div className="d-flex gap-1">
+          {canEdit && onRemove && (
+            <div data-toggle="tooltip" data-placement="top" title="Xoá">
+              <AiOutlineDelete
+                size={20}
+                color="red"
+                className="cursor-pointer"
+                onClick={() => onRemove(data?.id)}
+              />
+            </div>
+          )}
+          {canEdit && !data?.isDefault && onSetDefault && (
+            <div
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Đặt làm mặc định"
+            >
+              <MdOutlineAddLocation
+                size={20}
+                onClick={() => onSetDefault(data?.id)}
+                className="cursor-pointer"
+                color="blue"
+              />
+            </div>
+          )}
+        </div>
       </div>
       <div className="my-account__address-item__detail">
         <div>

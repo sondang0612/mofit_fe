@@ -26,7 +26,7 @@ const columns: Column<Order>[] = [
   },
   {
     title: "Trạng thái đơn hàng",
-    dataIndex: "orderStatus",
+    dataIndex: "status",
   },
   {
     title: "Phương thức thanh toán",

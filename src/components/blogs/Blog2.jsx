@@ -4,6 +4,7 @@ import Pagination1 from "../common/Pagination1";
 import { blogs13, categories } from "@/data/blogs";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { pathNames } from "@/utils/constants/paths";
 
 export default function Blog2() {
   const [activeCategory, setActiveCategory] = useState(categories[0]);
@@ -69,12 +70,12 @@ export default function Blog2() {
                   <span className="blog-grid__item-meta__date">{elm.date}</span>
                 </div>
                 <div className="blog-grid__item-title">
-                  <Link href={`/blog_single/${elm.id}`}>{elm.title}</Link>
+                  <Link href={`${pathNames.BLOGS}/${elm.id}`}>{elm.title}</Link>
                 </div>
                 <div className="blog-grid__item-content">
                   <p>{elm.content}</p>
                   <Link
-                    href={`/blog_single/${elm.id}`}
+                    href={`${pathNames.BLOGS}/${elm.id}`}
                     className="readmore-link"
                   >
                     Continue Reading

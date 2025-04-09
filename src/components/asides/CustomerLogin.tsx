@@ -2,7 +2,6 @@
 
 import { useLogin } from "@/hooks/react-query/auth/useLogin";
 import { closeModalUserlogin } from "@/utils/aside";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "react-toastify";
@@ -19,6 +18,8 @@ export default function CustomerLogin() {
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(username, password);
+
     if (!isValidForm) {
       toast.error("Vui lòng nhập đầy đủ thông tin");
       return;
@@ -26,24 +27,30 @@ export default function CustomerLogin() {
     login({ username, password });
   };
 
+  const preClose = () => {
+    setEmail("");
+    setPassword("");
+    closeModalUserlogin();
+  };
+
   React.useEffect(() => {
     const pageOverlay = document.getElementById("pageOverlay");
 
-    pageOverlay?.addEventListener("click", closeModalUserlogin);
+    pageOverlay?.addEventListener("click", preClose);
 
     return () => {
-      pageOverlay?.removeEventListener("click", closeModalUserlogin);
+      pageOverlay?.removeEventListener("click", preClose);
     };
   }, []);
 
   React.useEffect(() => {
     if (isSuccess) {
-      closeModalUserlogin();
+      preClose();
     }
   }, [isSuccess]);
 
   const navigate = (url: string) => {
-    closeModalUserlogin();
+    preClose();
     router.push(url);
   };
 
@@ -57,7 +64,7 @@ export default function CustomerLogin() {
           <div className="aside-header d-flex align-items-center">
             <h3 className="text-uppercase fs-6 mb-0">Đăng nhập</h3>
             <button
-              onClick={() => closeModalUserlogin()}
+              onClick={() => preClose()}
               className="btn-close-lg js-close-aside ms-auto"
             />
           </div>

@@ -1,4 +1,4 @@
 export const EDefaultValue = {
-  IMAGE: "/assets/images/products/product_1.jpg",
+  IMAGE: "/assets/images/products/default.jpeg",
   ALT_IMAGE: "Lorem isum",
 };

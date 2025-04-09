@@ -1,43 +1,76 @@
 "use client";
-import Pagination from "@/components/shoplist/Pagination";
 import Table, { Column } from "@/components/Table";
 import { QueryParam, QueryValue, useFetch } from "@/hooks/react-query/useFetch";
-import { Order, OrderItem } from "@/types/api";
+import { Order as IOrder, OrderItem } from "@/types/api";
 import { ITEMS_PER_PAGE } from "@/utils/constants";
 import { apiEndpoints } from "@/utils/constants/apiEndpoints";
+import { EDefaultValue } from "@/utils/constants/default-value.enum";
+import {
+  EOrderStatus,
+  EOrderStatusLabel,
+  EPaymentMethod,
+  EPaymentMethodLabel,
+  EShippingMethod,
+  EShippingMethodLabel,
+} from "@/utils/constants/order.enum";
 import { formatPrice } from "@/utils/formatPrice";
+import Image from "next/image";
 import React from "react";
+import { FiEye } from "react-icons/fi";
+import Pagination from "../shoplist/Pagination";
 
-const columns: Column<Order>[] = [
+const columns: Column<IOrder>[] = [
   {
     title: "ID",
     dataIndex: "id",
     width: 50,
   },
   {
-    title: "Số lượng sản phẩm",
+    title: "Hình ảnh",
     dataIndex: "orderItems",
-    renderItem: (value: OrderItem[]) =>
-      value?.map((item, index) => (
-        <div key={index}>- {item?.product?.title}</div>
-      )),
+    renderItem: (value: OrderItem[]) => {
+      return (
+        <Image
+          width={80}
+          height={80}
+          style={{ height: "fit-content" }}
+          src={value[0] ? `${value[0].product?.imgSrc}` : EDefaultValue.IMAGE}
+          alt={
+            value[0] ? `${value[0].product?.title}` : EDefaultValue.ALT_IMAGE
+          }
+        />
+      );
+    },
   },
   {
-    title: "Trạng thái đơn hàng",
-    dataIndex: "orderStatus",
+    title: "Trạng thái",
+    dataIndex: "status",
+    renderItem: (value) => EOrderStatusLabel[value as EOrderStatus],
   },
   {
-    title: "Phương thức thanh toán",
+    title: "Thanh toán",
     dataIndex: "paymentMethod",
+    renderItem: (value) => EPaymentMethodLabel[value as EPaymentMethod],
   },
   {
-    title: "Đơn vị vận chuyển",
+    title: "Vận chuyển",
     dataIndex: "shippingMethod",
+    renderItem: (value) => EShippingMethodLabel[value as EShippingMethod],
   },
   {
     title: "Thành tiền",
     dataIndex: "totalPrice",
     renderItem: (value) => formatPrice(value),
+  },
+  {
+    title: "",
+    renderItem: () => {
+      return (
+        <div data-toggle="tooltip" data-placement="top" title="Chi tiết">
+          <FiEye size={18} className="cursor-pointer" />
+        </div>
+      );
+    },
   },
 ];
 
@@ -47,7 +80,7 @@ const Page = () => {
     data: orders,
     isFetching,
     totalElements,
-  } = useFetch<Order>({
+  } = useFetch<IOrder>({
     page: page,
     endpoint: `${apiEndpoints.ORDERS}`,
     limit: ITEMS_PER_PAGE,
@@ -61,8 +94,13 @@ const Page = () => {
 
   return (
     <div className="col-lg-9">
-      <div className="page-content my-account__address">
+      <div className="page-content my-account__order">
         <p className="notice">Quản lý đơn hàng</p>
+
+        <div>
+          <Table columns={columns} data={orders} loading={isFetching} />
+          <Pagination totalItems={totalElements} onChange={onPageChange} />
+        </div>
       </div>
     </div>
   );
